@@ -19,7 +19,7 @@ MonoBehaviour:
   _baseDefense: 0
   _baseResistance: 0
   _baseAttackDamage: 1
-  Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+  EnemyModel: {fileID: 132966338052862889, guid: 779553ea840ef024a93c7a26788180d4, type: 3}
   Health: 10
   MovementSpeed: 1
   Defense: 0

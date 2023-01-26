@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 
@@ -9,7 +10,6 @@ public class EnemyGroupScriptable : ScriptableObject
     public SpawnStrategyBase SpawnStrategy;
     [Tooltip("How long to delay for the next group, after this one is depleted of enemies")]
     public float GroupSpawnDelay = 0.0f;
-    public List<EnemySpawnSettings> EnemyGroup;
-
+    public List<EnemySpawnSettings> EnemyTypes;
 }
 

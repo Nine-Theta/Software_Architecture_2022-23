@@ -27,7 +27,7 @@ public class EnemyScriptable : ScriptableObject
     [SerializeField, Tooltip("How much damage the enemy does to the Objective")]
     private float _baseAttackDamage = 1.0f;
 
-    public Mesh Mesh;
+    public GameObject EnemyModel;
 
 
     [Header("Runtime Values")]
@@ -47,9 +47,13 @@ public class EnemyScriptable : ScriptableObject
         AttackDamage = _baseAttackDamage;
     }
 
+
+    //Maybe implement TakeDamage as a Job?
     public float TakeDamage(float pDamage)
     {
-        Health = (pDamage - Defense) * (1-Resistance);
+        if (pDamage < Defense) return Health;
+
+        Health -= (pDamage - Defense) * (1-Resistance);
         return Health;
     }
 }

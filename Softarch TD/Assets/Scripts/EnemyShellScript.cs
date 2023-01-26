@@ -7,11 +7,12 @@ using UnityEngine;
 public class EnemyShellScript : MonoBehaviour
 {
     private EnemyScriptable _enemyData;
+    private GameObject _model;
 
     public void InitEnemy(EnemyScriptable pEnemyData)
     {
         _enemyData = pEnemyData;
-        GetComponent<MeshFilter>().mesh = _enemyData.Mesh;
+        _model = Instantiate<GameObject>(_enemyData.EnemyModel,this.transform);
         name = _enemyData.Name + " [Enemy]";
     }
 

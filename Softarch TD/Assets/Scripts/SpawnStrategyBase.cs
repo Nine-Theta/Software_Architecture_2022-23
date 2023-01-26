@@ -1,20 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Jobs;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
-public abstract class SpawnStrategyBase : MonoBehaviour
+public abstract class SpawnStrategyBase : ScriptableObject
 {
     public GameObject EnemyTemplate;
-    public EnemyScriptable testEnemy;
+
+    public abstract event System.Action OnSpawningComplete;
+
+    protected MonoBehaviour mono;
 
     protected List<EnemySpawnSettings> EnemyList;
-
-    private void Start()
-    {
-        SpawnEnemy(testEnemy);
-    }
 
     public void SpawnEnemy(EnemyScriptable pEnemyData)
     {
@@ -22,5 +21,6 @@ public abstract class SpawnStrategyBase : MonoBehaviour
         newEnemy.GetComponent<EnemyShellScript>().InitEnemy(pEnemyData);
     }
 
-    public abstract void SpawnGroup(EnemyGroupScriptable pGroup);
+
+    public abstract void SpawnGroup(EnemyGroupScriptable pGroup, MonoBehaviour pMono);
 }

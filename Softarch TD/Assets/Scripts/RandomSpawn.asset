@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfe020158c33b7a4c96cc28432ca3d56, type: 3}
-  m_Name: WaveSettings
+  m_Script: {fileID: 11500000, guid: b6a8d61318ebbe3488392821b107b03a, type: 3}
+  m_Name: RandomSpawn
   m_EditorClassIdentifier: 
-  Wave:
-  - {fileID: 11400000, guid: 5e3871f7c84758a49a4753f83a6b69ff, type: 2}
+  EnemyTemplate: {fileID: 0}
+  testEnemy: {fileID: 0}
