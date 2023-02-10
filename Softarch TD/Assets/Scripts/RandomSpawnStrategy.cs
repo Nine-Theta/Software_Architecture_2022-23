@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "RandomSpawn", menuName = "SpawnStrategy")]
+[CreateAssetMenu(fileName = "RandomSpawn", menuName = "SpawnStrategy/Random")]
 public class RandomSpawnStrategy : SpawnStrategyBase
 {
     private int _groupCount = 0;

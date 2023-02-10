@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class WaveManager : MonoBehaviour
@@ -8,20 +9,37 @@ public class WaveManager : MonoBehaviour
     [SerializeField]
     private WaveScriptable _currentWave;
     private EnemyGroupScriptable _currentGroup;
+    private int _groupCounter = 0; //which group is being handled right now
 
-    public void LoadWave(WaveScriptable pNewWave)
+    public event System.Action OnWaveComplete;
+
+    private void Start()
+    {
+        StartWave();
+    }
+
+    public void LoadWave(WaveScriptable pNewWave, bool pStartWave = true)
     {
         _currentWave = pNewWave;
+
+        if (pStartWave)
+        {
+            HandleGroup(_currentWave.Wave.First());
+            _groupCounter = 1;
+        }
     }
 
     public void StartWave()
     {
-        
+        if (_currentWave == null) throw new System.Exception("Tried starting a wave, but no wave Loaded");
+
+        HandleGroup(_currentWave.Wave.First());
+        _groupCounter = 1;
     }
 
-    public void Start()
+    public void OverideCooldown()
     {
-        HandleGroup(_currentWave.Wave.First());
+        //Todo
     }
 
     private void HandleGroup(EnemyGroupScriptable pGroup)
@@ -34,7 +52,13 @@ public class WaveManager : MonoBehaviour
     private void ProgressWave()
     {
         _currentGroup.SpawnStrategy.OnSpawningComplete -= ProgressWave;
-        StartCoroutine(GroupCooldown(5));
+
+        _groupCounter++;
+
+        if(_groupCounter <= _currentWave.Wave.Count)
+            StartCoroutine(GroupCooldown(_currentGroup.GroupSpawnDelay));
+        else
+            OnWaveComplete.Invoke();
 
     }
 
@@ -43,10 +67,11 @@ public class WaveManager : MonoBehaviour
         _currentGroup.SpawnStrategy.OnSpawningComplete -= ProgressWave;
     }
 
-    private IEnumerator GroupCooldown(int pSeconds)
+    private IEnumerator GroupCooldown(float pSeconds)
     {
         yield return new WaitForSeconds(pSeconds);
         Debug.Log("In Routine");
-        //Todo: handle new group
+
+        HandleGroup(_currentWave.Wave[_groupCounter - 1]);
     }
 }

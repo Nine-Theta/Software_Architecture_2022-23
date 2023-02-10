@@ -10,13 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67af422efc141634f937f26fa8fd3775, type: 3}
-  m_Name: EnemyGroupScriptable
+  m_Name: TestGroup1
   m_EditorClassIdentifier: 
-  SpawnStrategy: {fileID: 0}
-  GroupSpawnDelay: 0
-  EnemyGroup:
+  SpawnStrategy: {fileID: 11400000, guid: 1132b5b35118cd348a4f808f75629500, type: 2}
+  GroupSpawnDelay: 1
+  EnemyTypes:
   - EnemyType: {fileID: 11400000, guid: 29f6a9898c5433447b7abfe965a8deea, type: 2}
-    EnemyCount: 1
+    EnemyCount: 2
     SpawnDelay: 1
-  f: {fileID: 11500000, guid: bfe020158c33b7a4c96cc28432ca3d56, type: 3}
-  Q: {fileID: 0}

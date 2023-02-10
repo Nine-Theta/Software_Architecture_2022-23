@@ -12,5 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6a8d61318ebbe3488392821b107b03a, type: 3}
   m_Name: RandomSpawn
   m_EditorClassIdentifier: 
-  EnemyTemplate: {fileID: 0}
-  testEnemy: {fileID: 0}
+  EnemyTemplate: {fileID: 2150371888702897205, guid: d1e88e23ac029214281e186acc590048, type: 3}

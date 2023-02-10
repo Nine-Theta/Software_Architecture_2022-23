@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-[RequireComponent(typeof(MeshFilter))]
 public class EnemyShellScript : MonoBehaviour
 {
     private EnemyScriptable _enemyData;
@@ -13,7 +11,7 @@ public class EnemyShellScript : MonoBehaviour
     {
         _enemyData = pEnemyData;
         _model = Instantiate<GameObject>(_enemyData.EnemyModel,this.transform);
-        name = _enemyData.Name + " [Enemy]";
+        name = _enemyData.Name + " [ " + _enemyData.name + "]";
     }
 
 }
