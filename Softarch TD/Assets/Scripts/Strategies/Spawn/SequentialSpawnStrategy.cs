@@ -2,18 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "RandomSpawn", menuName = "SpawnStrategy/Random")]
-public class RandomSpawnStrategy : SpawnStrategyBase
+[CreateAssetMenu(fileName = "SequentialSpawn", menuName = "SpawnStrategy/Sequential")]
+public class SequentialSpawnStrategy : SpawnStrategyBase
 {
     private List<int> _enemyCounter;
 
     public override event System.Action OnSpawningComplete;
+
+    int _typeIndex;
 
     public override void SpawnGroup(EnemyGroupScriptable pGroup, MonoBehaviour pMono)
     {        
         EnemyList = new List<EnemySpawnSettings>(pGroup.EnemyTypes);
 
         _enemyCounter = new List<int>(pGroup.EnemyTypes.Count);
+
+        _typeIndex = 0;
 
         Debug.Log("groupcount: " + pGroup.EnemyTypes.Count);
 
@@ -30,31 +34,28 @@ public class RandomSpawnStrategy : SpawnStrategyBase
 
     IEnumerator Spawner()
     {
-
         Debug.Log("routine started");
-        int type = Random.Range(0, _enemyCounter.Count);
 
-        SpawnEnemy(EnemyList[type].EnemyType);
+        SpawnEnemy(EnemyList[_typeIndex].EnemyType);
 
-        float delay = EnemyList[type].SpawnDelay;
+        float delay = EnemyList[_typeIndex].SpawnDelay;
 
-        _enemyCounter[type]--;
-
+        _enemyCounter[_typeIndex]--;
 
         yield return new WaitForSeconds(delay);
 
-        Debug.Log("type " + type);
+        Debug.Log("type " + _typeIndex);
         Debug.Log("list count "+EnemyList.Count);
-        Debug.Log("type name: "+ EnemyList[type].EnemyType.name);
+        Debug.Log("type name: "+ EnemyList[_typeIndex].EnemyType.name);
 
-        if (_enemyCounter[type] <= 0)
+
+        if (_enemyCounter[_typeIndex] <= 0)
         {
             Debug.Log("No enemies left of type");
-            EnemyList.RemoveAt(type);
-            _enemyCounter.RemoveAt(type);
+            _typeIndex++;
         }
 
-        if (_enemyCounter.Count <= 0) //Todo: Fire event when done.
+        if (_typeIndex >= _enemyCounter.Count)
         {
 
             Debug.Log("No enemies left of any type");

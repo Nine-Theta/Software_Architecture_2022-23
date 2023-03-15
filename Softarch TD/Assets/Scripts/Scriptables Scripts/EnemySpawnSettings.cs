@@ -7,6 +7,7 @@ using UnityEngine;
 public struct EnemySpawnSettings
 {
     public EnemyScriptable EnemyType;
+    [Min(1)]
     public int EnemyCount;
     [Tooltip("How long to wait for to spawn another enemy of the same type")]
     public float SpawnDelay;

@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67af422efc141634f937f26fa8fd3775, type: 3}
   m_Name: TestGroup1
   m_EditorClassIdentifier: 
-  SpawnStrategy: {fileID: 11400000, guid: 1132b5b35118cd348a4f808f75629500, type: 2}
+  SpawnStrategy: {fileID: 11400000, guid: 333f3d7f27ef3a540b3309d6efbcc98f, type: 2}
   GroupSpawnDelay: 1
   EnemyTypes:
   - EnemyType: {fileID: 11400000, guid: 29f6a9898c5433447b7abfe965a8deea, type: 2}
-    EnemyCount: 2
+    EnemyCount: 4
     SpawnDelay: 1
   - EnemyType: {fileID: 11400000, guid: 769888d2c9a2f5e4b8854d0d4702d27f, type: 2}
     EnemyCount: 5
