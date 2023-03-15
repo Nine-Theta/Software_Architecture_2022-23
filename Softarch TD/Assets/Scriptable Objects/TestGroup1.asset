@@ -18,3 +18,6 @@ MonoBehaviour:
   - EnemyType: {fileID: 11400000, guid: 29f6a9898c5433447b7abfe965a8deea, type: 2}
     EnemyCount: 2
     SpawnDelay: 1
+  - EnemyType: {fileID: 11400000, guid: 769888d2c9a2f5e4b8854d0d4702d27f, type: 2}
+    EnemyCount: 5
+    SpawnDelay: 1

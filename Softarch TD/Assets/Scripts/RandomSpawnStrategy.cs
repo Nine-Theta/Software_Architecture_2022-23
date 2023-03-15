@@ -5,23 +5,21 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "RandomSpawn", menuName = "SpawnStrategy/Random")]
 public class RandomSpawnStrategy : SpawnStrategyBase
 {
-    private int _groupCount = 0;
-    private int[] _enemyCounter;
+    private List<int> _enemyCounter;
 
     public override event System.Action OnSpawningComplete;
 
     public override void SpawnGroup(EnemyGroupScriptable pGroup, MonoBehaviour pMono)
-    {
-        _groupCount = pGroup.EnemyTypes.Count;
-
+    {        
         EnemyList = new List<EnemySpawnSettings>(pGroup.EnemyTypes);
 
-        _enemyCounter = new int[_groupCount];
-        Debug.Log("groupcount: " + _groupCount);
+        _enemyCounter = new List<int>(pGroup.EnemyTypes.Count);
 
-        for (int i = 0; i < pGroup.EnemyTypes.Count; i++)
+        Debug.Log("groupcount: " + pGroup.EnemyTypes.Count);
+
+        for (int i = 0; i < pGroup.EnemyTypes.Count; i++) //For each enemy type in the group
         {
-            _enemyCounter[i] = pGroup.EnemyTypes[i].EnemyCount;
+            _enemyCounter.Add(pGroup.EnemyTypes[i].EnemyCount); //how many enemies per type
 
             Debug.Log("nmecount: " + _enemyCounter[i]);
         }
@@ -34,7 +32,7 @@ public class RandomSpawnStrategy : SpawnStrategyBase
     {
 
         Debug.Log("routine started");
-        int type = Random.Range(0, _groupCount - 1);
+        int type = Random.Range(0, _enemyCounter.Count);
 
         SpawnEnemy(EnemyList[type].EnemyType);
 
@@ -45,15 +43,21 @@ public class RandomSpawnStrategy : SpawnStrategyBase
 
         yield return new WaitForSeconds(delay);
 
+        Debug.Log("type " + type);
+        Debug.Log("list count "+EnemyList.Count);
+        Debug.Log("type name: "+ EnemyList[type].EnemyType.name);
+
         if (_enemyCounter[type] <= 0)
         {
+            Debug.Log("No enemies left of type");
             EnemyList.RemoveAt(type);
-            _groupCount--;
+            _enemyCounter.RemoveAt(type);
         }
 
-        if (_groupCount <= 0) //Todo: Fire event when done.
+        if (_enemyCounter.Count <= 0) //Todo: Fire event when done.
         {
-            Debug.Log("No enemies left of type");
+
+            Debug.Log("No enemies left of any type");
             OnSpawningComplete?.Invoke();
             mono.StopCoroutine(Spawner());
         }

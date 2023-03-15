@@ -51,6 +51,8 @@ public class WaveManager : MonoBehaviour
 
     private void ProgressWave()
     {
+        Debug.Log("Wave Progress");
+
         _currentGroup.SpawnStrategy.OnSpawningComplete -= ProgressWave;
 
         _groupCounter++;
