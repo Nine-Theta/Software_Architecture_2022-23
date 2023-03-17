@@ -1,6 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
+using UnityEditor.UIElements;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 
 [CreateAssetMenu(fileName = "EnemyScriptable", menuName = "ScriptableObjects/Enemy")]
@@ -36,12 +40,17 @@ public class EnemyScriptable : ScriptableObject
     public float AttackDamage = 1.0f;
 
 
+    public EnemyScriptable()
+    {
+
+    }
+
     private void OnEnable()
     {
         Health = _baseHealth;
         MovementSpeed = _baseMovementSpeed;
         Defense = _baseDefense;
-        Resistance= _baseResistance;
+        Resistance = _baseResistance;
         AttackDamage = _baseAttackDamage;
     }
 
@@ -51,7 +60,7 @@ public class EnemyScriptable : ScriptableObject
     {
         if (pDamage < Defense) return Health;
 
-        Health -= (pDamage - Defense) * (1-Resistance);
+        Health -= (pDamage - Defense) * (1 - Resistance);
         return Health;
     }
 }

@@ -10,7 +10,7 @@ public class RandomSpawnStrategy : SpawnStrategyBase
     public override event System.Action OnSpawningComplete;
 
     public override void SpawnGroup(EnemyGroupScriptable pGroup, MonoBehaviour pMono)
-    {        
+    {
         EnemyList = new List<EnemySpawnSettings>(pGroup.EnemyTypes);
 
         _enemyCounter = new List<int>(pGroup.EnemyTypes.Count);
@@ -44,8 +44,8 @@ public class RandomSpawnStrategy : SpawnStrategyBase
         yield return new WaitForSeconds(delay);
 
         Debug.Log("type " + type);
-        Debug.Log("list count "+EnemyList.Count);
-        Debug.Log("type name: "+ EnemyList[type].EnemyType.name);
+        Debug.Log("list count " + EnemyList.Count);
+        Debug.Log("type name: " + EnemyList[type].EnemyType.name);
 
         if (_enemyCounter[type] <= 0)
         {
@@ -59,11 +59,9 @@ public class RandomSpawnStrategy : SpawnStrategyBase
 
             Debug.Log("No enemies left of any type");
             OnSpawningComplete?.Invoke();
-            mono.StopCoroutine(Spawner());
+            yield break;
         }
-        else
-        {
-            mono.StartCoroutine(Spawner());
-        }
+
+        mono.StartCoroutine(Spawner());
     }
 }

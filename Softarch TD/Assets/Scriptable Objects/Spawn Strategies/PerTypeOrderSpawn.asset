@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa2b89297401c6a40bdaee0b7319433a, type: 3}
-  m_Name: SequentialSpawn
+  m_Script: {fileID: 11500000, guid: 7cee244ea3fda744eaded6ec1c4dcc59, type: 3}
+  m_Name: PerTypeOrderSpawn
   m_EditorClassIdentifier: 
   EnemyTemplate: {fileID: 2150371888702897205, guid: d1e88e23ac029214281e186acc590048, type: 3}
