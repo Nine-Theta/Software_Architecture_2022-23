@@ -17,6 +17,6 @@ public class EnemyShellScript : MonoBehaviour
       
         _model = Instantiate<GameObject>(_enemyData.EnemyModel, this.transform);
         name = _enemyData.Name + " [ " + _enemyData.name + "]";
-        _enemyData.Health -= 1;
+        _enemyData.Values.Health -= 1;
     }
 }

@@ -14,14 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MovemenStrategy: todo
   Name: Green
-  _baseHealth: 10
-  _baseMovementSpeed: 1
-  _baseDefense: 0
-  _baseResistance: 0
-  _baseAttackDamage: 1
+  Values:
+    Health: 0
+    MovementSpeed: 0
+    Defense: 0
+    Resistance: 0
+    AttackDamage: 0
+    Reward: 0
   EnemyModel: {fileID: 7720884960456987690, guid: 09b2e7cefe4bef4489b4af4510b10c16, type: 3}
-  Health: 10
-  MovementSpeed: 1
-  Defense: 0
-  Resistance: 0
-  AttackDamage: 1
+  ActiveDebuffs: []
