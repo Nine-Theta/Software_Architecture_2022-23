@@ -4,22 +4,15 @@ using Unity.Jobs;
 using UnityEditor;
 using UnityEngine;
 
-public abstract class SpawnStrategyBase : ScriptableObject
+public abstract class SpawnStrategyBase<T> : ScriptableObject
 {
-    public GameObject EnemyTemplate;
-
     public abstract event System.Action OnSpawningComplete;
+
+    public abstract event System.Action<T> OnNextSpawn;
 
     protected MonoBehaviour mono;
 
-    protected List<EnemySpawnSettings> EnemyList;
+    protected List<SpawnSettings<T>> Spawnables;
 
-    public void SpawnEnemy(EnemyScriptable pEnemyData)
-    {
-        GameObject newEnemy = Instantiate(EnemyTemplate);
-        newEnemy.GetComponent<EnemyShellScript>().Initialize(pEnemyData);
-    }
-
-
-    public abstract void SpawnGroup(EnemyGroupScriptable pGroup, MonoBehaviour pMono);
+    public abstract void SpawnGroup(List<SpawnSettings<T>> pSpawnables, MonoBehaviour pMono);
 }

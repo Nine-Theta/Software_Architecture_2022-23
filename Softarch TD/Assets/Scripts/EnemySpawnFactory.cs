@@ -15,7 +15,7 @@ public class EnemySpawnFactory : AbstractSpawnFactory<EnemyScriptable>
 
     public void SpawnEnemyGroup(EnemyGroupScriptable pGroup, Vector3 pPosition, Quaternion pRotation)
     {
-        
+        pGroup.SpawnStrategy.OnNextSpawn += SpawnNextEnemy;
     }
 
     public override void Spawn(Vector3 pPosition, Quaternion pRotation)
@@ -28,5 +28,10 @@ public class EnemySpawnFactory : AbstractSpawnFactory<EnemyScriptable>
     protected override AbstractShell<EnemyScriptable> SpawnObject(Vector3 pPosition, Quaternion pRotation)
     {
         return base.SpawnObject(pPosition, pRotation);   
+    }
+   
+    private void SpawnNextEnemy()
+    {
+
     }
 }

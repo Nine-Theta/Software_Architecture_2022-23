@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public struct EnemySpawnSettings
+public class SpawnSettings<T> //used to be a struct
 {
-    public EnemyScriptable EnemyType;
+    public T SpawnType;
     [Min(1)]
-    public int EnemyCount;
-    [Tooltip("How long to wait for to spawn another enemy of the same type")]
+    public int SpawnCount;
+    [Tooltip("How long to wait for to spawn another object of the same type")]
     public float SpawnDelay;
 }

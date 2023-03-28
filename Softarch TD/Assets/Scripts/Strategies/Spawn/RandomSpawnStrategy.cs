@@ -3,28 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "RandomSpawn", menuName = "SpawnStrategy/Random")]
-public class RandomSpawnStrategy : SpawnStrategyBase
+public class RandomSpawnStrategy<T> : SpawnStrategyBase<T> where T : ScriptableObject
 {
     //todo: redo strategies to be event based
 
-    private List<int> _enemyCounter;
-
     public override event System.Action OnSpawningComplete;
 
-    public override void SpawnGroup(EnemyGroupScriptable pGroup, MonoBehaviour pMono)
+    public override event System.Action<T> OnNextSpawn;
+
+    public override void SpawnGroup(List<SpawnSettings<T>> pSpawnables, MonoBehaviour pMono)
     {
-        EnemyList = new List<EnemySpawnSettings>(pGroup.EnemyTypes);
+        Spawnables = new List<SpawnSettings<T>>(pSpawnables);
 
-        _enemyCounter = new List<int>(pGroup.EnemyTypes.Count);
-
-        Debug.Log("groupcount: " + pGroup.EnemyTypes.Count);
-
-        for (int i = 0; i < pGroup.EnemyTypes.Count; i++) //For each enemy type in the group
-        {
-            _enemyCounter.Add(pGroup.EnemyTypes[i].EnemyCount); //how many enemies per type
-
-            Debug.Log("nmecount: " + _enemyCounter[i]);
-        }
+        Debug.Log("groupcount: " + Spawnables.Count);
 
         mono = pMono;
         mono.StartCoroutine(Spawner());
@@ -32,34 +23,31 @@ public class RandomSpawnStrategy : SpawnStrategyBase
 
     IEnumerator Spawner()
     {
-
         Debug.Log("routine started");
-        int type = Random.Range(0, _enemyCounter.Count);
+        int index = Random.Range(0, Spawnables.Count);
 
-        SpawnEnemy(EnemyList[type].EnemyType);
+        OnNextSpawn?.Invoke(Spawnables[index].SpawnType);
 
-        float delay = EnemyList[type].SpawnDelay;
+        float delay = Spawnables[index].SpawnDelay;
 
-        _enemyCounter[type]--;
-
+        Spawnables[index].SpawnCount--;
 
         yield return new WaitForSeconds(delay);
 
-        Debug.Log("type " + type);
-        Debug.Log("list count " + EnemyList.Count);
-        Debug.Log("type name: " + EnemyList[type].EnemyType.name);
+        Debug.Log("index " + index);
+        Debug.Log("list count " + Spawnables.Count);
+        Debug.Log("index name: " + Spawnables[index].SpawnType.name);
 
-        if (_enemyCounter[type] <= 0)
+        if (Spawnables[index].SpawnCount <= 0)
         {
-            Debug.Log("No enemies left of type");
-            EnemyList.RemoveAt(type);
-            _enemyCounter.RemoveAt(type);
+            Debug.Log("No enemies left of index");
+            Spawnables.RemoveAt(index);
         }
 
-        if (_enemyCounter.Count <= 0)
+        if (Spawnables.Count <= 0)
         {
 
-            Debug.Log("No enemies left of any type");
+            Debug.Log("No enemies left of any index");
             OnSpawningComplete?.Invoke();
             yield break;
         }
