@@ -4,19 +4,20 @@ using UnityEditor.Callbacks;
 using UnityEditor;
 using UnityEngine;
 
-public class EnemyShellScript : MonoBehaviour
+public class EnemyShellScript : AbstractShell<EnemyScriptable>
 {
-    [SerializeField]
-    private EnemyScriptable _enemyData;
-    private GameObject _model;
-
-    public void InitEnemy(EnemyScriptable pEnemyData)
+    public void Initialize(EnemyScriptable pData)
     {
-        _enemyData = Instantiate(pEnemyData);
-        _enemyData.name = pEnemyData.name;
+
+
+        //maybe do this in factory as well?
+        //Data = Instantiate(pData);
+        //Data.name = pData.name;
       
-        _model = Instantiate<GameObject>(_enemyData.EnemyModel, this.transform);
-        name = _enemyData.Name + " [ " + _enemyData.name + "]";
-        _enemyData.Values.Health -= 1;
+        //todo: do in factory;
+        //_model = Instantiate<GameObject>(_enemyData.EnemyModel, this.transform);
+        //name = _enemyData.Name + " [ " + _enemyData.name + "]";
+        //_enemyData.Values.Health -= 1;
+        
     }
 }

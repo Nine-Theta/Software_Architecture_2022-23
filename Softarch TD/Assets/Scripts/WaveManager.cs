@@ -7,6 +7,9 @@ using UnityEngine;
 public class WaveManager : MonoBehaviour
 {
     [SerializeField]
+    public EnemySpawnFactory EnemySpawner;
+
+    [SerializeField]
     private WaveScriptable _currentWave;
     private EnemyGroupScriptable _currentGroup;
     private int _groupCounter = 0; //which group is being handled right now
@@ -45,6 +48,9 @@ public class WaveManager : MonoBehaviour
     private void HandleGroup(EnemyGroupScriptable pGroup)
     {
         _currentGroup = pGroup;
+
+        EnemySpawner.SpawnEnemyGroup(pGroup, Vector3.zero, Quaternion.identity);
+
         _currentGroup.SpawnStrategy.SpawnGroup(pGroup, this);
         _currentGroup.SpawnStrategy.OnSpawningComplete += ProgressWave;
     }

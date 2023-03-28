@@ -5,6 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "RandomSpawn", menuName = "SpawnStrategy/Random")]
 public class RandomSpawnStrategy : SpawnStrategyBase
 {
+    //todo: redo strategies to be event based
+
     private List<int> _enemyCounter;
 
     public override event System.Action OnSpawningComplete;

@@ -17,7 +17,7 @@ public abstract class SpawnStrategyBase : ScriptableObject
     public void SpawnEnemy(EnemyScriptable pEnemyData)
     {
         GameObject newEnemy = Instantiate(EnemyTemplate);
-        newEnemy.GetComponent<EnemyShellScript>().InitEnemy(pEnemyData);
+        newEnemy.GetComponent<EnemyShellScript>().Initialize(pEnemyData);
     }
 
 
