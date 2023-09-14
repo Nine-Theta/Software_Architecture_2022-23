@@ -19,10 +19,9 @@ public class EnemyObject : MonoBehaviour
 
     public List<DebuffScriptable> ActiveDebuffs;
 
-    public void Initialize(EnemyScriptable pData, GameObject pModel)
+    public void Initialize(EnemyScriptable pData)
     {
         _baseData = pData;
-        _model = pModel;
         _runtimeValues = new EnemyValues(pData.Values);
     }
 

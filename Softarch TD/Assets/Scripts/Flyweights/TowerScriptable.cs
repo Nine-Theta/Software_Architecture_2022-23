@@ -7,7 +7,7 @@ using UnityEngine;
 public class TowerScriptable : ScriptableObject
 {
     public string TowerType = "todo"; //type of attack
-    public string AttackStrategy = "todo"; //which enemy to attack
+    public AbstractAttackStrategy AttackStrategy; //which enemy to attack
     public string Name = "tower";
 
     public float Damage = 0f;
@@ -15,6 +15,8 @@ public class TowerScriptable : ScriptableObject
     public float Range = 1;
 
     public int Cost = 1;
+
+    public GameObject TowerModel;
 
     public List<string> Debuffs = new List<string>();
 

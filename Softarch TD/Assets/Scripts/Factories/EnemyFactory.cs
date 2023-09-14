@@ -16,11 +16,13 @@ public class EnemyFactory : MonoBehaviour
 
     public GameObject CreateEnemy(EnemyScriptable pEnemyData)
     {
-        GameObject newEnemy = new GameObject(pEnemyData.Name); //Instantiate(,new GameObject(pEnemyData.Name), Vector3.zero, Quaternion.identity); //pPosition, pRotation);
-        GameObject enemyModel = Instantiate(pEnemyData.EnemyModel, Vector3.zero, Quaternion.identity,newEnemy.transform);
+        GameObject newEnemy = Instantiate(pEnemyData.EnemyModel, Vector3.zero, Quaternion.identity); //pPosition, pRotation);
+        newEnemy.name = pEnemyData.Name;
+        //GameObject enemyModel = Instantiate(pEnemyData.EnemyModel, Vector3.zero, Quaternion.identity,newEnemy.transform);
 
-        EnemyObject f = newEnemy.AddComponent<EnemyObject>();
-        f.Initialize(pEnemyData, enemyModel);
+        EnemyObject f = newEnemy.GetComponent<EnemyObject>();
+
+        f.Initialize(pEnemyData);
 
         return newEnemy; ;
     }

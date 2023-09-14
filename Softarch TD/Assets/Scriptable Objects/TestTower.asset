@@ -15,9 +15,9 @@ MonoBehaviour:
   TowerType: todo
   AttackStrategy: todo
   Name: tower
-  Damage: 0
+  Damage: 1
   Cooldown: 0.1
-  Range: 1
+  Range: 2
   Cost: 1
+  TowerModel: {fileID: 7720884960456987690, guid: 09b2e7cefe4bef4489b4af4510b10c16, type: 3}
   Debuffs: []
-  f: 0
