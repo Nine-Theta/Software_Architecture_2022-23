@@ -14,14 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MovemenStrategy: todo
   Name: Bob
-  _baseHealth: 10
-  _baseMovementSpeed: 1
-  _baseDefense: 0
-  _baseResistance: 0
-  _baseAttackDamage: 1
+  Values:
+    Health: 10
+    MovementSpeed: 2
+    Defense: 0
+    Resistance: 0
+    AttackDamage: 1
+    Reward: 0
   EnemyModel: {fileID: 132966338052862889, guid: 779553ea840ef024a93c7a26788180d4, type: 3}
-  Health: 10
-  MovementSpeed: 1
-  Defense: 0
-  Resistance: 0
-  AttackDamage: 1

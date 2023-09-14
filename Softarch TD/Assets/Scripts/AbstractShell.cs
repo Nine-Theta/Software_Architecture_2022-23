@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 
-public abstract class AbstractShell<T> : MonoBehaviour where T : ScriptableObject
+public class ShellObject<T> : MonoBehaviour where T : ScriptableObject
 {
     public T Data;
 

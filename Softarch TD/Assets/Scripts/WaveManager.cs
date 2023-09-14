@@ -51,7 +51,7 @@ public class WaveManager : MonoBehaviour
 
         EnemySpawner.SpawnEnemyGroup(pGroup, Vector3.zero, Quaternion.identity);
 
-        _currentGroup.SpawnStrategy.SpawnGroup(pGroup, this);
+        //_currentGroup.SpawnStrategy.SpawnGroup(pGroup, this);
         _currentGroup.SpawnStrategy.OnSpawningComplete += ProgressWave;
     }
 

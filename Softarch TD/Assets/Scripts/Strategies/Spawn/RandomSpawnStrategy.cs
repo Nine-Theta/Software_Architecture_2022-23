@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "RandomSpawn", menuName = "SpawnStrategy/Random")]
-public class RandomSpawnStrategy<T> : SpawnStrategyBase<T> where T : ScriptableObject
+public class RandomSpawnStrategy/*<T>*/ : SpawnStrategyBase/*<T>*/ /*where T : ScriptableObject*/
 {
     //todo: redo strategies to be event based
 
     public override event System.Action OnSpawningComplete;
 
-    public override event System.Action<T> OnNextSpawn;
+    public override event System.Action/*<T>*/ OnNextSpawn;
 
-    public override void SpawnGroup(List<SpawnSettings<T>> pSpawnables, MonoBehaviour pMono)
+    public override void SpawnGroup(List<SpawnSettings/*<T>*/> pSpawnables, MonoBehaviour pMono)
     {
-        Spawnables = new List<SpawnSettings<T>>(pSpawnables);
+        Spawnables = new List<SpawnSettings/*<T>*/>(pSpawnables);
 
         Debug.Log("groupcount: " + Spawnables.Count);
 
@@ -26,7 +26,7 @@ public class RandomSpawnStrategy<T> : SpawnStrategyBase<T> where T : ScriptableO
         Debug.Log("routine started");
         int index = Random.Range(0, Spawnables.Count);
 
-        OnNextSpawn?.Invoke(Spawnables[index].SpawnType);
+        //OnNextSpawn?.Invoke(Spawnables[index].SpawnType);
 
         float delay = Spawnables[index].SpawnDelay;
 
@@ -36,7 +36,7 @@ public class RandomSpawnStrategy<T> : SpawnStrategyBase<T> where T : ScriptableO
 
         Debug.Log("index " + index);
         Debug.Log("list count " + Spawnables.Count);
-        Debug.Log("index name: " + Spawnables[index].SpawnType.name);
+        //Debug.Log("index name: " + Spawnables[index].SpawnType.name);
 
         if (Spawnables[index].SpawnCount <= 0)
         {

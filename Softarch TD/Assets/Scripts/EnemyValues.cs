@@ -1,3 +1,4 @@
+using NaughtyAttributes;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using UnityEngine;
 public enum EnemyStats { HEALTH, SPEED, DEFENSE, RESISTANCE, ATTACK, REWARD };
 
 [Serializable]
-public struct EnemyValues
+public class EnemyValues
 {
 
     [Tooltip("Total health the enemy has")]
@@ -27,7 +28,6 @@ public struct EnemyValues
     [Tooltip("How much reward the player gets when defeating the enemy")]
     public float Reward;
 
-
     public EnemyValues(float pHealth, float pMovementSpeed, float pDefense, float pResistance, float pAttackDamage, float pReward)
     {
         Health = pHealth;
@@ -38,4 +38,5 @@ public struct EnemyValues
         Reward = pReward;
     }
 
+    public EnemyValues(EnemyValues pOriginal) : this(pOriginal.Health, pOriginal.MovementSpeed, pOriginal.Defense, pOriginal.Resistance, pOriginal.AttackDamage, pOriginal.Reward) { }
 }

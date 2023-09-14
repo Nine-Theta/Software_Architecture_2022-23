@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class EnemySpawnFactory : AbstractSpawnFactory<EnemyScriptable>
+public class EnemySpawnFactory //: AbstractSpawnFactory<EnemyScriptable>
 {
     EnemyScriptable enemy;
 
@@ -15,20 +15,20 @@ public class EnemySpawnFactory : AbstractSpawnFactory<EnemyScriptable>
 
     public void SpawnEnemyGroup(EnemyGroupScriptable pGroup, Vector3 pPosition, Quaternion pRotation)
     {
-        pGroup.SpawnStrategy.OnNextSpawn += SpawnNextEnemy;
+       // pGroup.SpawnStrategy.OnNextSpawn += SpawnNextEnemy;
     }
-
-    public override void Spawn(Vector3 pPosition, Quaternion pRotation)
+    
+    public void Spawn(Vector3 pPosition, Quaternion pRotation)
     {
-        AbstractShell<EnemyScriptable> newEnemy = SpawnObject(pPosition, pRotation);
-        newEnemy.Data = Instantiate(enemy);
-        newEnemy.Data.name = enemy.name;
+        //AbstractShell<EnemyScriptable> newEnemy = SpawnObject(pPosition, pRotation);
+        //newEnemy.Data = Instantiate(enemy);
+        //newEnemy.Data.name = enemy.name;
     }
-
+    /*
     protected override AbstractShell<EnemyScriptable> SpawnObject(Vector3 pPosition, Quaternion pRotation)
     {
         return base.SpawnObject(pPosition, pRotation);   
-    }
+    }*/
    
     private void SpawnNextEnemy()
     {
