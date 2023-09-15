@@ -2,7 +2,7 @@
 //using System.Collections.Generic;
 //using UnityEngine;
 
-//[CreateAssetMenu(fileName = "SequentialSpawn", menuName = "SpawnStrategy/Sequential")]
+//[CreateAssetMenu(fileName = "SequentialSpawn", menuName = "Strategy/Spawn/Sequential")]
 //public class SequentialSpawnStrategy : SpawnStrategyBase
 //{
 //    private List<int> _enemyCounter;

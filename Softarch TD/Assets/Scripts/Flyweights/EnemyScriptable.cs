@@ -9,7 +9,7 @@ using UnityEngine.UIElements;
 [CreateAssetMenu(fileName = "EnemyScriptable", menuName = "ScriptableObjects/Enemy")]
 public class EnemyScriptable : ScriptableObject
 {
-    public string MovemenStrategy = "todo";
+    public AbstractMovementStrategy MovemenStrategy;
 
     public string Name = "Bob";
 

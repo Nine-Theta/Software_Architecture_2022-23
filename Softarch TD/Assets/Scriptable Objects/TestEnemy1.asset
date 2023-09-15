@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a731a94f0f33e344836b4c85629939b, type: 3}
   m_Name: TestEnemy1
   m_EditorClassIdentifier: 
-  MovemenStrategy: todo
+  MovemenStrategy: {fileID: 11400000, guid: 841882a8c16acc64bab9004de5644e57, type: 2}
   Name: Bob
   Values:
     Health: 10

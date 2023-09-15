@@ -2,7 +2,7 @@
 //using System.Collections.Generic;
 //using UnityEngine;
 
-//[CreateAssetMenu(fileName = "PerTypeOrderSpawn", menuName = "SpawnStrategy/PerTypeOrder")]
+//[CreateAssetMenu(fileName = "PerTypeOrderSpawn", menuName = "Strategy/Spawn/PerTypeOrder")]
 //public class PerTypeOrderSpawnStrategy : SpawnStrategyBase
 //{
 //    private List<int> _enemyCounter;

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TestTower
   m_EditorClassIdentifier: 
   TowerType: todo
-  AttackStrategy: todo
+  AttackStrategy: {fileID: 11400000, guid: 5c07f856db15f0c489ddfcf9fd201512, type: 2}
   Name: tower
   Damage: 1
   Cooldown: 0.1

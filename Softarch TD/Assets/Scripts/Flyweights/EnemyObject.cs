@@ -5,7 +5,9 @@ using UnityEditor;
 using UnityEngine;
 using NaughtyAttributes;
 using System;
+using UnityEngine.AI;
 
+[SelectionBase]
 public class EnemyObject : MonoBehaviour
 {
     [SerializeField]
@@ -15,6 +17,8 @@ public class EnemyObject : MonoBehaviour
 
     [SerializeField]
     private EnemyValues _runtimeValues;
+
+    public Vector3 TargetPos;
 
 
     public List<DebuffScriptable> ActiveDebuffs;
@@ -29,6 +33,12 @@ public class EnemyObject : MonoBehaviour
     public void Damag()
     {
         DamageEnemy(1);
+    }
+
+    [Button]
+    public void Move()
+    {
+        this.GetComponent<NavMeshAgent>().SetDestination(TargetPos);
     }
 
     public void ApplyDebuff(DebuffScriptable pDebuff)

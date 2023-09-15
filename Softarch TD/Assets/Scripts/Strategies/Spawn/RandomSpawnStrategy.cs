@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "RandomSpawn", menuName = "SpawnStrategy/Random")]
+[CreateAssetMenu(fileName = "RandomSpawn", menuName = "Strategy/Spawn/Random")]
 public class RandomSpawnStrategy/*<T>*/ : SpawnStrategyBase/*<T>*/ /*where T : ScriptableObject*/
 {
     //todo: redo strategies to be event based

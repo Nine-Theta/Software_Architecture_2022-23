@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "ClosestAttack", menuName = "AttackStrategy/Closest")]
+[CreateAssetMenu(fileName = "ClosestAttackStrategy", menuName = "Strategy/Attack/Closest")]
 public class ClosestAttackStrategy : AbstractAttackStrategy
 {
     public override Collider GetTarget(Collider[] pTargetsInRange, Vector3 pCenterPosition)
