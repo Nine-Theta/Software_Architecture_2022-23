@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,11 +9,21 @@ public class TowerBuildScript : MonoBehaviour
 
     public TowerScriptable testType;
 
-    public void BuildTower(Command.BuildTower pTowerCommand)
+    public Vector3 TowerBuildPosition;
+
+    public Commander TowerBuildCommander =  new Commander();
+
+    public GameObject BuildTower()
     {
-        GameObject newTower = TFactory.CreateTower(pTowerCommand.TowerType);
-        newTower.transform.position = pTowerCommand.Location;
+        GameObject newTower = TFactory.CreateTower(testType);
+        newTower.transform.position = TowerBuildPosition;
         newTower.transform.position += new Vector3(0,1,0);
+        return newTower;
+    }
+
+    public void RemoveTower(GameObject pTower)
+    {
+        Destroy(pTower);
     }
 
     public void Update()
@@ -24,7 +35,13 @@ public class TowerBuildScript : MonoBehaviour
             RaycastHit hit;            
             Physics.Raycast(ray, out hit);
             if (hit.collider == null) return;
-            BuildTower(new Command.BuildTower(testType, hit.point));
+            TowerBuildPosition = hit.point;
+            TowerBuildCommander.ExecuteCommand(new BuildTowerCommand(this));
+        }
+
+        if (Input.GetKeyDown(KeyCode.Backspace))
+        {
+            TowerBuildCommander.UndoCommand();
         }
     }
 

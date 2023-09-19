@@ -2,17 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Command
+public class Commander
 {
-    public struct BuildTower
-    {
-        public TowerScriptable TowerType;
-        public Vector3 Location;
+    private CommandHistory _history = new CommandHistory();
 
-        public BuildTower(TowerScriptable pTowerType, Vector3 pLocation)
+    public void ExecuteCommand(Command pCommand)
+    {
+        if (pCommand.Execute())
+            _history.PushCommand(pCommand);
+    }
+
+    public void UndoCommand()
+    {
+        if (_history.HasCommands())
         {
-            TowerType = pTowerType;
-            Location = pLocation;
+            _history.PopCommand().Undo();
         }
     }
 }
