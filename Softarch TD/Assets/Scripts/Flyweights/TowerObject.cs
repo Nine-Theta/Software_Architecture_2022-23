@@ -3,13 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[SelectionBase]
-public class TowerObject : MonoBehaviour
+[SelectionBase, RequireComponent(typeof(Collider))]
+public class TowerObject : AbstractContainerObject<TowerScriptable>
 {
     [SerializeField]
     private TowerScriptable _baseData;
     [SerializeField]
-    private GameObject _model;
+    private GameObject _template;
     [SerializeField]
     private Collider _rangeCollider;
 
@@ -17,11 +17,13 @@ public class TowerObject : MonoBehaviour
 
     private bool activated = false;
 
-    public void Initialize(TowerScriptable pData, GameObject pModel, Collider pCollider)
+    public override TowerScriptable BaseData { get { return _baseData; } }
+
+    public override void Initialize(TowerScriptable pData)
     {
         _baseData = pData;
-        _model = pModel;
-        _rangeCollider = pCollider;
+        if (_template == null) _template = transform.GetChild(0).gameObject;
+        if (_rangeCollider == null) _rangeCollider = gameObject.GetComponent<Collider>();
     }
 
 
@@ -68,4 +70,5 @@ public class TowerObject : MonoBehaviour
         activated = true;
         Debug.Log("Enemy Entered Range");
     }
+
 }

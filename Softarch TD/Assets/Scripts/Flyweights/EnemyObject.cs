@@ -8,7 +8,7 @@ using System;
 using UnityEngine.AI;
 
 [SelectionBase]
-public class EnemyObject : MonoBehaviour
+public class EnemyObject : AbstractContainerObject<EnemyScriptable>
 {
     [SerializeField]
     private EnemyScriptable _baseData;
@@ -23,7 +23,9 @@ public class EnemyObject : MonoBehaviour
 
     public List<DebuffScriptable> ActiveDebuffs;
 
-    public void Initialize(EnemyScriptable pData)
+    public override EnemyScriptable BaseData { get { return _baseData; } }
+
+    public override void Initialize(EnemyScriptable pData)
     {
         _baseData = pData;
         _runtimeValues = new EnemyValues(pData.Values);

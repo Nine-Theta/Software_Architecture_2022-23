@@ -44,7 +44,7 @@ public class PlayerControls : MonoBehaviour
 
     private void OnClick(InputValue pValue)
     {
-
+        Debug.Log("OnClick: " + pValue.Get());
     }
 
 

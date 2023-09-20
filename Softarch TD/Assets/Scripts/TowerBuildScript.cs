@@ -18,10 +18,11 @@ public class TowerBuildScript : MonoBehaviour
 
     public GameObject BuildTower()
     {
-        GameObject newTower = TFactory.CreateTower(testType);
-        newTower.transform.position = TowerBuildPosition;
-        newTower.transform.position += new Vector3(0,1,0);
-        return newTower;
+        //GameObject newTower = TFactory.CreateTower(testType);
+        //newTower.transform.position = TowerBuildPosition;
+        //newTower.transform.position += new Vector3(0,1,0);
+        //return newTower;
+        return null;
     }
 
     public void RemoveTower(GameObject pTower)

@@ -7,24 +7,30 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 [CreateAssetMenu(fileName = "EnemyScriptable", menuName = "ScriptableObjects/Enemy")]
-public class EnemyScriptable : ScriptableObject
+public class EnemyScriptable : ScriptableObject, I_Containable
 {
     public AbstractMovementStrategy MovemenStrategy;
 
-    public string Name = "Bob";
+    [SerializeField]
+    private string _name = "Bob";
 
     public EnemyValues Values;
 
-    public GameObject EnemyModel;
+    public GameObject _containerObject;
 
+    public string GetName { get { return _name; } }
 
-    public EnemyScriptable()
+    public GameObject GetContainerObject
     {
-        
-    }
-
-    private void OnEnable()
-    {
-
+        get
+        {
+            if (_containerObject.GetComponent<AbstractContainerObject<EnemyScriptable>>() == null)
+            {
+                Debug.LogError("Container Object for :" + this + " Is NULL or does not contain the proper script. Go fix it");
+                return null;
+            }
+            else
+                return _containerObject;
+        }
     }
 }

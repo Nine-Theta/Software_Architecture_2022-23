@@ -4,25 +4,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class EnemyFactory : MonoBehaviour
+public class EnemyFactory : AbstractScriptableInstanceFactory<EnemyScriptable>
 {
     public EnemyScriptable testEnemy;
 
     [Button]
     public void TestSpawn()
     {
-        CreateEnemy(testEnemy);
+        CreateInstance(testEnemy);
     }
 
-    public GameObject CreateEnemy(EnemyScriptable pEnemyData)
+    public override GameObject CreateInstance(EnemyScriptable pEnemyData)
     {
-        GameObject newEnemy = Instantiate(pEnemyData.EnemyModel, Vector3.zero, Quaternion.identity); //pPosition, pRotation);
-        newEnemy.name = pEnemyData.Name;
-        //GameObject enemyModel = Instantiate(pEnemyData.EnemyModel, Vector3.zero, Quaternion.identity,newEnemy.transform);
+        GameObject newEnemy = Instantiate(pEnemyData.GetContainerObject, Vector3.zero, Quaternion.identity); //pPosition, pRotation);
+        newEnemy.name = pEnemyData.GetName;
 
-        EnemyObject f = newEnemy.GetComponent<EnemyObject>();
-
-        f.Initialize(pEnemyData);
+        newEnemy.GetComponent<EnemyObject>().Initialize(pEnemyData);
 
         return newEnemy; ;
     }
