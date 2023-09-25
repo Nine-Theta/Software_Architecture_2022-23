@@ -4,5 +4,5 @@ using UnityEngine;
 
 public abstract class AbstractScriptableInstanceFactory<T> : MonoBehaviour where T : I_Containable
 {
-    public abstract GameObject CreateInstance(T pObjectData);
+    public abstract GameObject CreateInstance(T pObjectData, Vector3 pPosition);
 }

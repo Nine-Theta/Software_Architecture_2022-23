@@ -6,7 +6,7 @@ public class Commander
 {
     private CommandHistory _history = new CommandHistory();
 
-    public void ExecuteCommand(Command pCommand)
+    public void ExecuteCommand(I_Command pCommand)
     {
         if (pCommand.Execute())
             _history.PushCommand(pCommand);

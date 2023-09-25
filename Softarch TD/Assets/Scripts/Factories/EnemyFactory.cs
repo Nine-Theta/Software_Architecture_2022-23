@@ -11,10 +11,10 @@ public class EnemyFactory : AbstractScriptableInstanceFactory<EnemyScriptable>
     [Button]
     public void TestSpawn()
     {
-        CreateInstance(testEnemy);
+        CreateInstance(testEnemy, new Vector3());
     }
 
-    public override GameObject CreateInstance(EnemyScriptable pEnemyData)
+    public override GameObject CreateInstance(EnemyScriptable pEnemyData, Vector3 pPosition)
     {
         GameObject newEnemy = Instantiate(pEnemyData.GetContainerObject, Vector3.zero, Quaternion.identity); //pPosition, pRotation);
         newEnemy.name = pEnemyData.GetName;

@@ -9,6 +9,9 @@ public class PlayerControls : MonoBehaviour
 {
     private PlayerInput _playerInput;
 
+    [SerializeField]
+    private InputProcessor _processor;
+
     public Vector2 MouseSensitivity;
 
     public Vector3 movement = Vector3.zero;
@@ -44,6 +47,7 @@ public class PlayerControls : MonoBehaviour
 
     private void OnClick(InputValue pValue)
     {
+        _processor.ProccessButtonClick(pValue.Get<Vector2>());
         Debug.Log("OnClick: " + pValue.Get());
     }
 

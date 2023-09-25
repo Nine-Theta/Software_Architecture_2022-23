@@ -2,22 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BuildTowerCommand : Command
+public class BuildTowerCommand : I_Command
 {
+    private TowerBuildScript _receiver;
+
+    private TowerScriptable _towerToBuild;
+
+    private Vector3 _position;
+
     private GameObject _towerBackup;
 
-    public BuildTowerCommand(TowerBuildScript pBehaviour) : base(pBehaviour)
+    public BuildTowerCommand(TowerBuildScript pReceiver, TowerScriptable pTowerType, Vector3 pPosition)
     {
+        this._receiver = pReceiver;
+        _towerToBuild = pTowerType;
+        _position = pPosition;
     }
 
-    public override bool Execute()
+    public bool Execute()
     {
-        _towerBackup = (behaviour as TowerBuildScript).BuildTower();
+        _towerBackup = _receiver.BuildTower(_towerToBuild, _position);
         return true;
     }
 
-    public override void Undo()
+    public void Undo()
     {
-        (behaviour as TowerBuildScript).RemoveTower(_towerBackup);
+        _receiver.RemoveTower(_towerBackup);
     }
 }

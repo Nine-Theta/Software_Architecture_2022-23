@@ -12,17 +12,14 @@ public class TowerBuildScript : MonoBehaviour
 
     public Vector3 TowerBuildPosition;
 
-    public Commander TowerBuildCommander =  new Commander();
-
     public bool PlaceTowers = false;
 
-    public GameObject BuildTower()
+    public GameObject BuildTower(TowerScriptable pTowerType, Vector3 pPosition)
     {
-        //GameObject newTower = TFactory.CreateTower(testType);
-        //newTower.transform.position = TowerBuildPosition;
-        //newTower.transform.position += new Vector3(0,1,0);
-        //return newTower;
-        return null;
+        GameObject newTower = TFactory.CreateInstance(pTowerType, pPosition);
+        newTower.transform.position = pPosition;
+        newTower.transform.position += new Vector3(0,1,0);
+        return newTower;
     }
 
     public void RemoveTower(GameObject pTower)
@@ -30,28 +27,13 @@ public class TowerBuildScript : MonoBehaviour
         Destroy(pTower);
     }
 
-    public void ToggleTowerPlacement()
-    {
-        PlaceTowers = !PlaceTowers;
-    }
+
 
     public void Update()
     {
-        if (PlaceTowers && Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            Debug.DrawRay(ray.origin, ray.direction * 50, Color.green, 3);
-            RaycastHit hit;            
-            Physics.Raycast(ray, out hit,50, 10001);
-            if (hit.collider == null) return;
-            //if (hit.collider.tag)
-            TowerBuildPosition = hit.point;
-            TowerBuildCommander.ExecuteCommand(new BuildTowerCommand(this));
-        }
-
         if (Input.GetKeyDown(KeyCode.Backspace))
         {
-            TowerBuildCommander.UndoCommand();
+            //TowerBuildCommander.UndoCommand();
         }
     }
 
