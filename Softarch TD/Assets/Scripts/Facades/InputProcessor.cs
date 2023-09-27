@@ -10,14 +10,14 @@ public class InputProcessor : MonoBehaviour
     [SerializeField]
     private AbstractProcessorState _currentState;
 
-    public TowerBuildScript TowerBuilder;
+    public TowerFactory TowerFactory;
 
     public Commander TowerBuildCommander = new Commander();
 
 
     public void Start()
     {
-        this._currentState = new DefaultState(this);
+        _currentState.SetContext(this);
     }
 
     public void ChangeState(AbstractProcessorState pState)

@@ -16,7 +16,7 @@ public class EnemyFactory : AbstractScriptableInstanceFactory<EnemyScriptable>
 
     public override GameObject CreateInstance(EnemyScriptable pEnemyData, Vector3 pPosition)
     {
-        GameObject newEnemy = Instantiate(pEnemyData.GetContainerObject, Vector3.zero, Quaternion.identity); //pPosition, pRotation);
+        GameObject newEnemy = Instantiate(pEnemyData.GetContainerObject, pPosition, Quaternion.identity); //pPosition, pRotation);
         newEnemy.name = pEnemyData.GetName;
 
         newEnemy.GetComponent<EnemyObject>().Initialize(pEnemyData);

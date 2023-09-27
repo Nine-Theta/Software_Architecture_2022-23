@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BuildTowerCommand : I_Command
 {
-    private TowerBuildScript _receiver;
+    private TowerFactory _receiver;
 
     private TowerScriptable _towerToBuild;
 
@@ -12,7 +12,7 @@ public class BuildTowerCommand : I_Command
 
     private GameObject _towerBackup;
 
-    public BuildTowerCommand(TowerBuildScript pReceiver, TowerScriptable pTowerType, Vector3 pPosition)
+    public BuildTowerCommand(TowerFactory pReceiver, TowerScriptable pTowerType, Vector3 pPosition)
     {
         this._receiver = pReceiver;
         _towerToBuild = pTowerType;
@@ -21,12 +21,12 @@ public class BuildTowerCommand : I_Command
 
     public bool Execute()
     {
-        _towerBackup = _receiver.BuildTower(_towerToBuild, _position);
+        _towerBackup = _receiver.CreateInstance(_towerToBuild, _position);
         return true;
     }
 
     public void Undo()
     {
-        _receiver.RemoveTower(_towerBackup);
+        _receiver.DeleteInstance(_towerBackup);
     }
 }

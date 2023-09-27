@@ -12,6 +12,6 @@ public class DefaultState : AbstractProcessorState
 
     public override void ProccessButtonClick(Vector2 pMousePos)
     {
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
     }
 }
