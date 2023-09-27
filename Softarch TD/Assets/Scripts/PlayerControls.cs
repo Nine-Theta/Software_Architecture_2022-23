@@ -54,7 +54,6 @@ public class PlayerControls : MonoBehaviour
 
     private void Update()
     {
-
         transform.position += movement;
     }
 }

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a731a94f0f33e344836b4c85629939b, type: 3}
   m_Name: TestEnemy2
   m_EditorClassIdentifier: 
-  MovemenStrategy: todo
-  Name: Green
+  MovemenStrategy: {fileID: 11400000, guid: 841882a8c16acc64bab9004de5644e57, type: 2}
+  _name: Bob
   Values:
     Health: 0
     MovementSpeed: 0
@@ -21,5 +21,4 @@ MonoBehaviour:
     Resistance: 0
     AttackDamage: 0
     Reward: 0
-  EnemyModel: {fileID: 7720884960456987690, guid: 09b2e7cefe4bef4489b4af4510b10c16, type: 3}
-  ActiveDebuffs: []
+  _containerObject: {fileID: 0}

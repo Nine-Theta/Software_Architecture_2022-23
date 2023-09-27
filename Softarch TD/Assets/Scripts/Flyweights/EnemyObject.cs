@@ -125,6 +125,9 @@ public class EnemyObject : AbstractContainerObject<EnemyScriptable>
     private void CheckForDeath()
     {
         if (_runtimeValues.Health <= 0)
+        {
             Debug.Log("Death to be implemented");
+            Destroy(gameObject);
+        }
     }
 }

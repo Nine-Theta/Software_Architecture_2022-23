@@ -38,6 +38,7 @@ public class TowerObject : AbstractContainerObject<TowerScriptable>
             Collider t = _baseData.AttackStrategy.GetTarget(c, gameObject.transform.position);
             t.GetComponent<EnemyObject>().DamageEnemy(_baseData.Damage);
             Debug.DrawLine(transform.position, t.transform.position,Color.red, 2f);
+            Gizmos.DrawLine(transform.position, t.transform.position);
         }
     }
 
