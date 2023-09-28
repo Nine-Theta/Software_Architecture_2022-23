@@ -10,7 +10,7 @@ public class TowerFactory : AbstractScriptableInstanceFactory<TowerScriptable>
     [Button]
     public void TestSpawn()
     {
-        CreateInstance(TestTower, new Vector3());
+        CreateInstance(TestTower, new Vector3(0,1,0));
     }
 
     //TODO: this and enemyfactory look a lot like each other, maybe they can be consolidated, like an abstract scriptable factory or something

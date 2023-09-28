@@ -1,6 +1,10 @@
+using NaughtyAttributes;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class InputProcessor : MonoBehaviour
 {
@@ -13,6 +17,21 @@ public class InputProcessor : MonoBehaviour
     public TowerFactory TowerFactory;
 
     public Commander TowerBuildCommander = new Commander();
+
+    public TextMeshProUGUI CreditUI;
+
+    [SerializeField]
+    private int _credits;
+    public int Credits
+    {
+        get { return _credits; }
+        set
+        {
+            _credits = value;
+            CreditUI.text = _credits.ToString();
+        }
+    }
+
 
 
     public void Start()
@@ -38,5 +57,5 @@ public class InputProcessor : MonoBehaviour
         _selectedTower = pTower;
     }
 
-    
+
 }

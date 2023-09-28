@@ -2,8 +2,9 @@ using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-[SelectionBase, RequireComponent(typeof(Collider))]
+[SelectionBase, RequireComponent(typeof(SphereCollider))]
 public class TowerObject : AbstractContainerObject<TowerScriptable>
 {
     [SerializeField]
@@ -11,7 +12,7 @@ public class TowerObject : AbstractContainerObject<TowerScriptable>
     [SerializeField]
     private GameObject _template;
     [SerializeField]
-    private Collider _rangeCollider;
+    private SphereCollider _rangeCollider;
 
     private float _cooldownTimer = 0;
 
@@ -23,7 +24,8 @@ public class TowerObject : AbstractContainerObject<TowerScriptable>
     {
         _baseData = pData;
         if (_template == null) _template = transform.GetChild(0).gameObject;
-        if (_rangeCollider == null) _rangeCollider = gameObject.GetComponent<Collider>();
+        if (_rangeCollider == null) _rangeCollider = gameObject.GetComponent<SphereCollider>();
+        _rangeCollider.radius = pData.Range;
     }
 
 
@@ -38,7 +40,6 @@ public class TowerObject : AbstractContainerObject<TowerScriptable>
             Collider t = _baseData.AttackStrategy.GetTarget(c, gameObject.transform.position);
             t.GetComponent<EnemyObject>().DamageEnemy(_baseData.Damage);
             Debug.DrawLine(transform.position, t.transform.position,Color.red, 2f);
-            Gizmos.DrawLine(transform.position, t.transform.position);
         }
     }
 
@@ -53,8 +54,7 @@ public class TowerObject : AbstractContainerObject<TowerScriptable>
             {
                 TestAttackEnemy();
                 _cooldownTimer = Time.time + (1 / _baseData.Cooldown);
-                Debug.Log("Pew! at: " + Time.time + " next pew at: " + _cooldownTimer);
-                
+                Debug.Log("Pew! at: " + Time.time + " next pew at: " + _cooldownTimer);                
             }
             else
             {
@@ -71,5 +71,4 @@ public class TowerObject : AbstractContainerObject<TowerScriptable>
         activated = true;
         Debug.Log("Enemy Entered Range");
     }
-
 }
