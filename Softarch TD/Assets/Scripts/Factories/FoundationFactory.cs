@@ -2,24 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FoundationFactory : AbstractScriptableInstanceFactory<FoundationScriptable>
+public class FoundationFactory : AbstractInstanceFactory
 {
-    public GameObject FoundationTemplate;
+    [SerializeField]
+    private FoundationScriptable _foundation;
 
     public float SnapSize;
 
-    public override GameObject CreateInstance(FoundationScriptable pFoundationData, Vector3 pPosition)
+    public override AbstractContainerObject CreateInstance(Vector3 pPosition)
     {
 
         Vector3 pos = new Vector3(pPosition.x - (pPosition.x % SnapSize), pPosition.y, pPosition.z - (pPosition.z % SnapSize));
 
-        GameObject founder = Instantiate(pFoundationData.GetContainerObject, pos, Quaternion.identity);
+        GameObject founder = Instantiate(_foundation.GetContainerObject, pos, Quaternion.identity);
 
-        founder.name = pFoundationData.GetName;
+        founder.name = _foundation.GetName;
 
-        founder.GetComponent<FoundationObject>().Initialize(pFoundationData);
+        FoundationObject instance = founder.GetComponent<FoundationObject>();
 
+        instance.Initialize(_foundation);
 
-        return founder;
+        return instance;
+    }
+    
+    public override void SetContainable(I_Containable pFoundationScriptable)
+    {
+        SetFoundation(pFoundationScriptable as FoundationScriptable);
+    }
+
+    public void SetFoundation(FoundationScriptable pFoundation)
+    {
+        _foundation = pFoundation;
     }
 }

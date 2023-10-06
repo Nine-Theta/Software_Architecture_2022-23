@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[CreateAssetMenu(fileName = "TowerScriptable", menuName = "ScriptableObjects/Foundation")]
+[CreateAssetMenu(fileName = "FoundationScriptable", menuName = "ScriptableObjects/Foundation")]
 public class FoundationScriptable : ScriptableObject, I_Containable
 {
     [SerializeField]
@@ -16,5 +16,17 @@ public class FoundationScriptable : ScriptableObject, I_Containable
 
     public string GetName { get { return _name; } }
 
-    public GameObject GetContainerObject { get { return _containerObject; } }
+    public GameObject GetContainerObject
+    {
+        get
+        {
+            if (_containerObject.GetComponent<FoundationObject>() == null)
+            {
+                Debug.LogError("Container Object for :" + this + " Is NULL or does not contain the proper script. Go fix it");
+                return null;
+            }
+            else
+                return _containerObject;
+        }
+    }
 }

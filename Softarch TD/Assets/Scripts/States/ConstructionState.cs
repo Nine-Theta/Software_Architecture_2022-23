@@ -5,16 +5,13 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-[CreateAssetMenu(fileName = "BuildState", menuName = "States/ConstructionState")]
-public class BuildTowerState : AbstractProcessorState
+[CreateAssetMenu(fileName = "ConstructionState", menuName = "States/ConstructionState")]
+public class ConstructionState : AbstractProcessorState
 {
-    [SerializeField]
-    private Vector3 _offset = new Vector3(0, 1, 0);
-
     [SerializeField]
     private LayerMask _buildingLayer;
 
-    public BuildTowerState(InputProcessor pContext) : base(pContext)
+    public ConstructionState(InputProcessor pContext) : base(pContext)
     {
 
     }
@@ -42,8 +39,13 @@ public class BuildTowerState : AbstractProcessorState
         //TowerBuildCommander.ExecuteCommand(new BuildTowerCommand(this));
     }
 
+    public void ChangeTargetLayer(LayerMask pTargetLayer)
+    {
+        _buildingLayer = pTargetLayer;
+    }
+
     private void BuildTower(Vector3 pPosition)
     {
-        context.TowerBuildCommander.ExecuteCommand(new BuildTowerCommand(context.TowerFactory, context._selectedTower, pPosition+_offset));
+        context.ConstructionCommander.ExecuteCommand(new ConstructionCommand(context.ConstructionFactory, pPosition));
     }
 }

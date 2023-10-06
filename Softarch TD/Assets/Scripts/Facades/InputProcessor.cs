@@ -14,9 +14,9 @@ public class InputProcessor : MonoBehaviour
     [SerializeField]
     private AbstractProcessorState _currentState;
 
-    public TowerFactory TowerFactory;
+    public AbstractInstanceFactory ConstructionFactory;
 
-    public Commander TowerBuildCommander = new Commander();
+    public Commander ConstructionCommander = new Commander();
 
     public TextMeshProUGUI CreditUI;
 
@@ -52,10 +52,8 @@ public class InputProcessor : MonoBehaviour
         _currentState.ProccessButtonClick(pMousePos);
     }
 
-    public void SelectTower(TowerScriptable pTower)
+    public void ChangeFactory(AbstractInstanceFactory pFactory)
     {
-        _selectedTower = pTower;
+        ConstructionFactory = pFactory;
     }
-
-
 }

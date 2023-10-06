@@ -24,7 +24,7 @@ public class EnemyScriptable : ScriptableObject, I_Containable
     {
         get
         {
-            if (_containerObject.GetComponent<AbstractContainerObject<EnemyScriptable>>() == null)
+            if (_containerObject.GetComponent<EnemyObject>() == null)
             {
                 Debug.LogError("Container Object for :" + this + " Is NULL or does not contain the proper script. Go fix it");
                 return null;

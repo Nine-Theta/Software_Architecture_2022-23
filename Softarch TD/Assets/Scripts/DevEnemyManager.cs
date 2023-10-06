@@ -35,7 +35,7 @@ public class DevEnemySpawner : MonoBehaviour
 
     public void SpawnEnemy()
     {
-        EnemyObject annie = Factory.CreateInstance(TestSpawn, transform.position + new Vector3(0, 1, 0)).GetComponent<EnemyObject>();
+        EnemyObject annie = Factory.CreateInstance(transform.position + new Vector3(0, 1, 0)).GetComponent<EnemyObject>();
         annie.TargetPos = Target.transform.position;
         annie.Move();
 

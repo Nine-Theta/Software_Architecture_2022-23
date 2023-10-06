@@ -1,26 +1,39 @@
 using NaughtyAttributes;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TowerFactory : AbstractScriptableInstanceFactory<TowerScriptable>
+public class TowerFactory : AbstractInstanceFactory
 {
-    public TowerScriptable TestTower;
+    [SerializeField]
+    private TowerScriptable _tower;
 
     [Button]
     public void TestSpawn()
     {
-        CreateInstance(TestTower, new Vector3(0,1,0));
+        CreateInstance(new Vector3(0,1,0));
     }
 
-    //TODO: this and enemyfactory look a lot like each other, maybe they can be consolidated, like an abstract scriptable factory or something
-    public override GameObject CreateInstance(TowerScriptable pTowerData, Vector3 pPosition)
+    public override AbstractContainerObject CreateInstance(Vector3 pPosition)
     {
-        GameObject newTower = Instantiate(pTowerData.GetContainerObject, pPosition, Quaternion.identity);
-        newTower.name = pTowerData.GetName;
+        GameObject newTower = Instantiate(_tower.GetContainerObject, pPosition, Quaternion.identity);
+        newTower.name = _tower.GetName;
 
-        newTower.GetComponent<TowerObject>().Initialize(pTowerData);
+        TowerObject instance = newTower.GetComponent<TowerObject>();
 
-        return newTower;
+        instance.Initialize(_tower);
+
+        return instance;
+    }
+
+    public override void SetContainable(I_Containable pTowerScriptable)
+    {
+        SetTowerVariant(pTowerScriptable as TowerScriptable);
+    }
+
+    public void SetTowerVariant(TowerScriptable pTowerScriptable)
+    {
+        _tower = pTowerScriptable;
     }
 }

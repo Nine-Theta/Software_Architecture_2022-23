@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FoundationObject : AbstractContainerObject<FoundationScriptable>
+public class FoundationObject : AbstractContainerObject
 {
-    public FoundationScriptable _baseData;
+    [SerializeField]
+    private FoundationScriptable _baseData;
 
-    public override FoundationScriptable BaseData { get { return _baseData; } }
+    public override I_Containable BaseData { get { return _baseData; } }
 
-    public override void Initialize(FoundationScriptable pData)
+    public override void Initialize(I_Containable pData)
     {
 
     }

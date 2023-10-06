@@ -4,23 +4,35 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class EnemyFactory : AbstractScriptableInstanceFactory<EnemyScriptable>
+public class EnemyFactory : AbstractInstanceFactory
 {
-    public EnemyScriptable testEnemy;
+    [SerializeField]
+    private EnemyScriptable _enemy;
 
     [Button]
     public void TestSpawn()
     {
-        CreateInstance(testEnemy, new Vector3());
+        CreateInstance(new Vector3());
     }
 
-    public override GameObject CreateInstance(EnemyScriptable pEnemyData, Vector3 pPosition)
+    public override AbstractContainerObject CreateInstance(Vector3 pPosition)
     {
-        GameObject newEnemy = Instantiate(pEnemyData.GetContainerObject, pPosition, Quaternion.identity); //pPosition, pRotation);
-        newEnemy.name = pEnemyData.GetName;
+        GameObject newEnemy = Instantiate(_enemy.GetContainerObject, pPosition, Quaternion.identity); //pPosition, pRotation);
+        newEnemy.name = _enemy.GetName;
 
-        newEnemy.GetComponent<EnemyObject>().Initialize(pEnemyData);
+        EnemyObject instance = newEnemy.GetComponent<EnemyObject>();
+        instance.Initialize(_enemy);
 
-        return newEnemy; ;
+        return instance;
+    }
+
+    public override void SetContainable(I_Containable pEnemyScriptable)
+    {
+        SetEnemyVariant(pEnemyScriptable as EnemyScriptable);
+    }
+
+    public void SetEnemyVariant(EnemyScriptable pEnemyScriptable)
+    {
+        _enemy = pEnemyScriptable;
     }
 }

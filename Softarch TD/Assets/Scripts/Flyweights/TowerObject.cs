@@ -1,11 +1,12 @@
 using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 
 [SelectionBase, RequireComponent(typeof(SphereCollider))]
-public class TowerObject : AbstractContainerObject<TowerScriptable>
+public class TowerObject : AbstractContainerObject
 {
     [SerializeField]
     private TowerScriptable _baseData;
@@ -18,14 +19,19 @@ public class TowerObject : AbstractContainerObject<TowerScriptable>
 
     private bool activated = false;
 
-    public override TowerScriptable BaseData { get { return _baseData; } }
+    public override I_Containable BaseData { get { return _baseData; } }
 
-    public override void Initialize(TowerScriptable pData)
+    public override void Initialize(I_Containable pData)
     {
-        _baseData = pData;
+        _baseData = pData as TowerScriptable;
         if (_template == null) _template = transform.GetChild(0).gameObject;
         if (_rangeCollider == null) _rangeCollider = gameObject.GetComponent<SphereCollider>();
-        _rangeCollider.radius = pData.Range;
+        _rangeCollider.radius = _baseData.Range;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Handles.DrawWireDisc(gameObject.transform.position, Vector3.up, _baseData.Range, 2f);
     }
 
 

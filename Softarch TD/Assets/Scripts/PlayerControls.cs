@@ -48,7 +48,7 @@ public class PlayerControls : MonoBehaviour
     private void OnClick(InputValue pValue)
     {
         _processor.ProccessButtonClick(pValue.Get<Vector2>());
-        Debug.Log("OnClick: " + pValue.Get());
+        //Debug.Log("OnClick: " + pValue.Get());
     }
 
 

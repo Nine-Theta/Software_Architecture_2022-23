@@ -1,13 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public abstract class AbstractScriptableInstanceFactory<T> : MonoBehaviour where T : I_Containable
+public enum FactoryType { Tower, Foundation, Enemy }
+public abstract class AbstractInstanceFactory : MonoBehaviour
 {
-    public abstract GameObject CreateInstance(T pObjectData, Vector3 pPosition);
+    public abstract AbstractContainerObject CreateInstance(Vector3 pPosition);
 
-    public virtual void DeleteInstance(GameObject pInstance)
+    public abstract void SetContainable(I_Containable pContainable);
+
+    public virtual void DeleteInstance(AbstractContainerObject pInstance)
     {
-        Destroy(pInstance);
-    }
+        Destroy(pInstance.gameObject);
+    }    
 }
