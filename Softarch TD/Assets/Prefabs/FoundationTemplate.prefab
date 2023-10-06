@@ -92,6 +92,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5075769914098101709}
+  - component: {fileID: -5838866757573717937}
   - component: {fileID: 6889036836704721650}
   m_Layer: 8
   m_Name: FoundationTemplate
@@ -116,6 +117,19 @@ Transform:
   - {fileID: 5121254289123889598}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-5838866757573717937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5365722053502347158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9950742514eefb458370d02e6a30be2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _baseData: {fileID: 0}
 --- !u!65 &6889036836704721650
 BoxCollider:
   m_ObjectHideFlags: 0

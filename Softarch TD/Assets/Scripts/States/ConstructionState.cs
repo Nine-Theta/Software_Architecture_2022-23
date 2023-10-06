@@ -27,7 +27,7 @@ public class ConstructionState : AbstractProcessorState
         Debug.DrawRay(ray.origin, ray.direction * 50, Color.green, 3);
         RaycastHit hit;
 
-        Physics.Raycast(ray, out hit, 50, _buildingLayer);
+        Physics.Raycast(ray, out hit, 50, context.ConstructionFactory.GetBuildLayer());
         if (hit.collider == null) return;
 
         BuildTower(hit.point);

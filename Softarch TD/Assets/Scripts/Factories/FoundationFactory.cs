@@ -7,6 +7,9 @@ public class FoundationFactory : AbstractInstanceFactory
     [SerializeField]
     private FoundationScriptable _foundation;
 
+    [SerializeField]
+    private LayerMask _buildLayer;
+
     public float SnapSize;
 
     public override AbstractContainerObject CreateInstance(Vector3 pPosition)
@@ -33,5 +36,10 @@ public class FoundationFactory : AbstractInstanceFactory
     public void SetFoundation(FoundationScriptable pFoundation)
     {
         _foundation = pFoundation;
+    }
+
+    public override LayerMask GetBuildLayer()
+    {
+        return _buildLayer;
     }
 }

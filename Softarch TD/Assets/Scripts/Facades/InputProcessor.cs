@@ -21,7 +21,7 @@ public class InputProcessor : MonoBehaviour
     public TextMeshProUGUI CreditUI;
 
     [SerializeField]
-    private int _credits;
+    private int _credits;   //TODO: Fix credit cost, _selectedTower is not really used anymore
     public int Credits
     {
         get { return _credits; }

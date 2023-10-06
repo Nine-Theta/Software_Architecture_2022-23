@@ -9,6 +9,9 @@ public class TowerFactory : AbstractInstanceFactory
     [SerializeField]
     private TowerScriptable _tower;
 
+    [SerializeField]
+    private LayerMask _buildLayer;
+
     [Button]
     public void TestSpawn()
     {
@@ -35,5 +38,10 @@ public class TowerFactory : AbstractInstanceFactory
     public void SetTowerVariant(TowerScriptable pTowerScriptable)
     {
         _tower = pTowerScriptable;
+    }
+
+    public override LayerMask GetBuildLayer()
+    {
+        return _buildLayer;
     }
 }

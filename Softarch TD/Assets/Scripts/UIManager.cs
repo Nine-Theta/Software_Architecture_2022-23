@@ -21,6 +21,8 @@ public class UIManager : MonoBehaviour
         {
             TowerTab[i].GetComponent<Button>().interactable = true;
         }
+
+        if (pSelected == null) return;
         pSelected.interactable = false;
     }
 
@@ -36,14 +38,15 @@ public class UIManager : MonoBehaviour
     public void ActiveTowerTab(bool pActive)
     {
         setTowerTab(pActive);
-        setFoundationTab(!pActive);
+        FoundationButton.interactable = pActive;
     }
 
-    public void ActiveFoundationTab(bool pActive)
+    public void SelectFoundationButton()
     {
-        setFoundationTab(pActive);
-        setTowerTab(!pActive);
+        setTowerTab(false);
         SelectTowerButton(null);
+
+        FoundationButton.interactable = false;
     }
 
     private void setTowerTab(bool pActive)
@@ -54,15 +57,5 @@ public class UIManager : MonoBehaviour
         }
 
         TowerButton.interactable = !pActive;
-    }
-
-    private void setFoundationTab(bool pActive)
-    {
-        for (int i = 0; i < FoundationTab.Count; i++)
-        {
-            FoundationTab[i].SetActive(pActive);
-        }
-
-        FoundationButton.interactable = !pActive;
     }
 }
