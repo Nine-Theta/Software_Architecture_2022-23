@@ -12,10 +12,22 @@ public class TowerFactory : AbstractInstanceFactory
     [SerializeField]
     private LayerMask _buildLayer;
 
+    public TowerScriptable TowerVariant
+    {
+        get { return _tower; }
+        set { _tower = value; }
+    }
+
+    public override I_Containable Containable
+    {
+        get { return _tower; }
+        set { _tower = value is TowerScriptable ? value as TowerScriptable : throw new System.ArgumentException("Incorrect Containable", "TowerFactory"); }
+    }
+
     [Button]
     public void TestSpawn()
     {
-        CreateInstance(new Vector3(0,1,0));
+        CreateInstance(new Vector3(0, 1, 0));
     }
 
     public override AbstractContainerObject CreateInstance(Vector3 pPosition)
@@ -28,16 +40,6 @@ public class TowerFactory : AbstractInstanceFactory
         instance.Initialize(_tower);
 
         return instance;
-    }
-
-    public override void SetContainable(I_Containable pTowerScriptable)
-    {
-        SetTowerVariant(pTowerScriptable as TowerScriptable);
-    }
-
-    public void SetTowerVariant(TowerScriptable pTowerScriptable)
-    {
-        _tower = pTowerScriptable;
     }
 
     public override LayerMask GetBuildLayer()

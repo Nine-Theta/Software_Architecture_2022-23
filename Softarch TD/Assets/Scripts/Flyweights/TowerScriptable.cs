@@ -22,6 +22,10 @@ public class TowerScriptable : ScriptableObject, I_Containable
     public int Cost = 1;
 
 
+    public string GetName { get { return _name; } }
+    public int CreationCost { get { return Cost; } }
+
+
     public List<string> Debuffs = new List<string>();
 
     public GameObject GetContainerObject
@@ -30,16 +34,11 @@ public class TowerScriptable : ScriptableObject, I_Containable
         {
             if (_containerObject.GetComponent<TowerObject>() == null)
             {
-                Debug.LogError("Container Object for :"+this+" Is NULL or does not contain the proper script. Go fix it");
+                Debug.LogError("Container Object for :" + this + " Is NULL or does not contain the proper script. Go fix it");
                 return null;
             }
             else
                 return _containerObject;
         }
-    }
-
-    public string GetName
-    {
-        get { return _name; }
     }
 }

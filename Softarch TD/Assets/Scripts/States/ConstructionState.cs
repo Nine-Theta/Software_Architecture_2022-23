@@ -9,16 +9,29 @@ using UnityEngine.UI;
 public class ConstructionState : AbstractProcessorState
 {
     [SerializeField]
+    private List<LayerMask> _constructionLayers;
+
     private LayerMask _buildingLayer;
+
 
     public ConstructionState(InputProcessor pContext) : base(pContext)
     {
+       
+    }
 
+    public void OnEnable()
+    {
+        _buildingLayer = new LayerMask();
+
+        for (int i = 0; i < _constructionLayers.Count; i++)
+        {
+            _buildingLayer += _constructionLayers[i];
+        }
     }
 
     public override void ProccessButtonClick(Vector2 pMousePos)
     {
-        if (context.Credits - context._selectedTower.Cost < 0 || EventSystem.current.IsPointerOverGameObject())
+        if (context.Credits - context.ConstructionFactory.Containable.CreationCost < 0 || EventSystem.current.IsPointerOverGameObject())
         {
             return;
         }
@@ -27,12 +40,13 @@ public class ConstructionState : AbstractProcessorState
         Debug.DrawRay(ray.origin, ray.direction * 50, Color.green, 3);
         RaycastHit hit;
 
-        Physics.Raycast(ray, out hit, 50, context.ConstructionFactory.GetBuildLayer());
-        if (hit.collider == null) return;
+        Physics.Raycast(ray, out hit, 50, _buildingLayer);
 
-        BuildTower(hit.point);
+        if (hit.collider == null || (context.ConstructionFactory.GetBuildLayer().value & (1 << hit.collider.gameObject.layer)) == 0 ) return;
 
-        context.Credits -= context._selectedTower.Cost;
+        ConstructAt(hit.point);
+
+        context.Credits -= context.ConstructionFactory.Containable.CreationCost;
 
         //if (hit.collider.tag)
         //TowerBuildPosition = hit.point;
@@ -44,7 +58,7 @@ public class ConstructionState : AbstractProcessorState
         _buildingLayer = pTargetLayer;
     }
 
-    private void BuildTower(Vector3 pPosition)
+    private void ConstructAt(Vector3 pPosition)
     {
         context.ConstructionCommander.ExecuteCommand(new ConstructionCommand(context.ConstructionFactory, pPosition));
     }

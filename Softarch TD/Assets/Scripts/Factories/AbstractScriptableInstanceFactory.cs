@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 public abstract class AbstractInstanceFactory : MonoBehaviour
 {
-    public abstract AbstractContainerObject CreateInstance(Vector3 pPosition);
+    public abstract I_Containable Containable { get; set; }
 
-    public abstract void SetContainable(I_Containable pContainable);
+    public abstract AbstractContainerObject CreateInstance(Vector3 pPosition);
 
     public virtual void DeleteInstance(AbstractContainerObject pInstance)
     {

@@ -20,6 +20,8 @@ public class EnemyScriptable : ScriptableObject, I_Containable
 
     public string GetName { get { return _name; } }
 
+    public int CreationCost { get { return 0; } } //Maybe do something with this
+
     public GameObject GetContainerObject
     {
         get

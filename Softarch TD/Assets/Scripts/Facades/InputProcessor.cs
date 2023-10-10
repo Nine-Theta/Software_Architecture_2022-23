@@ -47,8 +47,6 @@ public class InputProcessor : MonoBehaviour
 
     public void ProccessButtonClick(Vector2 pMousePos)
     {
-        Debug.Log("process");
-
         _currentState.ProccessButtonClick(pMousePos);
     }
 

@@ -16,6 +16,8 @@ public class FoundationScriptable : ScriptableObject, I_Containable
 
     public string GetName { get { return _name; } }
 
+    public int CreationCost { get { return Cost; } }
+
     public GameObject GetContainerObject
     {
         get

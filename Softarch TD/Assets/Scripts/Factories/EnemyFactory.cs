@@ -9,6 +9,18 @@ public class EnemyFactory : AbstractInstanceFactory
     [SerializeField]
     private EnemyScriptable _enemy;
 
+    public EnemyScriptable EnemyVariant
+    {
+        get { return _enemy; }
+        set { _enemy = value; }
+    }
+
+    public override I_Containable Containable
+    {
+        get { return _enemy; }
+        set { _enemy = value is EnemyScriptable ? value as EnemyScriptable : throw new System.ArgumentException("Incorrect Containable", "EnemyFactory" ); }
+    }
+
     [Button]
     public void TestSpawn()
     {
@@ -24,11 +36,6 @@ public class EnemyFactory : AbstractInstanceFactory
         instance.Initialize(_enemy);
 
         return instance;
-    }
-
-    public override void SetContainable(I_Containable pEnemyScriptable)
-    {
-        SetEnemyVariant(pEnemyScriptable as EnemyScriptable);
     }
 
     public void SetEnemyVariant(EnemyScriptable pEnemyScriptable)
