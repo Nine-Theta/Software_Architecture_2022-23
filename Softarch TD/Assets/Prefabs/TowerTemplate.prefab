@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 4219813500232289462}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.44, z: -0.67}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _baseData: {fileID: 0}
-  _model: {fileID: 4246633410309701135}
+  _template: {fileID: 0}
   _rangeCollider: {fileID: 6337649048866858037}
 --- !u!135 &6337649048866858037
 SphereCollider:
@@ -84,7 +84,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6036030246770646071, guid: 09b2e7cefe4bef4489b4af4510b10c16, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6036030246770646071, guid: 09b2e7cefe4bef4489b4af4510b10c16, type: 3}
       propertyPath: m_LocalPosition.z
@@ -130,10 +130,5 @@ PrefabInstance:
 --- !u!4 &147858921470981650 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6036030246770646071, guid: 09b2e7cefe4bef4489b4af4510b10c16, type: 3}
-  m_PrefabInstance: {fileID: 5893247500007074341}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &4246633410309701135 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7720884960456987690, guid: 09b2e7cefe4bef4489b4af4510b10c16, type: 3}
   m_PrefabInstance: {fileID: 5893247500007074341}
   m_PrefabAsset: {fileID: 0}
