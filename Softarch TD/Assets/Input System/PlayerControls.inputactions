@@ -40,6 +40,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Zoom",
+                    "type": "Value",
+                    "id": "66eaadd6-d5f4-4e3a-9b71-2a97d28d5240",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -57,7 +66,7 @@
                 {
                     "name": "Up",
                     "id": "2ddc0a7e-d50d-4b72-9c55-acd49c518071",
-                    "path": "<Keyboard>/w",
+                    "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -68,7 +77,7 @@
                 {
                     "name": "Down",
                     "id": "1816e46b-912a-4b63-8645-75a9d2cb8904",
-                    "path": "<Keyboard>/s",
+                    "path": "<Keyboard>/alt",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -100,8 +109,8 @@
                 },
                 {
                     "name": "Forward",
-                    "id": "67e459f4-99f9-4872-9e3e-3e7a80ec55f7",
-                    "path": "<Mouse>/scroll/up",
+                    "id": "b2541603-0ae1-4eba-aa61-1adbc6c68d18",
+                    "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -111,8 +120,8 @@
                 },
                 {
                     "name": "Backward",
-                    "id": "869cbd50-8e51-4ecb-ae58-be3c54cd3c21",
-                    "path": "<Mouse>/scroll/down",
+                    "id": "45913759-564f-4c61-8bcf-fdb1402ba5ef",
+                    "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -216,6 +225,39 @@
                     "processors": "",
                     "groups": "",
                     "action": "Undo",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "e9c34f4a-0ce6-47c2-a34e-d0607228948d",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "Scale(factor=0.005)",
+                    "groups": "",
+                    "action": "Zoom",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "positive",
+                    "id": "5965f4b7-513e-4ce1-a145-18d460193d86",
+                    "path": "<Mouse>/scroll/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Zoom",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "negative",
+                    "id": "b491a2be-479e-48b5-842d-8572b97f49d7",
+                    "path": "<Mouse>/scroll/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Zoom",
                     "isComposite": false,
                     "isPartOfComposite": true
                 }

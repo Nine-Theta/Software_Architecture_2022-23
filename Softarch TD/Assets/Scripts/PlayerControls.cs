@@ -14,7 +14,11 @@ public class PlayerControls : MonoBehaviour
 
     public Vector2 MouseSensitivity;
 
-    public Vector3 movement = Vector3.zero;
+    [SerializeField]
+    private Vector3 _moveInput = Vector3.zero;
+
+    [SerializeField]
+    private float _zoomInput = 0;
 
     [Range(0, 2f)]
     public float MoveSensitivity;
@@ -30,11 +34,11 @@ public class PlayerControls : MonoBehaviour
     {
         Vector3 vec = pValue.Get<Vector3>();
 
-        movement = Vector3.zero;
+        _moveInput = Vector3.zero;
 
-        movement += vec.x * MoveSensitivity * transform.right;
-        movement += vec.y * MoveSensitivity * transform.forward;
-        movement += vec.z * ScrollSensitivity * _playerInput.camera.transform.forward;
+        _moveInput.x = vec.x * MoveSensitivity;
+        _moveInput.y = vec.y * MoveSensitivity;
+        _moveInput.z = vec.z * MoveSensitivity;
     }
 
     private void OnFreeLook(InputValue pValue)
@@ -43,6 +47,7 @@ public class PlayerControls : MonoBehaviour
 
         transform.Rotate(0, vec.x * MouseSensitivity.x, 0);
         _playerInput.camera.transform.Rotate(-vec.y * MouseSensitivity.y, 0, 0);
+        
     }
 
     private void OnClick(InputValue pValue)
@@ -51,9 +56,16 @@ public class PlayerControls : MonoBehaviour
         //Debug.Log("OnClick: " + pValue.Get());
     }
 
+    private void OnZoom(InputValue pValue )
+    {
+        _zoomInput = pValue.Get<float>() * ScrollSensitivity;
+    }
+
 
     private void Update()
     {
+        Vector3 movement = (_moveInput.x * transform.right) + new Vector3(0,_moveInput.y,0) + (_moveInput.z * transform.forward) + (_zoomInput * _playerInput.camera.transform.forward);
+
         transform.position += movement;
     }
 }

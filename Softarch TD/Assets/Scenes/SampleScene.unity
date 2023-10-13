@@ -3264,7 +3264,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _processor: {fileID: 1902030691}
   MouseSensitivity: {x: 0.3, y: 0.15}
-  movement: {x: 0, y: 0, z: 0}
+  _moveInput: {x: 0, y: 0, z: 0}
+  _zoomInput: 0
   MoveSensitivity: 0.3
   ScrollSensitivity: 1.5
 --- !u!1 &1382064586

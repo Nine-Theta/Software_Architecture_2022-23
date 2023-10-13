@@ -4,38 +4,56 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class EventPublisher<T>
+public class EventPublisher
 {
     //makes me feel like I'm developing a subscription-based live-service
 
-    private List<EventSubscriber<T>> _subscribers;
+    public delegate void EventSubscriber();
 
-    public void Subscribe()//EventSubscriber<T> pSub)
+    private List<EventSubscriber> _subscribers;
+
+    public void Subscribe(EventSubscriber pSub)//EventSubscriber<T> pSub)
     {
-        //_subscribers.Add(pSub);
-        UnityEvent e = null;
-        e.AddListener(Publish);
-
-
+        _subscribers.Add(pSub);
     }
 
-    public void Unsubscribe(EventSubscriber<T> pSub)
+    public void Unsubscribe(EventSubscriber pSub)
     {
         _subscribers.Remove(pSub);
     }
 
-    public void Publish()//T pArgument)
+    public void Publish()
     {
-        for(int i = 0; i < _subscribers.Count; i++)
+        for (int i = 0; i < _subscribers.Count; i++)
         {
-            //_subscribers[i].DoThing(this, pArgument);
+            _subscribers[i].Invoke();
         }
     }
 }
 
-public delegate void EventSubscriber
+public class EventPublisher<T>
 {
+    //makes me feel like I'm developing a generic subscription-based live-service
 
+    public delegate void EventSubscriber(T pArgument);
 
-    public delegate T DoThing(EventPublisher<T> pPublisher, T pArgument);
+    private List<EventSubscriber> _subscribers;
+
+    public void Subscribe(EventSubscriber pSub)
+    {
+        _subscribers.Add(pSub);
+    }
+
+    public void Unsubscribe(EventSubscriber pSub)
+    {
+        _subscribers.Remove(pSub);
+    }
+
+    public void Publish(T pArgument)
+    {
+        for (int i = 0; i < _subscribers.Count; i++)
+        {
+            _subscribers[i].Invoke(pArgument);
+        }
+    }
 }

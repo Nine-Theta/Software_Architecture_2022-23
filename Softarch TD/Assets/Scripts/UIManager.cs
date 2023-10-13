@@ -31,7 +31,6 @@ public class UIManager : MonoBehaviour
         }
 
         TowerButton.interactable = !pActive;
-
         FoundationButton.interactable = pActive;
     }
 }
