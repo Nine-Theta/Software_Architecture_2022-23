@@ -233,7 +233,7 @@
                     "id": "e9c34f4a-0ce6-47c2-a34e-d0607228948d",
                     "path": "1DAxis",
                     "interactions": "",
-                    "processors": "Scale(factor=0.005)",
+                    "processors": "Scale",
                     "groups": "",
                     "action": "Zoom",
                     "isComposite": true,

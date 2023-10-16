@@ -20,9 +20,9 @@ public class PlayerControls : MonoBehaviour
     [SerializeField]
     private float _zoomInput = 0;
 
-    [Range(0, 2f)]
+    [Range(10, 50f)]
     public float MoveSensitivity;
-    [Range(0, 3f)]
+    [Range(0, 5f)]
     public float ScrollSensitivity;
 
     private void Awake()
@@ -61,11 +61,10 @@ public class PlayerControls : MonoBehaviour
         _zoomInput = pValue.Get<float>() * ScrollSensitivity;
     }
 
-
     private void Update()
     {
         Vector3 movement = (_moveInput.x * transform.right) + new Vector3(0,_moveInput.y,0) + (_moveInput.z * transform.forward) + (_zoomInput * _playerInput.camera.transform.forward);
 
-        transform.position += movement;
+        transform.position += movement * Time.deltaTime;
     }
 }
