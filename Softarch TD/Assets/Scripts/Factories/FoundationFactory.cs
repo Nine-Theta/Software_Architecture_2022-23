@@ -8,6 +8,9 @@ public class FoundationFactory : AbstractInstanceFactory
     private FoundationScriptable _foundation;
 
     [SerializeField]
+    private FoundationObject _foundationObject;
+
+    [SerializeField]
     private LayerMask _buildLayer;
 
     public float SnapSize;
@@ -31,7 +34,8 @@ public class FoundationFactory : AbstractInstanceFactory
 
         Vector3 pos = new Vector3((pPosition.x - x) + Mathf.Round(x), pPosition.y, (pPosition.z - z) + Mathf.Round(z));
 
-        GameObject founder = Instantiate(_foundation.GetContainerObject, pos, Quaternion.identity);
+        GameObject founder = Instantiate(_foundationObject.gameObject, pos, Quaternion.identity);
+        GameObject model = Instantiate(_foundation.GetModel, _foundation.GetModel.transform.position + pos, Quaternion.identity, founder.transform);        
 
         founder.name = _foundation.GetName;
 

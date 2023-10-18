@@ -5,6 +5,6 @@ using UnityEngine;
 public interface I_Containable
 {
     public string GetName { get; }
-    public GameObject GetContainerObject { get; }
+    public GameObject GetModel { get; }
     public int CreationCost { get; }
 }

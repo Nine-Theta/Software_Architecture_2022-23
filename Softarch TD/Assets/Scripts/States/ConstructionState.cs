@@ -44,7 +44,19 @@ public class ConstructionState : AbstractProcessorState
 
         if (hit.collider == null || (context.ConstructionFactory.GetBuildLayer().value & (1 << hit.collider.gameObject.layer)) == 0 ) return;
 
-        ConstructAt(hit.point);
+        Vector3 buildCoords = hit.point;
+
+        if (hit.collider.CompareTag("Foundation"))
+        {
+            FoundationObject FO = hit.collider.GetComponent<FoundationObject>();
+
+            if (!FO.BuildRequest())
+                return;
+
+            buildCoords = FO.GetBuildPos;
+        }
+
+        ConstructAt(buildCoords);
 
         context.Credits -= context.ConstructionFactory.Containable.CreationCost;
 

@@ -10,6 +10,9 @@ public class TowerFactory : AbstractInstanceFactory
     private TowerScriptable _tower;
 
     [SerializeField]
+    private TowerObject _towerObject;
+
+    [SerializeField]
     private LayerMask _buildLayer;
 
     public TowerScriptable TowerVariant
@@ -32,7 +35,8 @@ public class TowerFactory : AbstractInstanceFactory
 
     public override AbstractContainerObject CreateInstance(Vector3 pPosition)
     {
-        GameObject newTower = Instantiate(_tower.GetContainerObject, pPosition, Quaternion.identity);
+        GameObject newTower = Instantiate(_towerObject.gameObject, pPosition, Quaternion.identity);
+        GameObject model = Instantiate(_tower.GetModel, _tower.GetModel.transform.position + pPosition, Quaternion.identity, newTower.transform);
         newTower.name = _tower.GetName;
 
         TowerObject instance = newTower.GetComponent<TowerObject>();

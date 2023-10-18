@@ -10,7 +10,7 @@ public class FoundationScriptable : ScriptableObject, I_Containable
     private string _name = "FoundationTile";
 
     [SerializeField]
-    private GameObject _containerObject;
+    private GameObject _foundationModel;
 
     public int Cost = 0;
 
@@ -18,17 +18,8 @@ public class FoundationScriptable : ScriptableObject, I_Containable
 
     public int CreationCost { get { return Cost; } }
 
-    public GameObject GetContainerObject
+    public GameObject GetModel
     {
-        get
-        {
-            if (_containerObject.GetComponent<FoundationObject>() == null)
-            {
-                Debug.LogError("Container Object for :" + this + " Is NULL or does not contain the proper script. Go fix it");
-                return null;
-            }
-            else
-                return _containerObject;
-        }
+        get { return _foundationModel; }
     }
 }
