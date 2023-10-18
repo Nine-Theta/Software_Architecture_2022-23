@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: FoundationScriptable
   m_EditorClassIdentifier: 
   _name: FoundationTile
-  _containerObject: {fileID: 5365722053502347158, guid: 2086bffd84d844448b01f4411b746bad, type: 3}
+  _foundationModel: {fileID: 6494221476015610978, guid: 64ddc919ad8f99f41a7da5c213db8ee1, type: 3}
   Cost: 0

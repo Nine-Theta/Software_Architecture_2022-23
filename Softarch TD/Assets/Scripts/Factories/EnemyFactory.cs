@@ -9,6 +9,9 @@ public class EnemyFactory : AbstractInstanceFactory
     [SerializeField]
     private EnemyScriptable _enemy;
 
+    [SerializeField]
+    private EnemyObject _enemyObject;
+
     public EnemyScriptable EnemyVariant
     {
         get { return _enemy; }
@@ -29,7 +32,8 @@ public class EnemyFactory : AbstractInstanceFactory
 
     public override AbstractContainerObject CreateInstance(Vector3 pPosition)
     {
-        GameObject newEnemy = Instantiate(_enemy.GetContainerObject, pPosition, Quaternion.identity); //pPosition, pRotation);
+        GameObject newEnemy = Instantiate(_enemyObject.gameObject, pPosition, Quaternion.identity); //pPosition, pRotation);
+        GameObject model = Instantiate(_enemy.GetModel,_enemy.GetModel.transform.position + pPosition, Quaternion.identity, newEnemy.transform);
         newEnemy.name = _enemy.GetName;
 
         EnemyObject instance = newEnemy.GetComponent<EnemyObject>();

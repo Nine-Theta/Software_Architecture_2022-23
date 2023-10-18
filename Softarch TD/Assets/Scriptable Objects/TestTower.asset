@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TestTower
   m_EditorClassIdentifier: 
   _name: tower
-  _containerObject: {fileID: 4219813500232289462, guid: ad4b1498b79540e45a9868756294b53a, type: 3}
+  _towerModel: {fileID: 7720884960456987690, guid: 09b2e7cefe4bef4489b4af4510b10c16, type: 3}
   TowerType: todo
   AttackStrategy: {fileID: 11400000, guid: 5c07f856db15f0c489ddfcf9fd201512, type: 2}
   Damage: 1
