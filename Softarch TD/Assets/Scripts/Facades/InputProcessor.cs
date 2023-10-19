@@ -9,12 +9,15 @@ using UnityEngine.Events;
 public class InputProcessor : MonoBehaviour
 {
     [SerializeField]
-    public TowerScriptable _selectedTower = null;
-
-    [SerializeField]
     private AbstractProcessorState _currentState;
 
-    public AbstractInstanceFactory ConstructionFactory;
+    public AbstractInstanceFactory ConstructionFactory { get; private set; }
+
+    [SerializeField]
+    private NavigationManager _navManager;
+
+    [SerializeField]
+    private DevEnemySpawner _devSpawner;
 
     public Commander ConstructionCommander = new Commander();
 
@@ -53,5 +56,18 @@ public class InputProcessor : MonoBehaviour
     public void ChangeFactory(AbstractInstanceFactory pFactory)
     {
         ConstructionFactory = pFactory;
+    }
+
+    public void StartLevel()
+    {
+        //Should be offloaded to a level manager
+        if (_navManager.IsLayoutValid())
+        {
+            _devSpawner.AllowSpawn = true;
+        }
+        else
+        {
+            Debug.Log("Level Layout not Valid, gotta give the enemies a chance, ya know");
+        }
     }
 }

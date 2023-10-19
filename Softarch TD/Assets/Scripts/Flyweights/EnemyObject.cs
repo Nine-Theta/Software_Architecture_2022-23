@@ -20,7 +20,6 @@ public class EnemyObject : AbstractContainerObject
 
     public Vector3 TargetPos;
 
-
     public List<DebuffScriptable> ActiveDebuffs;
 
     public override I_Containable BaseData { get { return _baseData; } }
@@ -38,7 +37,7 @@ public class EnemyObject : AbstractContainerObject
     }
 
     [Button]
-    public void Move()
+    public void Move() //TODO: Movestrategy
     {
         this.GetComponent<NavMeshAgent>().SetDestination(TargetPos);
     }
@@ -120,6 +119,14 @@ public class EnemyObject : AbstractContainerObject
     {
         _runtimeValues.Health -= Mathf.Max((pDamage - _runtimeValues.Defense) * (1 - _runtimeValues.Resistance), 0);
         CheckForDeath();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Base"))
+        {
+            
+        }
     }
 
     private void CheckForDeath()
