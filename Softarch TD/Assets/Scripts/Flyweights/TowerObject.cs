@@ -15,23 +15,34 @@ public class TowerObject : AbstractContainerObject
     [SerializeField]
     private SphereCollider _rangeCollider;
 
+    [SerializeField]
+    private TowerValues _runtimeValues;
+
     private float _cooldownTimer = 0;
+
+    private int _upgradeRank = 0;
+    private int _upgradeMax;
 
     private bool activated = false;
 
     public override I_Containable BaseData { get { return _baseData; } }
 
+    public List<string> Debuffs = new List<string>();
+
     public override void Initialize(I_Containable pData)
     {
         _baseData = pData as TowerScriptable;
+        _runtimeValues = _baseData.BaseValues;
+        _upgradeMax = _baseData.UpgradeValues.Count;
+
         if (_template == null) _template = transform.GetChild(0).gameObject;
         if (_rangeCollider == null) _rangeCollider = gameObject.GetComponent<SphereCollider>();
-        _rangeCollider.radius = _baseData.Range;
+        _rangeCollider.radius = _runtimeValues.Range;
     }
 
     private void OnDrawGizmos()
     {
-        Handles.DrawWireDisc(gameObject.transform.position, Vector3.up, _baseData.Range, 2f);
+        Handles.DrawWireDisc(gameObject.transform.position, Vector3.up, _runtimeValues.Range, 2f);
     }
 
 
@@ -39,14 +50,30 @@ public class TowerObject : AbstractContainerObject
     public void TestAttackEnemy()
     {
         //Debug.Log(gameObject.transform.position);
-        Collider[] c = Physics.OverlapSphere(gameObject.transform.position, _baseData.Range, 1 << 10);
+        Collider[] c = Physics.OverlapSphere(gameObject.transform.position, _runtimeValues.Range, 1 << 10);
         Debug.Log(c.Length);
         if (c.Length > 0)
         {
             Collider t = _baseData.AttackStrategy.GetTarget(c, gameObject.transform.position);
-            t.GetComponent<EnemyObject>().DamageEnemy(_baseData.Damage);
+            t.GetComponent<EnemyObject>().DamageEnemy(_runtimeValues.Damage);
             Debug.DrawLine(transform.position, t.transform.position,Color.red, 2f);
         }
+    }
+
+    [Button]
+    public void TestUpgradeTower()
+    {
+        if (!CanUgrade()) return;
+
+        _upgradeRank += 1;
+        _runtimeValues = _baseData.UpgradeValues[_upgradeRank];
+
+        Debug.Log("Tower Upgraded!");
+    }
+
+    public bool CanUgrade()
+    {
+        return _upgradeRank < _upgradeMax;
     }
 
     public void Update()
@@ -55,11 +82,11 @@ public class TowerObject : AbstractContainerObject
         if (activated && _cooldownTimer <= Time.time)
         {
             Debug.Log("TowerCall");
-            Collider[] c = Physics.OverlapSphere(gameObject.transform.position, _baseData.Range, 1 << 10);
+            Collider[] c = Physics.OverlapSphere(gameObject.transform.position, _runtimeValues.Range, 1 << 10);
             if (c.Length > 0)
             {
                 TestAttackEnemy();
-                _cooldownTimer = Time.time + (1 / _baseData.Cooldown);
+                _cooldownTimer = Time.time + (1 / _runtimeValues.Cooldown);
                 Debug.Log("Pew! at: " + Time.time + " next pew at: " + _cooldownTimer);                
             }
             else

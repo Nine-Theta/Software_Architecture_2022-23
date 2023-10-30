@@ -15,16 +15,14 @@ public class TowerScriptable : ScriptableObject, I_Containable
     public string TowerType = "todo"; //type of attack
     public AbstractAttackStrategy AttackStrategy; //which enemy to attack
 
-    public float Damage = 0f;
-    public float Cooldown = 0.1f;
-    public float Range = 1;
+    public TowerValues BaseValues;
 
-    public int Cost = 1;
+    public List<TowerValues> UpgradeValues;
 
     public string GetName { get { return _name; } }
-    public int CreationCost { get { return Cost; } }
+    public int CreationCost { get { return BaseValues.Cost; } }
 
-
+    //To be aplied to Enemy
     public List<string> Debuffs = new List<string>();
 
     public GameObject GetModel

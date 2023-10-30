@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 7349912691951585713}
   - component: {fileID: 1834073266671704975}
   - component: {fileID: 6337649048866858037}
-  m_Layer: 0
+  - component: {fileID: 3384836400633359614}
+  m_Layer: 7
   m_Name: TowerContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69,3 +70,26 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!136 &3384836400633359614
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4219813500232289462}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1.5
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.8, z: 0}

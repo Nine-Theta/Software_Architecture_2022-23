@@ -9,24 +9,12 @@ using UnityEngine.UI;
 public class ConstructionState : AbstractProcessorState
 {
     [SerializeField]
-    private List<LayerMask> _constructionLayers;
-
-    private LayerMask _buildingLayer;
+    private LayerMask _constructionLayer;
 
 
     public ConstructionState(InputProcessor pContext) : base(pContext)
     {
        
-    }
-
-    public void OnEnable()
-    {
-        _buildingLayer = new LayerMask();
-
-        for (int i = 0; i < _constructionLayers.Count; i++)
-        {
-            _buildingLayer += _constructionLayers[i];
-        }
     }
 
     public override void ProccessButtonClick(Vector2 pMousePos)
@@ -40,8 +28,9 @@ public class ConstructionState : AbstractProcessorState
         Debug.DrawRay(ray.origin, ray.direction * 50, Color.green, 3);
         RaycastHit hit;
 
-        Physics.Raycast(ray, out hit, 50, _buildingLayer);
+        Physics.Raycast(ray, out hit, 50, _constructionLayer);
 
+        //checks if the specific construction layer we need for the current factory is hit, or if it was a different one
         if (hit.collider == null || (context.ConstructionFactory.GetBuildLayer().value & (1 << hit.collider.gameObject.layer)) == 0 ) return;
 
         Vector3 buildCoords = hit.point;
@@ -63,11 +52,6 @@ public class ConstructionState : AbstractProcessorState
         //if (hit.collider.tag)
         //TowerBuildPosition = hit.point;
         //TowerBuildCommander.ExecuteCommand(new BuildTowerCommand(this));
-    }
-
-    public void ChangeTargetLayer(LayerMask pTargetLayer)
-    {
-        _buildingLayer = pTargetLayer;
     }
 
     private void ConstructAt(Vector3 pPosition)

@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f37f4bf15065e5849a25ceddd744590b, type: 3}
-  m_Name: ConstructionState
+  m_Script: {fileID: 11500000, guid: a321144d37b839d46a2375baedce16ba, type: 3}
+  m_Name: UpgradeState
   m_EditorClassIdentifier: 
   context: {fileID: 0}
-  _constructionLayer:
+  _upgradeLayer:
     serializedVersion: 2
-    m_Bits: 769
+    m_Bits: 128

@@ -8,6 +8,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshSurface))]
 public class NavigationManager : MonoBehaviour
 {
+    [SerializeField]
     private NavMeshSurface _mesh;
 
     [SerializeField]
