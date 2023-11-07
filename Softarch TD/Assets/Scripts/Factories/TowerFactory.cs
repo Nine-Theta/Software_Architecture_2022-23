@@ -34,8 +34,9 @@ public class TowerFactory : AbstractInstanceFactory
     }
 
     public override AbstractContainerObject CreateInstance(Vector3 pPosition)
-    {
+    {      
         GameObject newTower = Instantiate(_towerObject.gameObject, pPosition, Quaternion.identity);
+        pPosition.y += _tower.ModelHeightOffset;
         GameObject model = Instantiate(_tower.GetModel, _tower.GetModel.transform.position + pPosition, Quaternion.identity, newTower.transform);
         newTower.name = _tower.GetName;
 
