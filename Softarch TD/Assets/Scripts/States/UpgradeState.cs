@@ -26,13 +26,16 @@ public class UpgradeState : AbstractProcessorState
         Debug.DrawRay(ray.origin, ray.direction * 50, Color.green, 3);
         RaycastHit hit;
 
-        Physics.Raycast(ray, out hit, 50, _upgradeLayer);
-
-        if (hit.collider == null)
+        if (!Physics.Raycast(ray, out hit, 50, _upgradeLayer))
+        {
+            context.UIManager.HideUpgradeUI();
             return;
+        }
+
 
         TowerObject tower = hit.collider.gameObject.GetComponent<TowerObject>();
 
+        context.UIManager.DisplayUpgradeUI(tower);
 
         /* TODO:
         * Upgrade UI

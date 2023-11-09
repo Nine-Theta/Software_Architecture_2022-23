@@ -11,7 +11,7 @@ public class TowerObject : AbstractContainerObject
     [SerializeField]
     private TowerScriptable _baseData;
     [SerializeField]
-    private GameObject _template;
+    private GameObject _model;
     [SerializeField]
     private SphereCollider _rangeCollider;
 
@@ -20,10 +20,18 @@ public class TowerObject : AbstractContainerObject
 
     private float _cooldownTimer = 0;
 
+    [SerializeField]
     private int _upgradeRank = 0;
+    [SerializeField]
     private int _upgradeMax;
 
     private bool activated = false;
+
+    public GameObject GetModel() { return _model; }
+    public TowerValues GetCurrentValues() { return _runtimeValues; }
+    public TowerValues GetNextUpgradeValues() { return _baseData.UpgradeValues[_upgradeRank]; }
+    public int GetCurrentRank () { return _upgradeRank; }
+    public bool CanUgrade() { return _upgradeRank + 1 < _upgradeMax; }
 
     public override I_Containable BaseData { get { return _baseData; } }
 
@@ -35,7 +43,7 @@ public class TowerObject : AbstractContainerObject
         _runtimeValues = _baseData.BaseValues;
         _upgradeMax = _baseData.UpgradeValues.Count;
 
-        if (_template == null) _template = transform.GetChild(0).gameObject;
+        if (_model == null) _model = transform.GetChild(0).gameObject;
         if (_rangeCollider == null) _rangeCollider = gameObject.GetComponent<SphereCollider>();
         _rangeCollider.radius = _runtimeValues.Range;
     }
@@ -65,15 +73,12 @@ public class TowerObject : AbstractContainerObject
     {
         if (!CanUgrade()) return;
 
-        _upgradeRank += 1;
         _runtimeValues = _baseData.UpgradeValues[_upgradeRank];
+        _upgradeRank += 1;
+
+        _rangeCollider.radius = _runtimeValues.Range;
 
         Debug.Log("Tower Upgraded!");
-    }
-
-    public bool CanUgrade()
-    {
-        return _upgradeRank < _upgradeMax;
     }
 
     public void Update()

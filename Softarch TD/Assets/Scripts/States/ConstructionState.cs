@@ -14,7 +14,7 @@ public class ConstructionState : AbstractProcessorState
 
     public ConstructionState(InputProcessor pContext) : base(pContext)
     {
-       
+
     }
 
     public override void ProccessButtonClick(Vector2 pMousePos)
@@ -28,10 +28,9 @@ public class ConstructionState : AbstractProcessorState
         Debug.DrawRay(ray.origin, ray.direction * 50, Color.green, 3);
         RaycastHit hit;
 
-        Physics.Raycast(ray, out hit, 50, _constructionLayer);
-
         //checks if the specific construction layer we need for the current factory is hit, or if it was a different one
-        if (hit.collider == null || (context.ConstructionFactory.GetBuildLayer().value & (1 << hit.collider.gameObject.layer)) == 0 ) return;
+        if (!Physics.Raycast(ray, out hit, 50, _constructionLayer) || (context.ConstructionFactory.GetBuildLayer().value & (1 << hit.collider.gameObject.layer)) == 0)
+            return;
 
         Vector3 buildCoords = hit.point;
 

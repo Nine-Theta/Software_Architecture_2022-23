@@ -21,17 +21,17 @@ public class InputProcessor : MonoBehaviour
 
     public Commander ConstructionCommander = new Commander();
 
-    public TextMeshProUGUI CreditUI;
+    public UIManager UIManager;
 
     [SerializeField]
-    private int _credits;   //TODO: Fix credit cost, _selectedTower is not really used anymore
+    private int _credits;
     public int Credits
     {
         get { return _credits; }
         set
         {
             _credits = value;
-            CreditUI.text = _credits.ToString();
+            UIManager.CreditVisual = _credits;
         }
     }
 
