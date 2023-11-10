@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a731a94f0f33e344836b4c85629939b, type: 3}
   m_Name: TestEnemy2
   m_EditorClassIdentifier: 
-  MovemenStrategy: {fileID: 11400000, guid: 841882a8c16acc64bab9004de5644e57, type: 2}
   _name: Dave
+  _enemyModel: {fileID: 0}
+  MovemenStrategy: {fileID: 11400000, guid: 841882a8c16acc64bab9004de5644e57, type: 2}
   Values:
     Health: 1
-    MovementSpeed: 0
+    MovementSpeed: 1
     Defense: 0
     Resistance: 0
     AttackDamage: 0
     Reward: 0
-  _containerObject: {fileID: 2150371888702897205, guid: d1e88e23ac029214281e186acc590048, type: 3}

@@ -45,7 +45,7 @@ public class TowerObject : AbstractContainerObject
 
         if (_model == null) _model = transform.GetChild(0).gameObject;
         if (_rangeCollider == null) _rangeCollider = gameObject.GetComponent<SphereCollider>();
-        _rangeCollider.radius = _runtimeValues.Range;
+        _rangeCollider.radius = _runtimeValues.Range;        
     }
 
     private void OnDrawGizmos()

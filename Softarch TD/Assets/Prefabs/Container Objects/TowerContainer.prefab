@@ -47,8 +47,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _baseData: {fileID: 0}
-  _template: {fileID: 0}
+  _model: {fileID: 0}
   _rangeCollider: {fileID: 6337649048866858037}
+  _runtimeValues:
+    Damage: 0
+    Range: 0
+    Cooldown: 0
+    Cost: 0
+  _upgradeRank: 0
+  _upgradeMax: 0
+  Debuffs: []
 --- !u!135 &6337649048866858037
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -68,7 +76,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Radius: 0.25
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &3384836400633359614
 CapsuleCollider:
@@ -89,7 +97,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.25
   m_Height: 1.5
   m_Direction: 1
-  m_Center: {x: 0, y: 0.8, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}

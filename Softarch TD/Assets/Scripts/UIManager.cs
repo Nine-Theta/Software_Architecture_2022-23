@@ -1,10 +1,12 @@
 using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class UIManager : MonoBehaviour
 {
@@ -48,7 +50,7 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private List<TextMeshProUGUI> _upgradeStats;
 
-    private TowerObject _viewingTower;
+    private Transform _viewingTower;
 
 
     public void SelectTowerButton(Button pSelected)
@@ -116,7 +118,7 @@ public class UIManager : MonoBehaviour
         _upgradePanel.SetActive(false);
 
         if(_viewingTower != null)
-            _viewingTower.GetModel().layer = LayerMask.NameToLayer("Default");
+            SetLayersInChildren(_viewingTower, LayerMask.NameToLayer("Default"));
 
         _towerButton.interactable = true;
     }
@@ -131,13 +133,13 @@ public class UIManager : MonoBehaviour
     private void ViewTower(TowerObject pTower)
     {
         if (_viewingTower != null)
-            _viewingTower.GetModel().layer = LayerMask.NameToLayer("Default");
+            SetLayersInChildren(_viewingTower,LayerMask.NameToLayer("Default"));
 
-        _viewingTower = pTower;
+        _viewingTower = pTower.GetModel().transform;
 
-        _towerViewCam.transform.position = pTower.transform.position;
+        _towerViewCam.transform.position = _viewingTower.position;
 
-        pTower.GetModel().layer = LayerMask.NameToLayer("3D View");
+        SetLayersInChildren(_viewingTower,LayerMask.NameToLayer("3D View"));
 
         _towerStats[0].text = pTower.GetCurrentValues().Damage.ToString();
         _towerStats[1].text = pTower.GetCurrentValues().Range.ToString();
@@ -147,5 +149,16 @@ public class UIManager : MonoBehaviour
         _upgradeStats[1].text = pTower.GetNextUpgradeValues().Range.ToString();
         _upgradeStats[2].text = pTower.GetNextUpgradeValues().Cooldown.ToString();
         _upgradeStats[3].text = pTower.GetNextUpgradeValues().Cost.ToString();
+    }
+
+    //Not a great solution
+    private void SetLayersInChildren(Transform pObject, LayerMask pLayer)
+    {
+        pObject.gameObject.layer = pLayer;
+        Transform[] children = pObject.GetComponentsInChildren<Transform>();
+        for (int i = 0; i < children.Count(); i++)
+        {
+            children[i].gameObject.layer = pLayer;
+        }
     }
 }

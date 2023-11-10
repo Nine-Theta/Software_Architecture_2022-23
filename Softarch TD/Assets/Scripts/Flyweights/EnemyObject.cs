@@ -28,6 +28,8 @@ public class EnemyObject : AbstractContainerObject
     {
         _baseData = pData as EnemyScriptable;
         _runtimeValues = new EnemyValues(_baseData.Values);
+
+        GetComponent<NavMeshAgent>().speed = _runtimeValues.MovementSpeed;
     }
 
     [Button]
@@ -125,7 +127,7 @@ public class EnemyObject : AbstractContainerObject
     {
         if (other.CompareTag("Base"))
         {
-            
+            Debug.Log("Base Reached!");
         }
     }
 

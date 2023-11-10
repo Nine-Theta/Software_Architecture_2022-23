@@ -11,8 +11,6 @@ public class TowerScriptable : ScriptableObject, I_Containable
 
     [SerializeField]
     private GameObject _towerModel;
-    
-    public float ModelHeightOffset = 1f;
 
     public string TowerType = "todo"; //type of attack
     public AbstractAttackStrategy AttackStrategy; //which enemy to attack

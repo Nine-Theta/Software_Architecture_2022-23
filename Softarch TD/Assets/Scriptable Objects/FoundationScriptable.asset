@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: FoundationTile
   _foundationModel: {fileID: 6494221476015610978, guid: 64ddc919ad8f99f41a7da5c213db8ee1, type: 3}
-  Cost: 0
+  Cost: 1

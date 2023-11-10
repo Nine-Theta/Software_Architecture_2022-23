@@ -10,7 +10,7 @@ public class FoundationObject : AbstractContainerObject
     private bool _buildable = true;
     public bool Buildable { get { return _buildable; } }
 
-    public Vector3 GetBuildPos { get { return transform.position + new Vector3(0,transform.localScale.y*0.5f,0); } }
+    public Vector3 GetBuildPos { get { return transform.position; } }
 
     public override I_Containable BaseData { get { return _baseData; } }
 

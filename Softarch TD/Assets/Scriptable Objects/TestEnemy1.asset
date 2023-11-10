@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: TestEnemy1
   m_EditorClassIdentifier: 
   _name: Bob
-  _enemyModel: {fileID: 132966338052862889, guid: 779553ea840ef024a93c7a26788180d4, type: 3}
+  _enemyModel: {fileID: 8757755199854365339, guid: 441eaf203d416a146a924addb507941b, type: 3}
   MovemenStrategy: {fileID: 11400000, guid: 841882a8c16acc64bab9004de5644e57, type: 2}
   Values:
     Health: 10
-    MovementSpeed: 2
+    MovementSpeed: 1
     Defense: 0
     Resistance: 0
     AttackDamage: 1
