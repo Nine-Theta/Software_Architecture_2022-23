@@ -20,7 +20,9 @@ public class UpgradeState : AbstractProcessorState
     public override void ProccessButtonClick(Vector2 pMousePos)
     {
         if (EventSystem.current.IsPointerOverGameObject())
+        {
             return;
+        }
 
         Ray ray = Camera.main.ScreenPointToRay(pMousePos);
         Debug.DrawRay(ray.origin, ray.direction * 50, Color.green, 3);

@@ -34,6 +34,10 @@ public class UIManager : MonoBehaviour
     private GameObject _towerViewCam;
 
     [SerializeField]
+    private float _camRotationSpeed = 30f;
+    private float _oldMouseX = 0f;
+
+    [SerializeField]
     private GameObject _upgradePanel;
 
     [SerializeField]
@@ -91,27 +95,6 @@ public class UIManager : MonoBehaviour
         _upgradeButton.interactable = true;
     }
 
-    private void ViewTower(TowerObject pTower)
-    {
-        if (_viewingTower != null)
-            _viewingTower.GetModel().layer = LayerMask.NameToLayer("Default");
-
-        _viewingTower = pTower;
-
-        _towerViewCam.transform.position = pTower.transform.position;
-
-        pTower.GetModel().layer = LayerMask.NameToLayer("3D View");
-
-        _towerStats[0].text = pTower.GetCurrentValues().Damage.ToString();
-        _towerStats[1].text = pTower.GetCurrentValues().Range.ToString();
-        _towerStats[2].text = pTower.GetCurrentValues().Cooldown.ToString();
-
-        _upgradeStats[0].text = pTower.GetNextUpgradeValues().Damage.ToString();
-        _upgradeStats[1].text = pTower.GetNextUpgradeValues().Range.ToString();
-        _upgradeStats[2].text = pTower.GetNextUpgradeValues().Cooldown.ToString();
-        _upgradeStats[3].text = pTower.GetNextUpgradeValues().Cost.ToString();
-    }
-
     public void SelectUpgradeButton()
     {
         HideTowerBuildUI();
@@ -136,5 +119,33 @@ public class UIManager : MonoBehaviour
             _viewingTower.GetModel().layer = LayerMask.NameToLayer("Default");
 
         _towerButton.interactable = true;
+    }
+
+    public void DragRotateTowerCam()
+    {
+        float delta = Input.mousePosition.x - _oldMouseX;
+        _oldMouseX = Input.mousePosition.x;
+        _towerViewCam.transform.Rotate(new Vector3(0,delta * Time.deltaTime * _camRotationSpeed,0));
+    }
+
+    private void ViewTower(TowerObject pTower)
+    {
+        if (_viewingTower != null)
+            _viewingTower.GetModel().layer = LayerMask.NameToLayer("Default");
+
+        _viewingTower = pTower;
+
+        _towerViewCam.transform.position = pTower.transform.position;
+
+        pTower.GetModel().layer = LayerMask.NameToLayer("3D View");
+
+        _towerStats[0].text = pTower.GetCurrentValues().Damage.ToString();
+        _towerStats[1].text = pTower.GetCurrentValues().Range.ToString();
+        _towerStats[2].text = pTower.GetCurrentValues().Cooldown.ToString();
+
+        _upgradeStats[0].text = pTower.GetNextUpgradeValues().Damage.ToString();
+        _upgradeStats[1].text = pTower.GetNextUpgradeValues().Range.ToString();
+        _upgradeStats[2].text = pTower.GetNextUpgradeValues().Cooldown.ToString();
+        _upgradeStats[3].text = pTower.GetNextUpgradeValues().Cost.ToString();
     }
 }
