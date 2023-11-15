@@ -23,15 +23,14 @@ public class InputProcessor : MonoBehaviour
 
     public UIManager UIManager;
 
-    [SerializeField]
-    private int _credits;
+    public GameplayManager GameplayManager;
+
     public int Credits
     {
-        get { return _credits; }
+        get { return GameplayManager.Credits; }
         set
         {
-            _credits = value;
-            UIManager.CreditVisual = _credits;
+            GameplayManager.Credits = value;
         }
     }
 

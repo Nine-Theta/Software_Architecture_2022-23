@@ -6,12 +6,21 @@ using UnityEngine.AI;
 [CreateAssetMenu(fileName = "NavMeshMovementStrategy", menuName = "Strategy/Movement/Navmesh"), RequireComponent(typeof(NavMeshAgent))]
 public class NavMeshMovementStrategy : AbstractMovementStrategy
 {
-    private NavMeshAgent bbbb;
-    
-
-    public override void MoveStep(Vector3 pDestiniation)
+    public override void Initialize(EnemyObject pEnemy, float pMoveSpeed)
     {
-        throw new System.NotImplementedException();
+        NavMeshAgent agent;
+
+        if (!pEnemy.gameObject.TryGetComponent<NavMeshAgent>(out agent))
+        {
+           agent = pEnemy.gameObject.AddComponent<NavMeshAgent>();
+        }
+
+        agent.speed = pMoveSpeed;
+    }
+
+    public override void MoveTo(EnemyObject pEnemy, Vector3 pDestiniation)
+    {
+        pEnemy.GetComponent<NavMeshAgent>().SetDestination(pDestiniation);
     }
 
 }

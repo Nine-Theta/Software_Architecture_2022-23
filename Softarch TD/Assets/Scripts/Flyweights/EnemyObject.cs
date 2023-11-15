@@ -29,7 +29,7 @@ public class EnemyObject : AbstractContainerObject
         _baseData = pData as EnemyScriptable;
         _runtimeValues = new EnemyValues(_baseData.Values);
 
-        GetComponent<NavMeshAgent>().speed = _runtimeValues.MovementSpeed;
+        _baseData.MovemenStrategy.Initialize(this, _runtimeValues.MovementSpeed);
     }
 
     [Button]
@@ -39,9 +39,9 @@ public class EnemyObject : AbstractContainerObject
     }
 
     [Button]
-    public void Move() //TODO: Movestrategy
+    public void Move()
     {
-        this.GetComponent<NavMeshAgent>().SetDestination(TargetPos);
+        _baseData.MovemenStrategy.MoveTo(this, TargetPos);
     }
 
     public void ApplyDebuff(DebuffScriptable pDebuff)

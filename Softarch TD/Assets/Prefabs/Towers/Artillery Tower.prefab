@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7372131311102240500}
+  - component: {fileID: 7419125111774785381}
   m_Layer: 0
   m_Name: Artillery Tower
   m_TagString: Untagged
@@ -33,6 +34,19 @@ Transform:
   - {fileID: 5254549478848666934}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7419125111774785381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6494076441597448111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0da4cb434dde27748a16e0ed147c1950, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _towerPivot: {fileID: 2839982772454985196}
 --- !u!1 &7385816577898769667
 GameObject:
   m_ObjectHideFlags: 0
@@ -185,6 +199,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03f0726672e3d2148bfcdf06ae0256a6, type: 3}
+--- !u!4 &2839982772454985196 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4780752047532616818, guid: 03f0726672e3d2148bfcdf06ae0256a6, type: 3}
+  m_PrefabInstance: {fileID: 7291611335422353822}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5254549478848666934 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3304209504806288552, guid: 03f0726672e3d2148bfcdf06ae0256a6, type: 3}

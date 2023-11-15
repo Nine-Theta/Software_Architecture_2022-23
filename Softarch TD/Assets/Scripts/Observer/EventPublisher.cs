@@ -10,7 +10,7 @@ public class EventPublisher
 
     public delegate void EventSubscriber();
 
-    private List<EventSubscriber> _subscribers;
+    private List<EventSubscriber> _subscribers = new List<EventSubscriber>();
 
     public void Subscribe(EventSubscriber pSub)//EventSubscriber<T> pSub)
     {
@@ -37,7 +37,7 @@ public class EventPublisher<T>
 
     public delegate void EventSubscriber(T pArgument);
 
-    private List<EventSubscriber> _subscribers;
+    private List<EventSubscriber> _subscribers = new List<EventSubscriber>();
 
     public void Subscribe(EventSubscriber pSub)
     {

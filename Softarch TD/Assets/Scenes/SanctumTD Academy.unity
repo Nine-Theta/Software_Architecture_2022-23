@@ -3095,42 +3095,6 @@ PrefabInstance:
       propertyPath: _devSpawner
       value: 
       objectReference: {fileID: 1314621820}
-    - target: {fileID: 8322783066596968340, guid: b8eefd27463add6468ae26c819a13737, type: 3}
-      propertyPath: m_TileSize
-      value: 256
-      objectReference: {fileID: 0}
-    - target: {fileID: 8322783066596968340, guid: b8eefd27463add6468ae26c819a13737, type: 3}
-      propertyPath: m_VoxelSize
-      value: 0.0714
-      objectReference: {fileID: 0}
-    - target: {fileID: 8322783066596968340, guid: b8eefd27463add6468ae26c819a13737, type: 3}
-      propertyPath: m_NavMeshData
-      value: 
-      objectReference: {fileID: 23800000, guid: 688261894a418ec41b674ecc951449b8, type: 2}
-    - target: {fileID: 8322783066596968340, guid: b8eefd27463add6468ae26c819a13737, type: 3}
-      propertyPath: m_UseGeometry
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8322783066596968340, guid: b8eefd27463add6468ae26c819a13737, type: 3}
-      propertyPath: m_GenerateLinks
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8322783066596968340, guid: b8eefd27463add6468ae26c819a13737, type: 3}
-      propertyPath: m_MinRegionArea
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8322783066596968340, guid: b8eefd27463add6468ae26c819a13737, type: 3}
-      propertyPath: m_BuildHeightMesh
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8322783066596968340, guid: b8eefd27463add6468ae26c819a13737, type: 3}
-      propertyPath: m_OverrideTileSize
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8322783066596968340, guid: b8eefd27463add6468ae26c819a13737, type: 3}
-      propertyPath: m_OverrideVoxelSize
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 9184824779602869915, guid: b8eefd27463add6468ae26c819a13737, type: 3}
       propertyPath: _navigationTarget
       value: 

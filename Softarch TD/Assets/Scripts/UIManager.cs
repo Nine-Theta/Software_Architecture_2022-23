@@ -6,15 +6,16 @@ using TMPro;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class UIManager : MonoBehaviour
 {
     [SerializeField]
+    private GameplayManager _gameplayManager;
+
+    [SerializeField]
     private TextMeshProUGUI _creditUI;
 
-    private int _creditTracker;
-
+    /////
 
     [Header("BuildUI"), HorizontalLine(color: EColor.Red)]
     [SerializeField]
@@ -30,6 +31,7 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private List<GameObject> _towers;
 
+    /////
 
     [Header("UpgradeUI"), HorizontalLine(color: EColor.Green)]
     [SerializeField]
@@ -52,6 +54,15 @@ public class UIManager : MonoBehaviour
 
     private Transform _viewingTower;
 
+    private void Awake()
+    {
+        _gameplayManager.CreditsUpdated.Subscribe(OnCreditsUpdated);
+    }
+
+    private void OnCreditsUpdated(int pValue)
+    {
+        _creditUI.text = pValue.ToString();
+    }
 
     public void SelectTowerButton(Button pSelected)
     {
@@ -80,16 +91,6 @@ public class UIManager : MonoBehaviour
         _towerButton.interactable = true;
     }
 
-    public int CreditVisual
-    {
-        get { return _creditTracker; }
-        set
-        {
-            _creditTracker = value;
-            _creditUI.text = value.ToString();
-        }
-    }
-
     public void BuildFoundationUI()
     {
         _foundationButton.interactable = false;
@@ -108,7 +109,7 @@ public class UIManager : MonoBehaviour
     {
         ViewTower(pTower);
 
-        _upgradePanelButton.interactable = (pTower.CanUgrade() && pTower.GetNextUpgradeValues().Cost < _creditTracker);
+        _upgradePanelButton.interactable = (pTower.CanUgrade() && pTower.GetNextUpgradeValues().Cost < _gameplayManager.Credits);
 
         _upgradePanel.SetActive(true);
     }

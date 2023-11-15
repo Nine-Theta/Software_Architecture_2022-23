@@ -7,6 +7,11 @@ using UnityEngine;
 [SelectionBase]
 public class BaseManager : MonoBehaviour
 {
+    public Vector3 GetEnemyTarget
+    {
+        get { return transform.position; }
+    }    
+
     public int BaseHealth = 100;
 
     [Button]
@@ -17,5 +22,10 @@ public class BaseManager : MonoBehaviour
     public void DamageBase(int pDamage)
     {
         BaseHealth -= pDamage;
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        Debug.Log(other.name + " Has entered the Forbidden Zone(tm)");
     }
 }
