@@ -18,6 +18,7 @@ public class TowerObject : AbstractContainerObject
     [SerializeField]
     private TowerValues _runtimeValues;
 
+
     private float _cooldownTimer = 0;
 
     [SerializeField]
@@ -27,11 +28,19 @@ public class TowerObject : AbstractContainerObject
 
     private bool activated = false;
 
+    private Collider _currentTarget;
+
+    private List<Collider> _targetsInRange =  new List<Collider>();
+
+
     public GameObject GetModel() { return _model; }
     public TowerValues GetCurrentValues() { return _runtimeValues; }
     public TowerValues GetNextUpgradeValues() { return _baseData.UpgradeValues[_upgradeRank]; }
     public int GetCurrentRank () { return _upgradeRank; }
     public bool CanUgrade() { return _upgradeRank + 1 < _upgradeMax; }
+
+    public EventPublisher<Transform> TargetAcquired = new EventPublisher<Transform>();
+    public EventPublisher TargetLost = new EventPublisher();
 
     public override I_Containable BaseData { get { return _baseData; } }
 
@@ -44,6 +53,8 @@ public class TowerObject : AbstractContainerObject
         _upgradeMax = _baseData.UpgradeValues.Count;
 
         if (_model == null) _model = transform.GetChild(0).gameObject;
+        _model.GetComponent<TowerModelController>().Initialize(this);
+
         if (_rangeCollider == null) _rangeCollider = gameObject.GetComponent<SphereCollider>();
         _rangeCollider.radius = _runtimeValues.Range;        
     }
@@ -53,19 +64,26 @@ public class TowerObject : AbstractContainerObject
         Handles.DrawWireDisc(gameObject.transform.position, Vector3.up, _runtimeValues.Range, 2f);
     }
 
-
-    [Button]
-    public void TestAttackEnemy()
+    private void CheckForNewTarget()
     {
-        //Debug.Log(gameObject.transform.position);
-        Collider[] c = Physics.OverlapSphere(gameObject.transform.position, _runtimeValues.Range, 1 << 10);
-        Debug.Log(c.Length);
-        if (c.Length > 0)
+        Collider target;
+
+        if (_baseData.AttackStrategy.TryGetTarget(_targetsInRange.ToArray(), gameObject.transform.position, out target))
         {
-            Collider t = _baseData.AttackStrategy.GetTarget(c, gameObject.transform.position);
-            t.GetComponent<EnemyObject>().DamageEnemy(_runtimeValues.Damage);
-            Debug.DrawLine(transform.position, t.transform.position,Color.red, 2f);
+            _currentTarget = target;
+            TargetAcquired.Publish(target.transform);
+            activated = true;
         }
+        else
+        {
+            activated= false;
+        }
+    }
+
+    private void AttackCurrentTarget()
+    {
+        _currentTarget.GetComponent<EnemyObject>().DamageEnemy(_runtimeValues.Damage);
+        Debug.DrawLine(transform.position, _currentTarget.transform.position, Color.red, 2f);
     }
 
     [Button]
@@ -83,30 +101,33 @@ public class TowerObject : AbstractContainerObject
 
     public void Update()
     {
-
         if (activated && _cooldownTimer <= Time.time)
         {
-            Debug.Log("TowerCall");
-            Collider[] c = Physics.OverlapSphere(gameObject.transform.position, _runtimeValues.Range, 1 << 10);
-            if (c.Length > 0)
-            {
-                TestAttackEnemy();
-                _cooldownTimer = Time.time + (1 / _runtimeValues.Cooldown);
-                Debug.Log("Pew! at: " + Time.time + " next pew at: " + _cooldownTimer);                
-            }
-            else
-            {
-                Debug.Log("no enemies in range");
-                activated = false;
-            }
+            if (_targetsInRange.Count > 1)
+                CheckForNewTarget();
 
+            AttackCurrentTarget();
         }
+
+        _cooldownTimer = Time.time + (1 / _runtimeValues.Cooldown);
     }
 
     public void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Enemy")) return;
-        activated = true;
-        Debug.Log("Enemy Entered Range");
+        _targetsInRange.Add(other);
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        if (!other.CompareTag("Enemy")) return;
+
+        _targetsInRange.Remove(other);
+
+        if (other == _currentTarget)
+        {
+            TargetLost.Publish();
+            CheckForNewTarget();
+        }
     }
 }

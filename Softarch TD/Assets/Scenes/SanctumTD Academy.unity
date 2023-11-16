@@ -3091,6 +3091,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Game Manager Collection
       objectReference: {fileID: 0}
+    - target: {fileID: 3205945162053369543, guid: b8eefd27463add6468ae26c819a13737, type: 3}
+      propertyPath: _credits
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 3702622812465333454, guid: b8eefd27463add6468ae26c819a13737, type: 3}
       propertyPath: _devSpawner
       value: 
