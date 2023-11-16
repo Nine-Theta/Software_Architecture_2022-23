@@ -54,6 +54,9 @@ MonoBehaviour:
     Range: 0
     Cooldown: 0
     Cost: 0
+  _enemyLayer:
+    serializedVersion: 2
+    m_Bits: 1024
   _upgradeRank: 0
   _upgradeMax: 0
   Debuffs: []
