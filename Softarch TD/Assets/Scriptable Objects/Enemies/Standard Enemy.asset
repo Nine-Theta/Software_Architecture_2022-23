@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2a731a94f0f33e344836b4c85629939b, type: 3}
-  m_Name: TestEnemy2
+  m_Name: Standard Enemy
   m_EditorClassIdentifier: 
-  _name: Dave
-  _enemyModel: {fileID: 0}
+  _name: Measure
+  _enemyModel: {fileID: 8757755199854365339, guid: 441eaf203d416a146a924addb507941b, type: 3}
   MovemenStrategy: {fileID: 11400000, guid: 841882a8c16acc64bab9004de5644e57, type: 2}
   Values:
-    Health: 1
+    Health: 10
     MovementSpeed: 1
     Defense: 0
     Resistance: 0
-    AttackDamage: 0
+    AttackDamage: 1
     Reward: 0

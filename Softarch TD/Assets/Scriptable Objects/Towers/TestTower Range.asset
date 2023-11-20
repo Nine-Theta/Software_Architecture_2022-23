@@ -13,30 +13,28 @@ MonoBehaviour:
   m_Name: TestTower Range
   m_EditorClassIdentifier: 
   _name: Range tower
-  _towerModel: {fileID: 6494076441597448111, guid: ea963f50e3c073f40870fdd6059a5e35, type: 3}
-  ModelHeightOffset: 1
+  _towerModel: {fileID: 6494076441597448111, guid: 53dbc7ffbc34e34448f2995358b7258e, type: 3}
   TowerType: todo
   AttackStrategy: {fileID: 11400000, guid: 5c07f856db15f0c489ddfcf9fd201512, type: 2}
-  BaseValues:
-    Damage: 1
-    Range: 3
-    Cooldown: 0.2
-    Cost: 1
-  UpgradeValues:
-  - Damage: 2
-    Range: 4
-    Cooldown: 0.2
+  TowerRankValues:
+  - Damage: 1
+    Range: 2
+    Cooldown: 0.5
     Cost: 1
   - Damage: 3
-    Range: 5
-    Cooldown: 0.2
+    Range: 3
+    Cooldown: 0.5
     Cost: 2
   - Damage: 5
+    Range: 5
+    Cooldown: 0.5
+    Cost: 3
+  - Damage: 7
     Range: 7
-    Cooldown: 0.2
+    Cooldown: 0.4
     Cost: 5
-  - Damage: 10
+  - Damage: 12
     Range: 10
-    Cooldown: 0.1
+    Cooldown: 0.25
     Cost: 10
   Debuffs: []

@@ -122,15 +122,17 @@ public class EnemyObject : AbstractContainerObject
         _runtimeValues.Health -= Mathf.Max((pDamage - _runtimeValues.Defense) * (1 - _runtimeValues.Resistance), 0);
         CheckForDeath();
     }
-
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Base"))
         {
             Debug.Log("Base Reached!");
+            other.GetComponentInParent<BaseManager>().DamageBase(_runtimeValues.AttackDamage);
+            Destroy(gameObject);
         }
     }
-
+    
     private void CheckForDeath()
     {
         if (_runtimeValues.Health <= 0)
@@ -138,5 +140,10 @@ public class EnemyObject : AbstractContainerObject
             Debug.Log("Death to be implemented");
             Destroy(gameObject);
         }
+    }
+
+    private void OnDestroy()
+    {
+        //
     }
 }

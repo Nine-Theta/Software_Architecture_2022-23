@@ -39,15 +39,6 @@ public class UpgradeState : AbstractProcessorState
 
         context.UIManager.DisplayUpgradeUI(tower);
 
-        /* TODO:
-        * Upgrade UI
-        * Check for Credits
-        * Send Upgrade Command
-        */
-    }
-
-    private void UpgradeTower()
-    {
-        //UpgradeCommand
+        context.GameplayManager.SetSelectedTower(tower);
     }
 }

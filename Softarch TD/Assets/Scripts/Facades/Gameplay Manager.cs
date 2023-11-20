@@ -5,7 +5,14 @@ using UnityEngine;
 public class GameplayManager : MonoBehaviour
 {
     [SerializeField]
-    private int _credits;
+    private int _credits = 20;
+
+    private UIManager _uiManager;
+
+    private TowerObject _selectedTower;
+
+    private Commander UpgradeCommander = new Commander();
+
     public int Credits
     {
         get { return _credits; }
@@ -20,6 +27,24 @@ public class GameplayManager : MonoBehaviour
 
     private void Start()
     {
-        CreditsUpdated.Publish(_credits);
+        CreditsUpdated.Publish(Credits);
+    }
+
+    public void SetSelectedTower(TowerObject pSelectedTower)
+    {
+        _selectedTower = pSelectedTower;
+    }
+
+    public void UpgradeTower()
+    {
+        if(_selectedTower.CanUgrade() && _selectedTower.GetNextUpgradeValues().Cost <= _credits)
+        {
+            UpgradeCommander.ExecuteCommand(new UpgradeTowerCommand(_selectedTower, this));
+        }
+    }
+
+    public void SellTower()
+    {
+
     }
 }

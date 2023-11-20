@@ -13,30 +13,28 @@ MonoBehaviour:
   m_Name: TestTower FireRate
   m_EditorClassIdentifier: 
   _name: Fire Rate Tower
-  _towerModel: {fileID: 6494076441597448111, guid: ea963f50e3c073f40870fdd6059a5e35, type: 3}
-  ModelHeightOffset: 1
+  _towerModel: {fileID: 6494076441597448111, guid: c6ae394c6eb6cdd49966341086f3d3e1, type: 3}
   TowerType: todo
   AttackStrategy: {fileID: 11400000, guid: 5c07f856db15f0c489ddfcf9fd201512, type: 2}
-  BaseValues:
-    Damage: 1
-    Range: 2
-    Cooldown: 0.5
-    Cost: 2
-  UpgradeValues:
+  TowerRankValues:
   - Damage: 1
-    Range: 2
-    Cooldown: 0.75
+    Range: 1
+    Cooldown: 1
     Cost: 1
   - Damage: 1
-    Range: 3
-    Cooldown: 1
+    Range: 1
+    Cooldown: 2
+    Cost: 1
+  - Damage: 1
+    Range: 2
+    Cooldown: 4
     Cost: 2
   - Damage: 1
-    Range: 4
-    Cooldown: 2
+    Range: 2
+    Cooldown: 10
     Cost: 3
   - Damage: 1
-    Range: 4
-    Cooldown: 4
+    Range: 3
+    Cooldown: 12
     Cost: 5
   Debuffs: []

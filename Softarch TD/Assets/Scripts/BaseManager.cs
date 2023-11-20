@@ -10,22 +10,36 @@ public class BaseManager : MonoBehaviour
     public Vector3 GetEnemyTarget
     {
         get { return transform.position; }
-    }    
+    }
 
-    public int BaseHealth = 100;
+    [SerializeField]
+    private float _baseHealth = 100f;
+
+    public EventPublisher<float> BaseHealthUpdated = new EventPublisher<float>();
+    public EventPublisher BaseDeath = new EventPublisher();
+
+
+    public float GetBaseHealth() { return _baseHealth; }
 
     [Button]
     public void OneDamage() { DamageBase(1); }
     [Button]
-    public void Kill () { DamageBase(BaseHealth); }
+    public void Kill() { DamageBase(_baseHealth); }
 
-    public void DamageBase(int pDamage)
+    public void DamageBase(float pDamage)
     {
-        BaseHealth -= pDamage;
+        _baseHealth -= pDamage;
+
+        if (_baseHealth <= 0)
+            BaseDeath.Publish();
+        else
+            BaseHealthUpdated.Publish(_baseHealth);
     }
 
-    public void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
+        if (!other.CompareTag("Enemy")) return;
+
         Debug.Log(other.name + " Has entered the Forbidden Zone(tm)");
     }
 }

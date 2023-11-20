@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 
 
@@ -15,12 +16,11 @@ public class TowerScriptable : ScriptableObject, I_Containable
     public string TowerType = "todo"; //type of attack
     public AbstractAttackStrategy AttackStrategy; //which enemy to attack
 
-    public TowerValues BaseValues;
-
-    public List<TowerValues> UpgradeValues;
+    [Description("[0] is base values, everything else is upgrades")]
+    public List<TowerValues> TowerRankValues;
 
     public string GetName { get { return _name; } }
-    public int CreationCost { get { return BaseValues.Cost; } }
+    public int CreationCost { get { return TowerRankValues[0].Cost; } }
 
     //To be aplied to Enemy
     public List<string> Debuffs = new List<string>();

@@ -16,6 +16,11 @@ public class NavMeshMovementStrategy : AbstractMovementStrategy
         }
 
         agent.speed = pMoveSpeed;
+
+        //Required for good pathfinding at higher speeds
+        agent.acceleration = 100;
+        //Enemy should not care about other enemies on the path
+        agent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
     }
 
     public override void MoveTo(EnemyObject pEnemy, Vector3 pDestiniation)

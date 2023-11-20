@@ -22,7 +22,7 @@ public class TowerObject : AbstractContainerObject
     private float _cooldownTimer = 0;
 
     [SerializeField]
-    private int _upgradeRank = 0;
+    private int _currentUpgradeRank = 0;
     [SerializeField]
     private int _upgradeMax;
 
@@ -30,14 +30,14 @@ public class TowerObject : AbstractContainerObject
 
     private Collider _currentTarget;
 
-    private List<Collider> _targetsInRange =  new List<Collider>();
+    private List<Collider> _targetsInRange = new List<Collider>();
 
 
     public GameObject GetModel() { return _model; }
     public TowerValues GetCurrentValues() { return _runtimeValues; }
-    public TowerValues GetNextUpgradeValues() { return _baseData.UpgradeValues[_upgradeRank]; }
-    public int GetCurrentRank () { return _upgradeRank; }
-    public bool CanUgrade() { return _upgradeRank + 1 < _upgradeMax; }
+    public TowerValues GetNextUpgradeValues() { return _baseData.TowerRankValues[Mathf.Min(_currentUpgradeRank+1, _upgradeMax)]; }
+    public int GetCurrentRank() { return _currentUpgradeRank; }
+    public bool CanUgrade() { return _currentUpgradeRank < _upgradeMax; }
 
     public EventPublisher<Transform> TargetAcquired = new EventPublisher<Transform>();
     public EventPublisher TargetLost = new EventPublisher();
@@ -49,14 +49,14 @@ public class TowerObject : AbstractContainerObject
     public override void Initialize(I_Containable pData)
     {
         _baseData = pData as TowerScriptable;
-        _runtimeValues = _baseData.BaseValues;
-        _upgradeMax = _baseData.UpgradeValues.Count;
+        _runtimeValues = _baseData.TowerRankValues[0];
+        _upgradeMax = _baseData.TowerRankValues.Count-1;
 
         if (_model == null) _model = transform.GetChild(0).gameObject;
         _model.GetComponent<TowerModelController>().Initialize(this);
 
         if (_rangeCollider == null) _rangeCollider = gameObject.GetComponent<SphereCollider>();
-        _rangeCollider.radius = _runtimeValues.Range;        
+        _rangeCollider.radius = _runtimeValues.Range;
     }
 
     private void OnDrawGizmos()
@@ -76,25 +76,48 @@ public class TowerObject : AbstractContainerObject
         }
         else
         {
-            activated= false;
+            activated = false;
         }
     }
 
     private void AttackCurrentTarget()
     {
+        Debug.Log("attacking: " + _currentTarget.name);
         _currentTarget.GetComponent<EnemyObject>().DamageEnemy(_runtimeValues.Damage);
         Debug.DrawLine(transform.position, _currentTarget.transform.position, Color.red, 2f);
+    }
+
+    public bool TryUpgradeTower()
+    {
+        if (!CanUgrade())
+            return false;
+
+        _currentUpgradeRank += 1;
+        _runtimeValues = _baseData.TowerRankValues[_currentUpgradeRank];
+
+        _rangeCollider.radius = _runtimeValues.Range;
+
+        return true;
+    }
+
+    public bool TryDownGradeTower()
+    {
+        if (_currentUpgradeRank <= 0)
+            return false;
+
+        _currentUpgradeRank -= 1;
+
+        _runtimeValues = _baseData.TowerRankValues[_currentUpgradeRank];
+
+        _rangeCollider.radius = _runtimeValues.Range;
+
+        return true;
     }
 
     [Button]
     public void TestUpgradeTower()
     {
-        if (!CanUgrade()) return;
-
-        _runtimeValues = _baseData.UpgradeValues[_upgradeRank];
-        _upgradeRank += 1;
-
-        _rangeCollider.radius = _runtimeValues.Range;
+        TryUpgradeTower();
 
         Debug.Log("Tower Upgraded!");
     }
@@ -107,15 +130,17 @@ public class TowerObject : AbstractContainerObject
                 CheckForNewTarget();
 
             AttackCurrentTarget();
+
+            _cooldownTimer = Time.time + (1 / _runtimeValues.Cooldown);
         }
 
-        _cooldownTimer = Time.time + (1 / _runtimeValues.Cooldown);
     }
 
     public void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Enemy")) return;
         _targetsInRange.Add(other);
+        CheckForNewTarget();
     }
 
     public void OnTriggerExit(Collider other)

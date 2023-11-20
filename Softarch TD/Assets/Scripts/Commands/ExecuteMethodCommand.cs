@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExecuteCommand : I_Command
+public class ExecuteMethodCommand : I_Command
 {
     public delegate void Method();
 
@@ -10,7 +10,7 @@ public class ExecuteCommand : I_Command
     private Method _undo;
 
 
-    public ExecuteCommand(Method pExecute, Method pUnexecute)
+    public ExecuteMethodCommand(Method pExecute, Method pUnexecute)
     {
         _do = pExecute;
         _undo = pUnexecute;

@@ -52,7 +52,7 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private List<TextMeshProUGUI> _upgradeStats;
 
-    private Transform _viewingTower;
+    private Transform _viewingTower = null;
 
     private void Awake()
     {
@@ -118,7 +118,7 @@ public class UIManager : MonoBehaviour
     {
         _upgradePanel.SetActive(false);
 
-        if(_viewingTower != null)
+        if (_viewingTower != null)
             SetLayersInChildren(_viewingTower, LayerMask.NameToLayer("Default"));
 
         _towerButton.interactable = true;
@@ -128,28 +128,46 @@ public class UIManager : MonoBehaviour
     {
         float delta = Input.mousePosition.x - _oldMouseX;
         _oldMouseX = Input.mousePosition.x;
-        _towerViewCam.transform.Rotate(new Vector3(0,delta * Time.deltaTime * _camRotationSpeed,0));
+        _towerViewCam.transform.Rotate(new Vector3(0, delta * Time.deltaTime * _camRotationSpeed, 0));
     }
 
     private void ViewTower(TowerObject pTower)
     {
         if (_viewingTower != null)
-            SetLayersInChildren(_viewingTower,LayerMask.NameToLayer("Default"));
+            SetLayersInChildren(_viewingTower, LayerMask.NameToLayer("Default"));
 
         _viewingTower = pTower.GetModel().transform;
 
         _towerViewCam.transform.position = _viewingTower.position;
 
-        SetLayersInChildren(_viewingTower,LayerMask.NameToLayer("3D View"));
+        SetLayersInChildren(_viewingTower, LayerMask.NameToLayer("3D View"));
 
-        _towerStats[0].text = pTower.GetCurrentValues().Damage.ToString();
-        _towerStats[1].text = pTower.GetCurrentValues().Range.ToString();
-        _towerStats[2].text = pTower.GetCurrentValues().Cooldown.ToString();
+        RefreshTowerValues();
 
-        _upgradeStats[0].text = pTower.GetNextUpgradeValues().Damage.ToString();
-        _upgradeStats[1].text = pTower.GetNextUpgradeValues().Range.ToString();
-        _upgradeStats[2].text = pTower.GetNextUpgradeValues().Cooldown.ToString();
-        _upgradeStats[3].text = pTower.GetNextUpgradeValues().Cost.ToString();
+
+    }
+
+    public void RefreshTowerValues()
+    {
+        if (_viewingTower == null) return;
+
+        TowerObject tower = _viewingTower.gameObject.GetComponentInParent<TowerObject>();
+
+        _towerStats[0].text = tower.GetCurrentRank().ToString();
+        _towerStats[1].text = tower.GetCurrentValues().Damage.ToString();
+        _towerStats[2].text = tower.GetCurrentValues().Range.ToString();
+        _towerStats[3].text = tower.GetCurrentValues().Cooldown.ToString();
+
+        int nextRank = tower.GetCurrentRank();
+
+        if (tower.CanUgrade())
+            nextRank += 1;
+
+        _upgradeStats[0].text = nextRank.ToString();
+        _upgradeStats[1].text = tower.GetNextUpgradeValues().Damage.ToString();
+        _upgradeStats[2].text = tower.GetNextUpgradeValues().Range.ToString();
+        _upgradeStats[3].text = tower.GetNextUpgradeValues().Cooldown.ToString();
+        _upgradeStats[4].text = tower.GetNextUpgradeValues().Cost.ToString();
     }
 
     //Not a great solution

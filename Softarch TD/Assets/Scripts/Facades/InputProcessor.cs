@@ -11,14 +11,17 @@ public class InputProcessor : MonoBehaviour
     [SerializeField]
     private AbstractProcessorState _currentState;
 
+    //Should be moved to gameplaymanager
     public AbstractInstanceFactory ConstructionFactory { get; private set; }
 
     [SerializeField]
     private NavigationManager _navManager;
 
+    //Should be moved to gameplaymanager
     [SerializeField]
     private DevEnemySpawner _devSpawner;
 
+    //Should be moved to gameplaymanager
     public Commander ConstructionCommander = new Commander();
 
     public UIManager UIManager;
