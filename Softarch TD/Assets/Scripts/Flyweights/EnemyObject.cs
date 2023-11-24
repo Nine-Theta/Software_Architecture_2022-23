@@ -6,6 +6,7 @@ using UnityEngine;
 using NaughtyAttributes;
 using System;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 [SelectionBase]
 public class EnemyObject : AbstractContainerObject
@@ -17,28 +18,41 @@ public class EnemyObject : AbstractContainerObject
 
     [SerializeField]
     private EnemyValues _runtimeValues;
+    [Space(5)]
+
+    [SerializeField]
+    private Slider _healthVisual;
+    private float _healthVisualMult;
 
     public Vector3 TargetPos;
+    public GameObject GetModel() { return _model; }
 
     public List<DebuffScriptable> ActiveDebuffs;
 
+    public EventPublisher EnemyDestroyed = new EventPublisher();
+    public EventPublisher<float> EnemyDamaged = new EventPublisher<float>();
+
     public override I_Containable BaseData { get { return _baseData; } }
 
-    public override void Initialize(I_Containable pData)
+    public override void Initialize(I_Containable pData, GameObject pEnemyModel)
     {
         _baseData = pData as EnemyScriptable;
         _runtimeValues = new EnemyValues(_baseData.Values);
 
+        _model = pEnemyModel;
+
         _baseData.MovemenStrategy.Initialize(this, _runtimeValues.MovementSpeed);
+
+        EnemyDamaged.Subscribe(OnEnemyDamaged);
+
+        _healthVisualMult = 1 / _baseData.Values.Health;
     }
 
-    [Button]
-    public void Damag()
+    private void OnEnemyDamaged(float _health)
     {
-        DamageEnemy(1);
+        _healthVisual.value = _health * _healthVisualMult; 
     }
 
-    [Button]
     public void Move()
     {
         _baseData.MovemenStrategy.MoveTo(this, TargetPos);
@@ -120,6 +134,7 @@ public class EnemyObject : AbstractContainerObject
     public void DamageEnemy(float pDamage)
     {
         _runtimeValues.Health -= Mathf.Max((pDamage - _runtimeValues.Defense) * (1 - _runtimeValues.Resistance), 0);
+        EnemyDamaged.Publish(_runtimeValues.Health);
         CheckForDeath();
     }
     
@@ -144,6 +159,6 @@ public class EnemyObject : AbstractContainerObject
 
     private void OnDestroy()
     {
-        //
+        EnemyDestroyed.Publish();
     }
 }

@@ -19,7 +19,8 @@ public class EventPublisher
 
     public void Unsubscribe(EventSubscriber pSub)
     {
-        _subscribers.Remove(pSub);
+        if (_subscribers.Contains(pSub))
+            _subscribers.Remove(pSub);
     }
 
     public void Publish()

@@ -6,6 +6,6 @@ public abstract class AbstractContainerObject : MonoBehaviour
 {
     public abstract I_Containable BaseData { get; }
 
-    public abstract void Initialize(I_Containable pData);
+    public abstract void Initialize(I_Containable pData, GameObject pObjectModel);
 
 }

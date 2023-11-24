@@ -37,7 +37,7 @@ public class EnemyFactory : AbstractInstanceFactory
         newEnemy.name = _enemy.GetName;
 
         EnemyObject instance = newEnemy.GetComponent<EnemyObject>();
-        instance.Initialize(_enemy);
+        instance.Initialize(_enemy, model);
 
         return instance;
     }

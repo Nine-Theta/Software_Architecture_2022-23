@@ -42,7 +42,7 @@ public class TowerFactory : AbstractInstanceFactory
 
         TowerObject instance = newTower.GetComponent<TowerObject>();
 
-        instance.Initialize(_tower);
+        instance.Initialize(_tower, model);
 
         return instance;
     }

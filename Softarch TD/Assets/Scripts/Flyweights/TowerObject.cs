@@ -41,22 +41,29 @@ public class TowerObject : AbstractContainerObject
 
     public EventPublisher<Transform> TargetAcquired = new EventPublisher<Transform>();
     public EventPublisher TargetLost = new EventPublisher();
+    public EventPublisher FireAtTarget = new EventPublisher();
+
+    private EventPublisher _targetDestroyed = new EventPublisher();
 
     public override I_Containable BaseData { get { return _baseData; } }
 
     public List<string> Debuffs = new List<string>();
 
-    public override void Initialize(I_Containable pData)
+    public override void Initialize(I_Containable pData, GameObject pTowerModel)
     {
         _baseData = pData as TowerScriptable;
         _runtimeValues = _baseData.TowerRankValues[0];
         _upgradeMax = _baseData.TowerRankValues.Count-1;
 
-        if (_model == null) _model = transform.GetChild(0).gameObject;
+        _model = pTowerModel;
         _model.GetComponent<TowerModelController>().Initialize(this);
 
         if (_rangeCollider == null) _rangeCollider = gameObject.GetComponent<SphereCollider>();
         _rangeCollider.radius = _runtimeValues.Range;
+
+        TargetLost.Subscribe(CheckForNewTarget);
+
+        _targetDestroyed.Subscribe(OnTargetDestroyed);
     }
 
     private void OnDrawGizmos()
@@ -64,6 +71,7 @@ public class TowerObject : AbstractContainerObject
         Handles.DrawWireDisc(gameObject.transform.position, Vector3.up, _runtimeValues.Range, 2f);
     }
 
+    //Automatically gets called by the TargetLost event as well
     private void CheckForNewTarget()
     {
         Collider target;
@@ -71,6 +79,11 @@ public class TowerObject : AbstractContainerObject
         if (_baseData.AttackStrategy.TryGetTarget(_targetsInRange.ToArray(), gameObject.transform.position, out target))
         {
             _currentTarget = target;
+
+            _targetDestroyed.Unsubscribe(OnTargetDestroyed);
+            _targetDestroyed = target.GetComponent<EnemyObject>().EnemyDestroyed;
+            _targetDestroyed.Subscribe(OnTargetDestroyed);
+
             TargetAcquired.Publish(target.transform);
             activated = true;
         }
@@ -84,7 +97,16 @@ public class TowerObject : AbstractContainerObject
     {
         Debug.Log("attacking: " + _currentTarget.name);
         _currentTarget.GetComponent<EnemyObject>().DamageEnemy(_runtimeValues.Damage);
-        Debug.DrawLine(transform.position, _currentTarget.transform.position, Color.red, 2f);
+        FireAtTarget.Publish();
+        Debug.DrawLine(transform.position, _currentTarget.transform.position, Color.red, 3f);
+    }
+
+    private void OnTargetDestroyed()
+    {
+        _targetDestroyed.Unsubscribe(OnTargetDestroyed);
+        _targetsInRange.Remove(_currentTarget);
+        activated = false;
+        TargetLost.Publish();
     }
 
     public bool TryUpgradeTower()
@@ -152,7 +174,6 @@ public class TowerObject : AbstractContainerObject
         if (other == _currentTarget)
         {
             TargetLost.Publish();
-            CheckForNewTarget();
         }
     }
 }

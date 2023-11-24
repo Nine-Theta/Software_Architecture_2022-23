@@ -3,20 +3,27 @@ using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [SelectionBase]
 public class BaseManager : MonoBehaviour
 {
-    public Vector3 GetEnemyTarget
-    {
-        get { return transform.position; }
-    }
-
     [SerializeField]
     private float _baseHealth = 100f;
 
+    private float _healhSliderMult;
+
+    [SerializeField]
+    private Slider _healthSilder;
+
     public EventPublisher<float> BaseHealthUpdated = new EventPublisher<float>();
     public EventPublisher BaseDeath = new EventPublisher();
+
+    private void Start()
+    {
+        _healhSliderMult = 1 / _baseHealth;
+        _healthSilder.value = _baseHealth * _healhSliderMult;
+    }
 
 
     public float GetBaseHealth() { return _baseHealth; }
@@ -29,6 +36,8 @@ public class BaseManager : MonoBehaviour
     public void DamageBase(float pDamage)
     {
         _baseHealth -= pDamage;
+
+        _healthSilder.value = _baseHealth * _healhSliderMult;
 
         if (_baseHealth <= 0)
             BaseDeath.Publish();

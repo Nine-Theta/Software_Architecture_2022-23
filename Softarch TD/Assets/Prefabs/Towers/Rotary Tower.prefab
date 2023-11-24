@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _towerPivot: {fileID: 2545761962479034234}
+  _gunAnimator: {fileID: 5141980964798240185}
 --- !u!1 &7385816577898769667
 GameObject:
   m_ObjectHideFlags: 0
@@ -207,5 +208,10 @@ Transform:
 --- !u!4 &5004854378631849042 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 44568248228356325, guid: 8317ffbade7b95544a01c39e5d00153a, type: 3}
+  m_PrefabInstance: {fileID: 5037986603906188471}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &5141980964798240185 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 194070871912993038, guid: 8317ffbade7b95544a01c39e5d00153a, type: 3}
   m_PrefabInstance: {fileID: 5037986603906188471}
   m_PrefabAsset: {fileID: 0}

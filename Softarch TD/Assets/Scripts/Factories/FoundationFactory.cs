@@ -41,7 +41,7 @@ public class FoundationFactory : AbstractInstanceFactory
 
         FoundationObject instance = founder.GetComponent<FoundationObject>();
 
-        instance.Initialize(_foundation);
+        instance.Initialize(_foundation, model);
 
         return instance;
     }
