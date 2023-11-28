@@ -13,6 +13,4 @@ MonoBehaviour:
   m_Name: WaveSettings
   m_EditorClassIdentifier: 
   Wave:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 5e3871f7c84758a49a4753f83a6b69ff, type: 2}

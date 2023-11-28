@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy
+  - Foundation
+  - Tower
+  - Base
   layers:
   - Default
   - TransparentFX
@@ -12,6 +16,10 @@ TagManager:
   - Water
   - UI
   - 
+  - Tower
+  - Foundation
+  - BuildableGround
+  - Enemy
   - 
   - 
   - 
@@ -32,11 +40,7 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - 3D View
   m_SortingLayers:
   - name: Default
     uniqueID: 0
