@@ -4,6 +4,15 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/StartScene.unity
+    guid: 76abdbc34c785cc4caee0101de0d3bcb
+  - enabled: 1
+    path: Assets/Scenes/SanctumTD Academy.unity
+    guid: 8a532af2ff4d18642bb0dbbf4799037c
+  - enabled: 1
+    path: Assets/Scenes/SampleScene.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 57405bcb38ef7b84d815631c523b930c, type: 2}

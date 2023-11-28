@@ -11,9 +11,9 @@ public class RandomSpawnStrategy/*<T>*/ : SpawnStrategyBase/*<T>*/ /*where T : S
 
     public override event System.Action/*<T>*/ OnNextSpawn;
 
-    public override void SpawnGroup(List<SpawnSettings/*<T>*/> pSpawnables, MonoBehaviour pMono)
+    public override void SpawnGroup(List<EnemySpawnSettings/*<T>*/> pSpawnables, MonoBehaviour pMono)
     {
-        Spawnables = new List<SpawnSettings/*<T>*/>(pSpawnables);
+        Spawnables = new List<EnemySpawnSettings/*<T>*/>(pSpawnables);
 
         Debug.Log("groupcount: " + Spawnables.Count);
 

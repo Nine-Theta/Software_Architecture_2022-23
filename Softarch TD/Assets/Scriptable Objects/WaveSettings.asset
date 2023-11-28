@@ -12,5 +12,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfe020158c33b7a4c96cc28432ca3d56, type: 3}
   m_Name: WaveSettings
   m_EditorClassIdentifier: 
-  Wave:
-  - {fileID: 11400000, guid: 5e3871f7c84758a49a4753f83a6b69ff, type: 2}
+  EnemyGroups:
+  - SpawnStrategy: {fileID: 0}
+    GroupSpawnDelay: 0
+    EnemyTypes:
+    - EnemyType: {fileID: 0}
+      SpawnCount: 0
+      SpawnDelay: 0
+    - EnemyType: {fileID: 0}
+      SpawnCount: 0
+      SpawnDelay: 0
+  - SpawnStrategy: {fileID: 0}
+    GroupSpawnDelay: 0
+    EnemyTypes:
+    - EnemyType: {fileID: 0}
+      SpawnCount: 0
+      SpawnDelay: 0
+    - EnemyType: {fileID: 0}
+      SpawnCount: 0
+      SpawnDelay: 0
+  - SpawnStrategy: {fileID: 0}
+    GroupSpawnDelay: 0
+    EnemyTypes:
+    - EnemyType: {fileID: 0}
+      SpawnCount: 0
+      SpawnDelay: 0
+    - EnemyType: {fileID: 0}
+      SpawnCount: 0
+      SpawnDelay: 0

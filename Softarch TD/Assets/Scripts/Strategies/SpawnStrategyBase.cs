@@ -12,7 +12,7 @@ public abstract class SpawnStrategyBase/*<T>*/ : ScriptableObject
 
     protected MonoBehaviour mono;
 
-    protected List<SpawnSettings/*<T>*/> Spawnables;
+    protected List<EnemySpawnSettings/*<T>*/> Spawnables;
 
-    public abstract void SpawnGroup(List<SpawnSettings/*<T>*/> pSpawnables, MonoBehaviour pMono);
+    public abstract void SpawnGroup(List<EnemySpawnSettings/*<T>*/> pSpawnables, MonoBehaviour pMono);
 }

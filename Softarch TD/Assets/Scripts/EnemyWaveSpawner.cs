@@ -4,22 +4,44 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-public class WaveManager : MonoBehaviour
+public class EnemyWaveSpawner : MonoBehaviour
 {
     [SerializeField]
-    public EnemySpawnFactory EnemySpawner;
-
-    [SerializeField]
+    private WaveScriptable[] _enemyWaves;
+    
     private WaveScriptable _currentWave;
-    private EnemyGroupScriptable _currentGroup;
+
+    private EnemyGroup _currentGroup;
+
     private int _groupCounter = 0; //which group is being handled right now
 
+    public bool IsWaveComplete { get; private set; } = false;
+
     public event System.Action OnWaveComplete;
+
+    public EventPublisher SpawnWaveComplete = new EventPublisher();
 
     private void Start()
     {
         StartWave();
     }
+
+    public void SpawnWave(int pWaveIndex)
+    {
+        if (_enemyWaves[pWaveIndex] == null) return;
+
+        _currentWave = _enemyWaves[pWaveIndex];
+        _currentGroup = _currentWave.EnemyGroups[0];
+
+        HandleCurrentGroup();
+    }
+
+    private void HandleCurrentGroup()
+    {
+
+    }
+
+
 
     public void LoadWave(WaveScriptable pNewWave, bool pStartWave = true)
     {
@@ -27,7 +49,7 @@ public class WaveManager : MonoBehaviour
 
         if (pStartWave)
         {
-            HandleGroup(_currentWave.Wave.First());
+            HandleGroup(_currentWave.EnemyGroups.First());
             _groupCounter = 1;
         }
     }
@@ -36,7 +58,7 @@ public class WaveManager : MonoBehaviour
     {
         if (_currentWave == null) throw new System.Exception("Tried starting a wave, but no wave Loaded");
 
-        HandleGroup(_currentWave.Wave.First());
+        HandleGroup(_currentWave.EnemyGroups.First());
         _groupCounter = 1;
     }
 
@@ -45,11 +67,11 @@ public class WaveManager : MonoBehaviour
         //Todo
     }
 
-    private void HandleGroup(EnemyGroupScriptable pGroup)
+    private void HandleGroup(EnemyGroup pGroup)
     {
         _currentGroup = pGroup;
 
-        EnemySpawner.SpawnEnemyGroup(pGroup, Vector3.zero, Quaternion.identity);
+        //EnemySpawner.SpawnEnemyGroup(pGroup, Vector3.zero, Quaternion.identity);
 
         //_currentGroup.SpawnStrategy.SpawnGroup(pGroup, this);
         _currentGroup.SpawnStrategy.OnSpawningComplete += ProgressWave;
@@ -63,7 +85,7 @@ public class WaveManager : MonoBehaviour
 
         _groupCounter++;
 
-        if(_groupCounter <= _currentWave.Wave.Count)
+        if(_groupCounter <= _currentWave.EnemyGroups.Count)
             StartCoroutine(GroupCooldown(_currentGroup.GroupSpawnDelay));
         else
             OnWaveComplete.Invoke();
@@ -80,6 +102,6 @@ public class WaveManager : MonoBehaviour
         yield return new WaitForSeconds(pSeconds);
         Debug.Log("In Routine");
 
-        HandleGroup(_currentWave.Wave[_groupCounter - 1]);
+        HandleGroup(_currentWave.EnemyGroups[_groupCounter - 1]);
     }
 }
