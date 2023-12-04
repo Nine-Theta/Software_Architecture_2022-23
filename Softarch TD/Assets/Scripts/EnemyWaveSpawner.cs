@@ -38,7 +38,7 @@ public class EnemyWaveSpawner : MonoBehaviour
 
     private void HandleCurrentGroup()
     {
-
+        
     }
 
 
@@ -74,14 +74,14 @@ public class EnemyWaveSpawner : MonoBehaviour
         //EnemySpawner.SpawnEnemyGroup(pGroup, Vector3.zero, Quaternion.identity);
 
         //_currentGroup.SpawnStrategy.SpawnGroup(pGroup, this);
-        _currentGroup.SpawnStrategy.OnSpawningComplete += ProgressWave;
+        //_currentGroup.SpawnStrategy.OnSpawningComplete += ProgressWave;
     }
 
     private void ProgressWave()
     {
         Debug.Log("Wave Progress");
 
-        _currentGroup.SpawnStrategy.OnSpawningComplete -= ProgressWave;
+        //_currentGroup.SpawnStrategy.OnSpawningComplete -= ProgressWave;
 
         _groupCounter++;
 
@@ -94,7 +94,7 @@ public class EnemyWaveSpawner : MonoBehaviour
 
     private void OnDisable()
     {
-        _currentGroup.SpawnStrategy.OnSpawningComplete -= ProgressWave;
+        //_currentGroup.SpawnStrategy.OnSpawningComplete -= ProgressWave;
     }
 
     private IEnumerator GroupCooldown(float pSeconds)
