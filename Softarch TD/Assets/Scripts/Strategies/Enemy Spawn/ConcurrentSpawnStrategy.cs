@@ -2,20 +2,21 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "ConcurrentSpawn", menuName = "Strategy/Spawn/Concurrent")]
 public class ConcurrentSpawnStrategy : SpawnStrategyBase
 {
-    public override List<Tuple<EnemyScriptable, float>> GetSpawnOrder(EnemyGroup pGroup)
+    public override Queue<Tuple<EnemyScriptable, float>> GetSpawnOrder(EnemyGroup pGroup)
     {
-        List<Tuple<EnemyScriptable, float>> spawnOrder = new List<Tuple<EnemyScriptable, float>>();
+        Queue<Tuple<EnemyScriptable, float>> spawnOrder = new Queue<Tuple<EnemyScriptable, float>>();
 
-        List<Tuple<EnemyScriptable, float>> groupInfo = new List<Tuple<EnemyScriptable, float>>();
+        List<Tuple<EnemyScriptable, float>> groupInfo = new List<Tuple<EnemyScriptable, float>>(pGroup.EnemyTypes.Count);
 
-        List<int> spawnCount = new List<int>();
-        List<float> delayBaseValues = new List<float>();
-        List<float> delayCounters = new List<float>();
+        List<int> spawnCount = new List<int>(pGroup.EnemyTypes.Count);
+        List<float> delayBaseValues = new List<float>(pGroup.EnemyTypes.Count);
+        List<float> delayCounters = new List<float>(pGroup.EnemyTypes.Count);
 
         for (int i = 0; i < pGroup.EnemyTypes.Count; i++)
         {
@@ -25,28 +26,28 @@ public class ConcurrentSpawnStrategy : SpawnStrategyBase
 
         groupInfo.Sort(CompareTupleSpawnDelays);
 
-
         for (int i = 0; i < groupInfo.Count; i++)
         {
-            delayBaseValues[i] = groupInfo[i].Item2;
-            delayCounters[i] = groupInfo[i].Item2;
-            spawnCount[i] = pGroup.EnemyTypes[i].SpawnCount - 1;
+            delayBaseValues.Add(groupInfo[i].Item2);
+            delayCounters.Add(groupInfo[i].Item2);
+            spawnCount.Add(pGroup.EnemyTypes[i].SpawnCount - 1);
         }
 
 
         for (int i = 0; i < groupInfo.Count-1; i++)
         {
-            spawnOrder.Add(Tuple.Create(groupInfo[i].Item1, 0f));
+            spawnOrder.Enqueue(Tuple.Create(groupInfo[i].Item1, 0f));
         }
 
         int smallestIndex = GetSmallestDelayIndex(delayCounters);
 
-        spawnOrder.Add(Tuple.Create(groupInfo.Last().Item1, delayCounters[smallestIndex]));
+        spawnOrder.Enqueue(Tuple.Create(groupInfo.Last().Item1, delayCounters[smallestIndex]));
 
         UpdateDelayCounters(smallestIndex, delayCounters, delayBaseValues);
 
         while (groupInfo.Count > 0)
         {
+
             smallestIndex = GetSmallestDelayIndex(delayCounters);
 
             if (spawnCount[smallestIndex] <= 0)
@@ -58,7 +59,11 @@ public class ConcurrentSpawnStrategy : SpawnStrategyBase
                 continue;
             }
 
-            spawnOrder.Add(Tuple.Create(groupInfo[smallestIndex].Item1, groupInfo[smallestIndex].Item2));
+            Debug.Log("Added to queue: " + groupInfo[smallestIndex].Item1 + " with: " + delayCounters[smallestIndex]);
+
+            spawnOrder.Enqueue(Tuple.Create(groupInfo[smallestIndex].Item1, delayCounters[smallestIndex]));
+
+            spawnCount[smallestIndex]--;
 
             UpdateDelayCounters(smallestIndex, delayCounters, delayBaseValues);
         }

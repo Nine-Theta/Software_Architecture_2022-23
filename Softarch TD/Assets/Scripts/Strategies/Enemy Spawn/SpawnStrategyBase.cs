@@ -7,5 +7,5 @@ using UnityEngine;
 
 public abstract class SpawnStrategyBase : ScriptableObject
 {
-    public abstract List<Tuple<EnemyScriptable, float>> GetSpawnOrder(EnemyGroup pGroup);
+    public abstract Queue<Tuple<EnemyScriptable, float>> GetSpawnOrder(EnemyGroup pGroup);
 }

@@ -6,7 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "RandomSpawn", menuName = "Strategy/Spawn/Random")]
 public class RandomSpawnStrategy : SpawnStrategyBase
 {
-    public override List<Tuple<EnemyScriptable, float>> GetSpawnOrder(EnemyGroup pGroup)
+    public override Queue<Tuple<EnemyScriptable, float>> GetSpawnOrder(EnemyGroup pGroup)
     {
         List<Tuple<EnemyScriptable, float>> spawnOrder = new List<Tuple<EnemyScriptable, float>>();
 
@@ -20,7 +20,9 @@ public class RandomSpawnStrategy : SpawnStrategyBase
 
         Shuffle(spawnOrder);
 
-        return spawnOrder;
+        Queue<Tuple<EnemyScriptable, float>> spawnQueue = new Queue<Tuple<EnemyScriptable, float>>(spawnOrder);
+
+        return spawnQueue;
     }
 
     public void Shuffle<T>(List<T> list)

@@ -6,15 +6,15 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "SequentialSpawn", menuName = "Strategy/Spawn/Sequential")]
 public class SequentialSpawnStrategy : SpawnStrategyBase
 {
-    public override List<Tuple<EnemyScriptable, float>> GetSpawnOrder(EnemyGroup pGroup)
+    public override Queue<Tuple<EnemyScriptable, float>> GetSpawnOrder(EnemyGroup pGroup)
     {
-        List<Tuple<EnemyScriptable, float>> spawnOrder = new List<Tuple<EnemyScriptable, float>>();
+        Queue<Tuple<EnemyScriptable, float>> spawnOrder = new Queue<Tuple<EnemyScriptable, float>>();
 
         for (int i = 0; i < pGroup.EnemyTypes.Count; i++)
         {
             for (int j = 0; j < pGroup.EnemyTypes[i].SpawnCount; j++)
             {
-                spawnOrder.Add(Tuple.Create(pGroup.EnemyTypes[i].EnemyType, pGroup.EnemyTypes[i].SpawnDelay));
+                spawnOrder.Enqueue(Tuple.Create(pGroup.EnemyTypes[i].EnemyType, pGroup.EnemyTypes[i].SpawnDelay));
             }
         }
 
