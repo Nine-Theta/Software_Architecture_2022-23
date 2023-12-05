@@ -9,7 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfe020158c33b7a4c96cc28432ca3d56, type: 3}
-  m_Name: WaveSettings 1
+  m_Script: {fileID: 11500000, guid: 2a731a94f0f33e344836b4c85629939b, type: 3}
+  m_Name: HeavyEnemy
   m_EditorClassIdentifier: 
-  EnemyGroups: []
+  _name: Bob
+  _enemyModel: {fileID: 0}
+  MovemenStrategy: {fileID: 0}
+  Values:
+    Health: 0
+    MovementSpeed: 0
+    Defense: 0
+    Resistance: 0
+    AttackDamage: 0
+    Reward: 0

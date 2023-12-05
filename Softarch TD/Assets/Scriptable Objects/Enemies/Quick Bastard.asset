@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Quick Bastard
   m_EditorClassIdentifier: 
   _name: Dave
-  _enemyModel: {fileID: 0}
+  _enemyModel: {fileID: 8757755199854365339, guid: fca626ff9377daa409cc2a2ea6c2f782, type: 3}
   MovemenStrategy: {fileID: 11400000, guid: 841882a8c16acc64bab9004de5644e57, type: 2}
   Values:
     Health: 1
-    MovementSpeed: 5
+    MovementSpeed: 3
     Defense: 0
     Resistance: 0
     AttackDamage: 0

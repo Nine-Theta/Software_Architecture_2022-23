@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.Events;
 
 [CreateAssetMenu(fileName = "ConcurrentSpawn", menuName = "Strategy/Spawn/Concurrent")]
 public class ConcurrentSpawnStrategy : SpawnStrategyBase
@@ -22,6 +23,7 @@ public class ConcurrentSpawnStrategy : SpawnStrategyBase
         {
             //spawnOrder.Add(Tuple.Create(pGroup.EnemyTypes[i].EnemyType, pGroup.EnemyTypes[i].SpawnDelay));
             groupInfo.Add(Tuple.Create(pGroup.EnemyTypes[i].EnemyType, pGroup.EnemyTypes[i].SpawnDelay));
+
         }
 
         groupInfo.Sort(CompareTupleSpawnDelays);
@@ -29,6 +31,7 @@ public class ConcurrentSpawnStrategy : SpawnStrategyBase
         for (int i = 0; i < groupInfo.Count; i++)
         {
             delayBaseValues.Add(groupInfo[i].Item2);
+            //Debug.Log("index: "+ i + " delay: " + groupInfo[i].Item2);
             delayCounters.Add(groupInfo[i].Item2);
             spawnCount.Add(pGroup.EnemyTypes[i].SpawnCount - 1);
         }
@@ -56,6 +59,8 @@ public class ConcurrentSpawnStrategy : SpawnStrategyBase
                 spawnCount.RemoveAt(smallestIndex);
                 delayCounters.RemoveAt(smallestIndex);
                 delayBaseValues.RemoveAt(smallestIndex);
+                Debug.Log("removed index: " + smallestIndex);
+
                 continue;
             }
 
@@ -73,9 +78,9 @@ public class ConcurrentSpawnStrategy : SpawnStrategyBase
 
     private int CompareTupleSpawnDelays(Tuple<EnemyScriptable, float> x, Tuple<EnemyScriptable, float> y)
     {
-        if (x.Item2 == y.Item2) return 0;
-        if (x.Item2 > y.Item2) return -1;
-        return 1;
+        if (Mathf.Approximately(x.Item2, y.Item2)) return 0;
+        if (x.Item2 > y.Item2) return 1;
+        return -1;
     }
 
     private int GetSmallestDelayIndex(List<float> pDelayCounters)
@@ -84,6 +89,10 @@ public class ConcurrentSpawnStrategy : SpawnStrategyBase
 
         for (int i = 1; i < pDelayCounters.Count; i++)
         {
+            //Debug.Log("delaycount index: " + index + " delay count i: " +i+ " values: "  + pDelayCounters[index] +" : "+ pDelayCounters[i] + " larger? " + (pDelayCounters[index] > pDelayCounters[i]));
+            //Debug.Log("");
+
+
             if (pDelayCounters[index] > pDelayCounters[i])
                 index = i;
         }
@@ -93,11 +102,17 @@ public class ConcurrentSpawnStrategy : SpawnStrategyBase
 
     private void UpdateDelayCounters(int pSmallestIndex, List<float> pDelayCounters, List<float> pDelayBaseValues)
     {
+        float smallestDelay = pDelayCounters[pSmallestIndex];
+        //Debug.Log("smallestdelay: " + smallestDelay);
+
         for (int i = 0; i < pDelayCounters.Count; i++)
         {
-            pDelayCounters[i] -= pDelayCounters[pSmallestIndex];
+            //Debug.Log("delaycount smallestindex: " + pSmallestIndex + " delay count i: " + i + " values: " + pDelayCounters[pSmallestIndex] + " : " + pDelayCounters[i]);
+            pDelayCounters[i] -= smallestDelay;
+            //Debug.Log("delaycount smallestindex: " + pSmallestIndex + " delay count i: " + i + " values: " + pDelayCounters[pSmallestIndex] + " : " + pDelayCounters[i]);
         }
 
         pDelayCounters[pSmallestIndex] = pDelayBaseValues[pSmallestIndex];
+        //Debug.Log("delaycount smallestindex: " + pSmallestIndex + " values: " + pDelayCounters[pSmallestIndex] + " : " + pDelayBaseValues[pSmallestIndex]);
     }
 }
