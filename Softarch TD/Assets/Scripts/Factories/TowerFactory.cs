@@ -27,12 +27,6 @@ public class TowerFactory : AbstractInstanceFactory
         set { _tower = value is TowerScriptable ? value as TowerScriptable : throw new System.ArgumentException("Incorrect Containable", "TowerFactory"); }
     }
 
-    [Button]
-    public void TestSpawn()
-    {
-        CreateInstance(new Vector3(0, 1, 0));
-    }
-
     public override AbstractContainerObject CreateInstance(Vector3 pPosition)
     {      
         GameObject newTower = Instantiate(_towerObject.gameObject, pPosition, Quaternion.identity);

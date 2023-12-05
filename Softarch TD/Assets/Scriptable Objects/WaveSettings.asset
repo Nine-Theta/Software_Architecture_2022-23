@@ -22,3 +22,6 @@ MonoBehaviour:
     - EnemyType: {fileID: 11400000, guid: 769888d2c9a2f5e4b8854d0d4702d27f, type: 2}
       SpawnCount: 10
       SpawnDelay: 0.5
+    - EnemyType: {fileID: 11400000, guid: 6d4b64430906fdb4ea031f5fdcad2731, type: 2}
+      SpawnCount: 10
+      SpawnDelay: 0.7

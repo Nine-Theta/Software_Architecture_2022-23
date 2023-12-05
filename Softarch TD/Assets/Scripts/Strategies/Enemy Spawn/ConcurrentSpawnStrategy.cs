@@ -21,9 +21,7 @@ public class ConcurrentSpawnStrategy : SpawnStrategyBase
 
         for (int i = 0; i < pGroup.EnemyTypes.Count; i++)
         {
-            //spawnOrder.Add(Tuple.Create(pGroup.EnemyTypes[i].EnemyType, pGroup.EnemyTypes[i].SpawnDelay));
             groupInfo.Add(Tuple.Create(pGroup.EnemyTypes[i].EnemyType, pGroup.EnemyTypes[i].SpawnDelay));
-
         }
 
         groupInfo.Sort(CompareTupleSpawnDelays);
@@ -31,7 +29,6 @@ public class ConcurrentSpawnStrategy : SpawnStrategyBase
         for (int i = 0; i < groupInfo.Count; i++)
         {
             delayBaseValues.Add(groupInfo[i].Item2);
-            //Debug.Log("index: "+ i + " delay: " + groupInfo[i].Item2);
             delayCounters.Add(groupInfo[i].Item2);
             spawnCount.Add(pGroup.EnemyTypes[i].SpawnCount - 1);
         }
@@ -59,12 +56,8 @@ public class ConcurrentSpawnStrategy : SpawnStrategyBase
                 spawnCount.RemoveAt(smallestIndex);
                 delayCounters.RemoveAt(smallestIndex);
                 delayBaseValues.RemoveAt(smallestIndex);
-                Debug.Log("removed index: " + smallestIndex);
-
                 continue;
             }
-
-            Debug.Log("Added to queue: " + groupInfo[smallestIndex].Item1 + " with: " + delayCounters[smallestIndex]);
 
             spawnOrder.Enqueue(Tuple.Create(groupInfo[smallestIndex].Item1, delayCounters[smallestIndex]));
 
@@ -89,10 +82,6 @@ public class ConcurrentSpawnStrategy : SpawnStrategyBase
 
         for (int i = 1; i < pDelayCounters.Count; i++)
         {
-            //Debug.Log("delaycount index: " + index + " delay count i: " +i+ " values: "  + pDelayCounters[index] +" : "+ pDelayCounters[i] + " larger? " + (pDelayCounters[index] > pDelayCounters[i]));
-            //Debug.Log("");
-
-
             if (pDelayCounters[index] > pDelayCounters[i])
                 index = i;
         }
@@ -103,16 +92,12 @@ public class ConcurrentSpawnStrategy : SpawnStrategyBase
     private void UpdateDelayCounters(int pSmallestIndex, List<float> pDelayCounters, List<float> pDelayBaseValues)
     {
         float smallestDelay = pDelayCounters[pSmallestIndex];
-        //Debug.Log("smallestdelay: " + smallestDelay);
 
         for (int i = 0; i < pDelayCounters.Count; i++)
         {
-            //Debug.Log("delaycount smallestindex: " + pSmallestIndex + " delay count i: " + i + " values: " + pDelayCounters[pSmallestIndex] + " : " + pDelayCounters[i]);
             pDelayCounters[i] -= smallestDelay;
-            //Debug.Log("delaycount smallestindex: " + pSmallestIndex + " delay count i: " + i + " values: " + pDelayCounters[pSmallestIndex] + " : " + pDelayCounters[i]);
         }
 
         pDelayCounters[pSmallestIndex] = pDelayBaseValues[pSmallestIndex];
-        //Debug.Log("delaycount smallestindex: " + pSmallestIndex + " values: " + pDelayCounters[pSmallestIndex] + " : " + pDelayBaseValues[pSmallestIndex]);
     }
 }

@@ -45,4 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sceneBase: {fileID: 0}
-  _enemySpawners: []
+  _sceneSpawnManager: {fileID: 0}
+  _sceneNavMeshSurface: {fileID: 0}
+  _sceneNavigiationTester: {fileID: 0}

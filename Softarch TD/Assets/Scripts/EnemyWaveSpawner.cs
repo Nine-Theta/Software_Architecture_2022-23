@@ -6,6 +6,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+[RequireComponent(typeof(EnemyFactory))]
 public class EnemyWaveSpawner : MonoBehaviour
 {
     [SerializeField]
@@ -34,9 +35,12 @@ public class EnemyWaveSpawner : MonoBehaviour
 
     public EventPublisher SpawnWaveComplete = new EventPublisher();
 
-    private void Start()
+    private void Awake()
     {
-        //StartWave();
+        if(_spawnFactory == null)
+        {
+            _spawnFactory = gameObject.GetComponent<EnemyFactory>();
+        }
     }
 
     [Button]
@@ -79,6 +83,11 @@ public class EnemyWaveSpawner : MonoBehaviour
         Debug.Log("spawning done for now");
 
         //TODO: next group;
+    }
+
+    public int GetTotalWaveCount()
+    {
+        return _enemyWaves.Count();
     }
 
 
