@@ -18,10 +18,6 @@ public class InputProcessor : MonoBehaviour
     private NavigationManager _navManager;
 
     //Should be moved to gameplaymanager
-    [SerializeField]
-    private DevEnemySpawner _devSpawner;
-
-    //Should be moved to gameplaymanager
     public Commander ConstructionCommander = new Commander();
 
     public UIManager UIManager;
@@ -36,8 +32,6 @@ public class InputProcessor : MonoBehaviour
             GameplayManager.Credits = value;
         }
     }
-
-
 
     public void Start()
     {
@@ -65,7 +59,7 @@ public class InputProcessor : MonoBehaviour
         //Should be offloaded to a level manager
         if (_navManager.IsLayoutValid())
         {
-            _devSpawner.AllowSpawn = true;
+            GameplayManager.StartLevel();
         }
         else
         {

@@ -46,7 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _currentState: {fileID: 11400000, guid: ac29c395c8bc4184a87d9d4a2f5797f3, type: 2}
   _navManager: {fileID: 9184824779602869915}
-  _devSpawner: {fileID: 0}
   UIManager: {fileID: 2014894046697775813}
   GameplayManager: {fileID: 3205945162053369543}
 --- !u!1 &1685698056112847095
@@ -227,7 +226,7 @@ Camera:
   m_GameObject: {fileID: 5068079445168229594}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 2
   m_BackGroundColor: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -278,7 +277,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2456673198946909071}
-  - component: {fileID: 8322783066596968340}
   - component: {fileID: 9184824779602869915}
   m_Layer: 0
   m_Name: Navigation Manager
@@ -302,37 +300,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1306681728684643945}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8322783066596968340
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5810049488398805158}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_AgentTypeID: 0
-  m_CollectObjects: 0
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 2, z: 0}
-  m_LayerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_UseGeometry: 0
-  m_DefaultArea: 0
-  m_GenerateLinks: 1
-  m_IgnoreNavMeshAgent: 1
-  m_IgnoreNavMeshObstacle: 1
-  m_OverrideTileSize: 1
-  m_TileSize: 256
-  m_OverrideVoxelSize: 1
-  m_VoxelSize: 0.0714
-  m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 0d578bf27360b98478a4d0a77e23a8b4, type: 2}
-  m_BuildHeightMesh: 0
 --- !u!114 &9184824779602869915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -345,7 +312,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27510e11c3eb53d40a10a0b31695ce35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mesh: {fileID: 8322783066596968340}
+  _mesh: {fileID: 0}
   _navigationTarget: {fileID: 0}
   _navigationTester: {fileID: 0}
 --- !u!1 &8171074155989704660
@@ -393,3 +360,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _credits: 100
+  _spawnManager: {fileID: 0}

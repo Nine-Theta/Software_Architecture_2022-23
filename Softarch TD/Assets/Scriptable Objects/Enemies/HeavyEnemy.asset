@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2a731a94f0f33e344836b4c85629939b, type: 3}
-  m_Name: Quick Bastard
+  m_Name: HeavyEnemy
   m_EditorClassIdentifier: 
-  _name: Dave
-  _enemyModel: {fileID: 8757755199854365339, guid: fca626ff9377daa409cc2a2ea6c2f782, type: 3}
+  _name: Sasha
+  _enemyModel: {fileID: 8757755199854365339, guid: 441eaf203d416a146a924addb507941b, type: 3}
   MovemenStrategy: {fileID: 11400000, guid: 841882a8c16acc64bab9004de5644e57, type: 2}
   Values:
-    Health: 1
-    MovementSpeed: 3
-    Defense: 0
+    Health: 20
+    MovementSpeed: 0.5
+    Defense: 1
     Resistance: 0
     AttackDamage: 0
     Reward: 0

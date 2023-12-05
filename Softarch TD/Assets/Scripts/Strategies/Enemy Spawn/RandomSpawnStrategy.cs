@@ -1,57 +1,41 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "RandomSpawn", menuName = "Strategy/Spawn/Random")]
-public class RandomSpawnStrategy/*<T>*/ : SpawnStrategyBase/*<T>*/ /*where T : ScriptableObject*/
+public class RandomSpawnStrategy : SpawnStrategyBase
 {
-    //todo: redo strategies to be event based
-
-    public override event System.Action OnSpawningComplete;
-
-    public override event System.Action/*<T>*/ OnNextSpawn;
-
-    public override void SpawnGroup(List<SpawnSettings/*<T>*/> pSpawnables, MonoBehaviour pMono)
+    public override Queue<Tuple<EnemyScriptable, float>> GetSpawnOrder(EnemyGroup pGroup)
     {
-        Spawnables = new List<SpawnSettings/*<T>*/>(pSpawnables);
+        List<Tuple<EnemyScriptable, float>> spawnOrder = new List<Tuple<EnemyScriptable, float>>();
 
-        Debug.Log("groupcount: " + Spawnables.Count);
+        for (int i = 0; i < pGroup.EnemyTypes.Count; i++)
+        {
+            for(int j = 0; j < pGroup.EnemyTypes[i].SpawnCount; j++)
+            {
+                spawnOrder.Add(Tuple.Create(pGroup.EnemyTypes[i].EnemyType, pGroup.EnemyTypes[i].SpawnDelay));
+            }
+        }
 
-        mono = pMono;
-        mono.StartCoroutine(Spawner());
+        Shuffle(spawnOrder);
+
+        Queue<Tuple<EnemyScriptable, float>> spawnQueue = new Queue<Tuple<EnemyScriptable, float>>(spawnOrder);
+
+        return spawnQueue;
     }
 
-    IEnumerator Spawner()
+    public void Shuffle<T>(List<T> list)
     {
-        Debug.Log("routine started");
-        int index = Random.Range(0, Spawnables.Count);
+        int rand;
+        T item;
 
-        //OnNextSpawn?.Invoke(Spawnables[index].SpawnType);
-
-        float delay = Spawnables[index].SpawnDelay;
-
-        Spawnables[index].SpawnCount--;
-
-        yield return new WaitForSeconds(delay);
-
-        Debug.Log("index " + index);
-        Debug.Log("list count " + Spawnables.Count);
-        //Debug.Log("index name: " + Spawnables[index].SpawnType.name);
-
-        if (Spawnables[index].SpawnCount <= 0)
+        for (int i = list.Count; i > 1;)
         {
-            Debug.Log("No enemies left of index");
-            Spawnables.RemoveAt(index);
+            rand = UnityEngine.Random.Range(0, i--);
+            item = list[i];
+            list[i] = list[rand];
+            list[rand] = item;
         }
-
-        if (Spawnables.Count <= 0)
-        {
-
-            Debug.Log("No enemies left of any index");
-            OnSpawningComplete?.Invoke();
-            yield break;
-        }
-
-        mono.StartCoroutine(Spawner());
     }
 }

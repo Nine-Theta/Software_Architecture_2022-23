@@ -24,12 +24,6 @@ public class EnemyFactory : AbstractInstanceFactory
         set { _enemy = value is EnemyScriptable ? value as EnemyScriptable : throw new System.ArgumentException("Incorrect Containable", "EnemyFactory" ); }
     }
 
-    [Button]
-    public void TestSpawn()
-    {
-        CreateInstance(new Vector3());
-    }
-
     public override AbstractContainerObject CreateInstance(Vector3 pPosition)
     {
         GameObject newEnemy = Instantiate(_enemyObject.gameObject, pPosition, Quaternion.identity); //pPosition, pRotation);

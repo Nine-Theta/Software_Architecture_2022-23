@@ -5,7 +5,6 @@ using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(NavMeshSurface))]
 public class NavigationManager : MonoBehaviour
 {
     [SerializeField]
@@ -19,10 +18,16 @@ public class NavigationManager : MonoBehaviour
 
     private NavMeshPath paff;
 
-    private void Awake()
+    private void Start()
     {
-        if (_mesh == null)
-            _mesh = GetComponent<NavMeshSurface>();
+        GetSceneValues();
+    }
+
+    public void GetSceneValues()
+    {
+        _mesh = SceneSettings.Instance.GetNavMeshSurface();
+        _navigationTarget = SceneSettings.Instance.GetSceneBase().transform;
+        _navigationTester = SceneSettings.Instance.GetSceneNavigiationTester();
     }
 
     public bool IsLayoutValid()
@@ -54,11 +59,5 @@ public class NavigationManager : MonoBehaviour
     public void TestNavigation()
     {
         IsLayoutValid();
-    }
-
-    [Button]
-    public void RebuildMesh()
-    {
-        _mesh.BuildNavMesh();
     }
 }

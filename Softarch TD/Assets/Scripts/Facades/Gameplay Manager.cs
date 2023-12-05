@@ -7,6 +7,9 @@ public class GameplayManager : MonoBehaviour
     [SerializeField]
     private int _credits = 20;
 
+    [SerializeField]
+    private EnemySpawnManager _spawnManager;
+
     private UIManager _uiManager;
 
     private TowerObject _selectedTower;
@@ -28,6 +31,12 @@ public class GameplayManager : MonoBehaviour
     private void Start()
     {
         CreditsUpdated.Publish(Credits);
+        GetSceneValues();
+    }
+
+    public void GetSceneValues()
+    {
+        _spawnManager = SceneSettings.Instance.GetSceneSpawnManager();
     }
 
     public void SetSelectedTower(TowerObject pSelectedTower)
@@ -46,5 +55,10 @@ public class GameplayManager : MonoBehaviour
     public void SellTower()
     {
 
+    }
+
+    public void StartLevel()
+    {
+        _spawnManager.SpawnNextWave();
     }
 }
