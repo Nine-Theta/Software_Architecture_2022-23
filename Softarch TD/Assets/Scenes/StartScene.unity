@@ -920,6 +920,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartLevel: {fileID: 102900000, guid: 8a532af2ff4d18642bb0dbbf4799037c, type: 3}
+  OverlayLevel: {fileID: 102900000, guid: ab98cefe55072e74b952f0e9e4f5ffb9, type: 3}
 --- !u!4 &1445234246
 Transform:
   m_ObjectHideFlags: 0

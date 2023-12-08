@@ -9,8 +9,17 @@ EditorBuildSettings:
     path: Assets/Scenes/StartScene.unity
     guid: 76abdbc34c785cc4caee0101de0d3bcb
   - enabled: 1
+    path: Assets/Scenes/OverlayScene.unity
+    guid: ab98cefe55072e74b952f0e9e4f5ffb9
+  - enabled: 1
     path: Assets/Scenes/SanctumTD Academy.unity
     guid: 8a532af2ff4d18642bb0dbbf4799037c
+  - enabled: 1
+    path: Assets/Scenes/SanctumTD Arc.unity
+    guid: d1001e48cbdd0a74586bedeba497552f
+  - enabled: 1
+    path: Assets/Scenes/SanctumTD Bridge.unity
+    guid: d76fed42d6739d542a655e9ac6472963
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab

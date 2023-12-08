@@ -479,10 +479,6 @@ PrefabInstance:
       propertyPath: _processor
       value: 
       objectReference: {fileID: 1469390926}
-    - target: {fileID: 981744235065397751, guid: 7fd7775c2ae9c3b4a85725b61a14e25d, type: 3}
-      propertyPath: m_UIInputModule
-      value: 
-      objectReference: {fileID: 1490872172}
     - target: {fileID: 2097978505856360968, guid: 7fd7775c2ae9c3b4a85725b61a14e25d, type: 3}
       propertyPath: m_Name
       value: Player
