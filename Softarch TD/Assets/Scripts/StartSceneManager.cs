@@ -9,9 +9,13 @@ public class StartSceneManager : MonoBehaviour
     [SerializeField]
     private SceneAsset StartLevel;
 
+    [SerializeField]
+    private SceneAsset OverlayLevel;
+
     public void LoadStartLevel()
     {
         SceneManager.LoadScene(StartLevel.name);
+        SceneManager.LoadScene(OverlayLevel.name, LoadSceneMode.Additive);
     }
 
     public void QuitGame()

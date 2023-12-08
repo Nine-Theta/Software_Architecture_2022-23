@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameplayManager : MonoBehaviour
 {
@@ -31,6 +32,8 @@ public class GameplayManager : MonoBehaviour
     private void Start()
     {
         CreditsUpdated.Publish(Credits);
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
         GetSceneValues();
     }
 
@@ -60,5 +63,9 @@ public class GameplayManager : MonoBehaviour
     public void StartLevel()
     {
         _spawnManager.SpawnNextWave();
+    }
+    private void OnSceneLoaded(Scene pScene, LoadSceneMode pMode)
+    {
+        GetSceneValues();
     }
 }

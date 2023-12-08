@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class NavigationManager : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class NavigationManager : MonoBehaviour
 
     private void Start()
     {
+        SceneManager.sceneLoaded+= OnSceneLoaded;
         GetSceneValues();
     }
 
@@ -59,5 +61,10 @@ public class NavigationManager : MonoBehaviour
     public void TestNavigation()
     {
         IsLayoutValid();
+    }
+
+    private void OnSceneLoaded(Scene pScene, LoadSceneMode pMode)
+    {
+        GetSceneValues();
     }
 }
