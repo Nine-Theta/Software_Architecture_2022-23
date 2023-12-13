@@ -49,7 +49,7 @@ public class TowerModelController : MonoBehaviour
         if (_useAnimation)
         {
             _gunAnimator.SetBool("GunIsFiring", true);
-            _gunAnimator.speed = 8 * _towerObject.GetCurrentValues().Cooldown;
+            _gunAnimator.speed = _towerObject.GetCurrentValues().Cooldown;
         }
     }
 

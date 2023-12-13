@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2a731a94f0f33e344836b4c85629939b, type: 3}
-  m_Name: HeavyEnemy
+  m_Name: Boss Enemy
   m_EditorClassIdentifier: 
-  _name: Sasha
-  _enemyModel: {fileID: 8757755199854365339, guid: 441eaf203d416a146a924addb507941b, type: 3}
+  _name: Dave
+  _enemyModel: {fileID: 8757755199854365339, guid: ab2f2a9199c764744a19fecbb1b4f31f, type: 3}
   MovemenStrategy: {fileID: 11400000, guid: 841882a8c16acc64bab9004de5644e57, type: 2}
   Values:
-    Health: 20
-    MovementSpeed: 0.5
+    Health: 100
+    MovementSpeed: 0.1
     Defense: 1
-    Resistance: 0
-    AttackDamage: 0
-    Reward: 0
+    Resistance: 0.5
+    AttackDamage: 100
+    Reward: 25
