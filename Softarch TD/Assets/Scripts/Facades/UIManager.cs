@@ -15,6 +15,9 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI _creditUI;
 
+    [SerializeField]
+    private TextMeshProUGUI _waveCountUI;
+
     /////
 
     [Header("BuildUI"), HorizontalLine(color: EColor.Red)]
@@ -29,7 +32,13 @@ public class UIManager : MonoBehaviour
     private GameObject _towerSelectionTab;
 
     [SerializeField]
+    private GameObject _buildTowerStatsPanel;
+
+    [SerializeField]
     private List<GameObject> _towers;
+
+    [SerializeField]
+    private List<TextMeshProUGUI> _buildTowerStats;
 
     /////
 
@@ -48,9 +57,9 @@ public class UIManager : MonoBehaviour
     private Button _upgradePanelButton;
 
     [SerializeField]
-    private List<TextMeshProUGUI> _towerStats;
+    private List<TextMeshProUGUI> _selectedTowerStats;
     [SerializeField]
-    private List<TextMeshProUGUI> _upgradeStats;
+    private List<TextMeshProUGUI> _towerUpgradedStats;
 
     private Transform _viewingTower = null;
 
@@ -62,6 +71,11 @@ public class UIManager : MonoBehaviour
     private void OnCreditsUpdated(int pValue)
     {
         _creditUI.text = pValue.ToString();
+    }
+
+    public void UpdateWaveDisplay(int pCurrentWave, int pTotalWaves)
+    {
+        _waveCountUI.text = (pCurrentWave.ToString() + "/" + pTotalWaves.ToString());
     }
 
     public void SelectTowerButton(Button pSelected)
@@ -78,6 +92,7 @@ public class UIManager : MonoBehaviour
     public void DisplayTowerBuildUI()
     {
         _towerSelectionTab.SetActive(true);
+        _buildTowerStatsPanel.SetActive(true);
 
         _towerButton.interactable = false;
         _foundationButton.interactable = true;
@@ -87,6 +102,8 @@ public class UIManager : MonoBehaviour
     public void HideTowerBuildUI()
     {
         _towerSelectionTab.SetActive(false);
+
+        _buildTowerStatsPanel.SetActive(false);
 
         _towerButton.interactable = true;
     }
@@ -103,6 +120,15 @@ public class UIManager : MonoBehaviour
         HideTowerBuildUI();
         _foundationButton.interactable = true;
         _upgradeButton.interactable = false;
+    }
+
+    public void DisplayBuildTowerStats(TowerScriptable pTower)
+    {
+        _buildTowerStats[0].text = pTower.GetName;
+        _buildTowerStats[1].text = pTower.TowerRankValues[0].Damage.ToString();
+        _buildTowerStats[2].text = pTower.TowerRankValues[0].Range.ToString();
+        _buildTowerStats[3].text = pTower.TowerRankValues[0].Cooldown.ToString();
+        _buildTowerStats[4].text = pTower.TowerRankValues[0].Cost.ToString();
     }
 
     public void DisplayUpgradeUI(TowerObject pTower)
@@ -153,21 +179,21 @@ public class UIManager : MonoBehaviour
 
         TowerObject tower = _viewingTower.gameObject.GetComponentInParent<TowerObject>();
 
-        _towerStats[0].text = tower.GetCurrentRank().ToString();
-        _towerStats[1].text = tower.GetCurrentValues().Damage.ToString();
-        _towerStats[2].text = tower.GetCurrentValues().Range.ToString();
-        _towerStats[3].text = tower.GetCurrentValues().Cooldown.ToString();
+        _selectedTowerStats[0].text = tower.GetCurrentRank().ToString();
+        _selectedTowerStats[1].text = tower.GetCurrentValues().Damage.ToString();
+        _selectedTowerStats[2].text = tower.GetCurrentValues().Range.ToString();
+        _selectedTowerStats[3].text = tower.GetCurrentValues().Cooldown.ToString();
 
         int nextRank = tower.GetCurrentRank();
 
         if (tower.CanUgrade())
             nextRank += 1;
 
-        _upgradeStats[0].text = nextRank.ToString();
-        _upgradeStats[1].text = tower.GetNextUpgradeValues().Damage.ToString();
-        _upgradeStats[2].text = tower.GetNextUpgradeValues().Range.ToString();
-        _upgradeStats[3].text = tower.GetNextUpgradeValues().Cooldown.ToString();
-        _upgradeStats[4].text = tower.GetNextUpgradeValues().Cost.ToString();
+        _towerUpgradedStats[0].text = nextRank.ToString();
+        _towerUpgradedStats[1].text = tower.GetNextUpgradeValues().Damage.ToString();
+        _towerUpgradedStats[2].text = tower.GetNextUpgradeValues().Range.ToString();
+        _towerUpgradedStats[3].text = tower.GetNextUpgradeValues().Cooldown.ToString();
+        _towerUpgradedStats[4].text = tower.GetNextUpgradeValues().Cost.ToString();
     }
 
     //Not a great solution

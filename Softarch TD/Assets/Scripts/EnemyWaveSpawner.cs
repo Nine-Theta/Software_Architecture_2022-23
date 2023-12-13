@@ -75,7 +75,7 @@ public class EnemyWaveSpawner : MonoBehaviour
             enemy.TargetPos = _target.transform.position;
             enemy.Move();
 
-            Debug.Log("spawned: " + _currentSpawnList.Peek().Item1.GetName + " with delay of:" + _currentSpawnList.Peek().Item2);
+            //Debug.Log("spawned: " + _currentSpawnList.Peek().Item1.GetName + " with delay of:" + _currentSpawnList.Peek().Item2);
 
             yield return new WaitForSeconds(_currentSpawnList.Dequeue().Item2);
         }

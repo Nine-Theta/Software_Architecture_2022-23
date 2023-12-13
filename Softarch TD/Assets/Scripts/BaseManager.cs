@@ -49,6 +49,6 @@ public class BaseManager : MonoBehaviour
     {
         if (!other.CompareTag("Enemy")) return;
 
-        Debug.Log(other.name + " Has entered the Forbidden Zone(tm)");
+        //Debug.Log(other.name + " Has entered the Forbidden Zone(tm)");
     }
 }

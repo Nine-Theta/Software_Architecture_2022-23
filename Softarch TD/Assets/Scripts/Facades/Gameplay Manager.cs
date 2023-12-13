@@ -11,6 +11,7 @@ public class GameplayManager : MonoBehaviour
     [SerializeField]
     private EnemySpawnManager _spawnManager;
 
+    [SerializeField]
     private UIManager _uiManager;
 
     private TowerObject _selectedTower;
@@ -40,6 +41,15 @@ public class GameplayManager : MonoBehaviour
     public void GetSceneValues()
     {
         _spawnManager = SceneSettings.Instance.GetSceneSpawnManager();
+
+        _spawnManager.SpawningWave.Subscribe(_uiManager.UpdateWaveDisplay);
+
+        _uiManager.UpdateWaveDisplay(0, _spawnManager.TotalWaves);
+    }
+
+    public void SetGameSpeed(float pSpeed)
+    {
+        Time.timeScale = pSpeed;
     }
 
     public void SetSelectedTower(TowerObject pSelectedTower)

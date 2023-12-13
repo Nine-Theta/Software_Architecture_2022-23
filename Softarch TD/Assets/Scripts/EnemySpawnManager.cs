@@ -10,6 +10,9 @@ public class EnemySpawnManager : MonoBehaviour
     [SerializeField]
     private EnemyWaveSpawner[] _spawnLocations;
 
+    public int TotalWaves { get { return _wavesInLevel; } }
+
+    public EventPublisher<int, int> SpawningWave = new EventPublisher<int, int>();
     public EventPublisher CurrentWaveComplete = new EventPublisher();
     public EventPublisher AllWavesComplete = new EventPublisher();
 
@@ -47,6 +50,8 @@ public class EnemySpawnManager : MonoBehaviour
             _spawnLocations[i].SpawnWave(_currentWaveCount);
         }
         _currentWaveCount++;
+
+        SpawningWave.Publish(_currentWaveCount, _wavesInLevel);
     }
 
 }

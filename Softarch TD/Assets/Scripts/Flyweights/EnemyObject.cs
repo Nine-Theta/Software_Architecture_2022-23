@@ -142,7 +142,7 @@ public class EnemyObject : AbstractContainerObject
     {
         if (other.CompareTag("Base"))
         {
-            Debug.Log("Base Reached!");
+            //Debug.Log("Base Reached!");
             other.GetComponentInParent<BaseManager>().DamageBase(_runtimeValues.AttackDamage);
             Destroy(gameObject);
         }

@@ -126,11 +126,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gameplayManager: {fileID: 3205945162053369543}
   _creditUI: {fileID: 0}
+  _waveCountUI: {fileID: 0}
   _towerButton: {fileID: 0}
   _foundationButton: {fileID: 0}
   _upgradeButton: {fileID: 0}
   _towerSelectionTab: {fileID: 0}
+  _buildTowerStatsPanel: {fileID: 0}
   _towers:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _buildTowerStats:
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -138,12 +146,12 @@ MonoBehaviour:
   _camRotationSpeed: 50
   _upgradePanel: {fileID: 0}
   _upgradePanelButton: {fileID: 0}
-  _towerStats:
+  _selectedTowerStats:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  _upgradeStats:
+  _towerUpgradedStats:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -194,6 +202,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TestLevel: {fileID: 102900000, guid: d76fed42d6739d542a655e9ac6472963, type: 3}
+  _nextScene: 
+  _previousScene: 
 --- !u!1 &3173155048524966013
 GameObject:
   m_ObjectHideFlags: 0
@@ -256,13 +266,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5068079445168229594}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.6, z: -5}
+  m_LocalRotation: {x: 0.08715578, y: 0, z: 0, w: 0.9961947}
+  m_LocalPosition: {x: 0, y: 1.6, z: -5.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5171389839725767612}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 10, y: 0, z: 0}
 --- !u!20 &7633700423624182575
 Camera:
   m_ObjectHideFlags: 0
@@ -407,3 +417,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _credits: 100
   _spawnManager: {fileID: 0}
+  _uiManager: {fileID: 2014894046697775813}
