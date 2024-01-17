@@ -4,6 +4,5 @@ using UnityEngine;
 
 public abstract class AbstractAttackStrategy : ScriptableObject
 {
-    public abstract Collider GetTarget(Collider[] pTargets, Vector3 pReference);
-    public abstract bool TryGetTarget(Collider[] pTargets, Vector3 pReference, out Collider pTarget);
+    public abstract bool AttackEnemies(EnemyObject[] pEnemies, TowerObject pAttacker);
 }

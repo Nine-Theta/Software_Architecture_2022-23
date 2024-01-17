@@ -18,6 +18,8 @@ public class EnemyObject : AbstractContainerObject
 
     [SerializeField]
     private EnemyValues _runtimeValues;
+
+    public EnemyValues RuntimeValues { get { return _runtimeValues; } }
     [Space(5)]
 
     [SerializeField]
@@ -29,8 +31,9 @@ public class EnemyObject : AbstractContainerObject
 
     public List<DebuffScriptable> ActiveDebuffs;
 
-    public EventPublisher EnemyDestroyed = new EventPublisher();
-    public EventPublisher<float> EnemyDamaged = new EventPublisher<float>();
+    //public Action<float> onEnemyDestroyed;
+
+    public EventPublisher<EnemyObject> EnemyDestroyed = new EventPublisher<EnemyObject>();
 
     public override I_Containable BaseData { get { return _baseData; } }
 
@@ -43,14 +46,7 @@ public class EnemyObject : AbstractContainerObject
 
         _baseData.MovemenStrategy.Initialize(this, _runtimeValues.MovementSpeed);
 
-        EnemyDamaged.Subscribe(OnEnemyDamaged);
-
         _healthVisualMult = 1 / _baseData.Values.Health;
-    }
-
-    private void OnEnemyDamaged(float _health)
-    {
-        _healthVisual.value = _health * _healthVisualMult; 
     }
 
     public void Move()
@@ -134,7 +130,7 @@ public class EnemyObject : AbstractContainerObject
     public void DamageEnemy(float pDamage)
     {
         _runtimeValues.Health -= Mathf.Max((pDamage - _runtimeValues.Defense) * (1 - _runtimeValues.Resistance), 0);
-        EnemyDamaged.Publish(_runtimeValues.Health);
+        _healthVisual.value = _runtimeValues.Health * _healthVisualMult;
         CheckForDeath();
     }
     
@@ -144,6 +140,7 @@ public class EnemyObject : AbstractContainerObject
         {
             //Debug.Log("Base Reached!");
             other.GetComponentInParent<BaseManager>().DamageBase(_runtimeValues.AttackDamage);
+            EnemyDestroyed.Publish(this);
             Destroy(gameObject);
         }
     }
@@ -153,12 +150,8 @@ public class EnemyObject : AbstractContainerObject
         if (_runtimeValues.Health <= 0)
         {
             Debug.Log("Death to be implemented");
+            EnemyDestroyed.Publish(this);
             Destroy(gameObject);
         }
-    }
-
-    private void OnDestroy()
-    {
-        EnemyDestroyed.Publish();
     }
 }

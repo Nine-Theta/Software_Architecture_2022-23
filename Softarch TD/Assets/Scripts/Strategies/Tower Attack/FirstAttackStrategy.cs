@@ -6,21 +6,13 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "FirstAttackStrategy", menuName = "Strategy/Attack/First")]
 public class FirstAttackStrategy : AbstractAttackStrategy
 {
-    public override Collider GetTarget(Collider[] pTargetsInRange, Vector3 pReference)
+    public override bool AttackEnemies(EnemyObject[] pEnemies, TowerObject pAttacker)
     {
-        if (pTargetsInRange.Length == 0) return null;
+        if (pEnemies.Length == 0) return false;
 
-        return pTargetsInRange[0];
-    }
+        pAttacker.AttackTarget(pEnemies[0]);
 
-    public override bool TryGetTarget(Collider[] pTargetsInRange, Vector3 pReference, out Collider pTarget)
-    {
-        pTarget = GetTarget(pTargetsInRange, pReference);
-
-        if (pTarget == null)
-            return false;
-        else
-            return true;
+        return true;
     }
 }
 

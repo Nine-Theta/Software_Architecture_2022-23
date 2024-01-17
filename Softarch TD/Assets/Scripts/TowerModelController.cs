@@ -23,7 +23,6 @@ public class TowerModelController : MonoBehaviour
     {
         _towerObject = pTower;
         _towerObject.TargetAcquired.Subscribe(OnTargetAcquired);
-        _towerObject.TargetLost.Subscribe(OnTargetLost);
 
         _useAnimation = (_gunAnimator != null);
     }
@@ -37,7 +36,16 @@ public class TowerModelController : MonoBehaviour
     {
         if (_hasTarget)
         {
-            _towerPivot.LookAt(_targetTransform);
+            if(_targetTransform != null && Vector3.SqrMagnitude(_towerObject.transform.position - _targetTransform.position) < _towerObject.RuntimeValues.Range * _towerObject.RuntimeValues.Range)
+            {
+                _towerPivot.LookAt(_targetTransform);
+            }
+            else
+            {
+                _hasTarget = false;
+                if (_useAnimation)
+                    _gunAnimator.SetBool("GunIsFiring", false);
+            }
         }
     }
 
@@ -51,12 +59,5 @@ public class TowerModelController : MonoBehaviour
             _gunAnimator.SetBool("GunIsFiring", true);
             _gunAnimator.speed = _towerObject.GetCurrentValues().Cooldown;
         }
-    }
-
-    private void OnTargetLost()
-    {
-        _hasTarget = false;
-        if (_useAnimation)
-            _gunAnimator.SetBool("GunIsFiring", false);
     }
 }
