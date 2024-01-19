@@ -50,7 +50,7 @@ public class TowerObject : AbstractContainerObject
         _model = pTowerModel;
     }
 
-    private void OnEnable()
+    private void Start()
     {
         _runtimeValues = _baseData.TowerRankValues[0];
         _upgradeMax = _baseData.TowerRankValues.Count - 1;

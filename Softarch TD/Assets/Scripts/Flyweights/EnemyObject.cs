@@ -31,8 +31,6 @@ public class EnemyObject : AbstractContainerObject
 
     public List<DebuffScriptable> ActiveDebuffs;
 
-    //public Action<float> onEnemyDestroyed;
-
     public EventPublisher<EnemyObject> EnemyDestroyed = new EventPublisher<EnemyObject>();
 
     public override I_Containable BaseData { get { return _baseData; } }

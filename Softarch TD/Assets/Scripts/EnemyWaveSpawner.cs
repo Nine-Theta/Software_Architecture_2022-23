@@ -27,13 +27,13 @@ public class EnemyWaveSpawner : MonoBehaviour
 
     private int _groupCounter = 0; //which group is being handled right now
 
+    private int _groupCount = 1; 
+
     private Queue<Tuple<EnemyScriptable, float>> _currentSpawnList;
 
     public bool IsWaveComplete { get; private set; } = false;
 
-    public event System.Action OnWaveComplete;
-
-    public EventPublisher SpawnWaveComplete = new EventPublisher();
+    public EventPublisher SpawnerWaveCompleted = new EventPublisher();
 
     private void Awake()
     {
@@ -54,13 +54,24 @@ public class EnemyWaveSpawner : MonoBehaviour
         if (_enemyWaves[pWaveIndex] == null) return;
 
         _currentWave = _enemyWaves[pWaveIndex];
-        _currentGroup = _currentWave.EnemyGroups[0];
 
-        HandleCurrentGroup();
+        _groupCounter = 0;
+        _groupCount = _currentWave.EnemyGroups.Count;
+
+        LoadNextGroup();
     }
 
-    private void HandleCurrentGroup()
+    private void LoadNextGroup()
     {
+        if(_groupCounter >= _groupCount)
+        {
+            IsWaveComplete = true;
+            SpawnerWaveCompleted.Publish();
+            return;
+        }
+
+        _currentGroup = _currentWave.EnemyGroups[_groupCounter];
+
         _currentSpawnList = _currentGroup.SpawnStrategy.GetSpawnOrder(_currentGroup);
         StartCoroutine(SpawnEnemy());
     }
@@ -81,6 +92,13 @@ public class EnemyWaveSpawner : MonoBehaviour
         }
 
         Debug.Log("spawning done for now");
+        _groupCounter++;
+
+        yield return new WaitForSeconds(_currentGroup.GroupSpawnDelay);
+
+        Debug.Log("Loading next group");
+
+        LoadNextGroup();
 
         //TODO: next group;
     }
@@ -90,7 +108,7 @@ public class EnemyWaveSpawner : MonoBehaviour
         return _enemyWaves.Count();
     }
 
-
+    ///
 
     public void LoadWave(WaveScriptable pNewWave, bool pStartWave = true)
     {
@@ -136,14 +154,9 @@ public class EnemyWaveSpawner : MonoBehaviour
 
         if(_groupCounter <= _currentWave.EnemyGroups.Count)
             StartCoroutine(GroupCooldown(_currentGroup.GroupSpawnDelay));
-        else
-            OnWaveComplete.Invoke();
+        //else
+            //OnWaveComplete.Invoke();
 
-    }
-
-    private void OnDisable()
-    {
-        //_currentGroup.SpawnStrategy.OnSpawningComplete -= ProgressWave;
     }
 
     private IEnumerator GroupCooldown(float pSeconds)
@@ -152,7 +165,7 @@ public class EnemyWaveSpawner : MonoBehaviour
         Debug.Log("In Routine");
 
         HandleGroup(_currentWave.EnemyGroups[_groupCounter - 1]);
-    }
+    }///
 
     private void Update()
     {

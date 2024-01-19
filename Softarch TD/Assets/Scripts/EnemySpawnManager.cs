@@ -10,17 +10,17 @@ public class EnemySpawnManager : MonoBehaviour
     [SerializeField]
     private EnemyWaveSpawner[] _spawnLocations;
 
+    public int CurrentWaveCount { get { return _currentWaveCount; } }
     public int TotalWaves { get { return _wavesInLevel; } }
 
-    public EventPublisher<int, int> SpawningWave = new EventPublisher<int, int>();
-    public EventPublisher CurrentWaveComplete = new EventPublisher();
+    public EventPublisher<int> CurrentWaveComplete = new EventPublisher<int>();
     public EventPublisher AllWavesComplete = new EventPublisher();
 
     private void Start()
     {
         for(int i = 0; i < _spawnLocations.Length; i++)
         {
-            _spawnLocations[i].SpawnWaveComplete.Subscribe(CheckIfSpawningFinished);
+            _spawnLocations[i].SpawnerWaveCompleted.Subscribe(CheckIfSpawningFinished);
             if(_wavesInLevel < _spawnLocations[i].GetTotalWaveCount())
                 _wavesInLevel = _spawnLocations[i].GetTotalWaveCount();
         }
@@ -34,10 +34,10 @@ public class EnemySpawnManager : MonoBehaviour
                 return;
         }
 
-        CurrentWaveComplete.Publish();
+        CurrentWaveComplete.Publish(_currentWaveCount);
     }
 
-    public void SpawnNextWave()
+    public void SpawnNextWave() //TODO: ensure waves are done spawning
     {
         if(_currentWaveCount >= _wavesInLevel)
         {
@@ -50,8 +50,6 @@ public class EnemySpawnManager : MonoBehaviour
             _spawnLocations[i].SpawnWave(_currentWaveCount);
         }
         _currentWaveCount++;
-
-        SpawningWave.Publish(_currentWaveCount, _wavesInLevel);
     }
 
 }

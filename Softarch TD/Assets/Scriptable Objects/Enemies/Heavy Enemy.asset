@@ -20,5 +20,5 @@ MonoBehaviour:
     MovementSpeed: 0.5
     Defense: 1
     Resistance: 0
-    AttackDamage: 2
+    AttackDamage: 3
     Reward: 5

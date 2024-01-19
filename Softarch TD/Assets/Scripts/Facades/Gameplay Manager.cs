@@ -17,7 +17,10 @@ public class GameplayManager : MonoBehaviour
     [SerializeField]
     private EnemySpawnManager _spawnManager;
 
+
     private TowerObject _selectedTower;
+
+    private bool _canSpawnNextWave = true;
 
 
     public AbstractInstanceFactory ConstructionFactory;
@@ -53,6 +56,8 @@ public class GameplayManager : MonoBehaviour
         _spawnManager = SceneSettings.Instance.GetSceneSpawnManager();
 
         _uiManager.UpdateWaveDisplay(0, _spawnManager.TotalWaves);
+
+        _canSpawnNextWave = true;
     }
 
     public void SetGameSpeed(float pSpeed)
@@ -77,6 +82,8 @@ public class GameplayManager : MonoBehaviour
     {
         if (_navManager.IsLayoutValid())
         {
+            if (!_canSpawnNextWave) //TODO: make sure this works
+                return;
 
             _uiManager.UpdateWaveDisplay(_spawnManager.CurrentWaveCount + 1, _spawnManager.TotalWaves);
 
