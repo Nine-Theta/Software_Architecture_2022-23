@@ -32,7 +32,7 @@ public class Commander
         return _history.Pop();
     }
 
-    private bool HasCommands()
+    public bool HasCommands()
     {
         return _history.Count > 0;
     }

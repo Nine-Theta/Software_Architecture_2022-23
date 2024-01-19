@@ -760,6 +760,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 327800735987036583, guid: 8b7d6284323dd2e42a194d701a7d6df7, type: 3}
+      propertyPath: _credits
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 327800735987036583, guid: 8b7d6284323dd2e42a194d701a7d6df7, type: 3}
       propertyPath: _sceneBase
       value: 
       objectReference: {fileID: 1328991256}

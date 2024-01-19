@@ -27,7 +27,7 @@ public class NavigationManager : MonoBehaviour
 
     public void GetSceneValues()
     {
-        _mesh = SceneSettings.Instance.GetNavMeshSurface();
+        _mesh = SceneSettings.Instance.GetSceneNavMeshSurface();
         _navigationTarget = SceneSettings.Instance.GetSceneBase().transform;
         _navigationTester = SceneSettings.Instance.GetSceneNavigiationTester();
     }

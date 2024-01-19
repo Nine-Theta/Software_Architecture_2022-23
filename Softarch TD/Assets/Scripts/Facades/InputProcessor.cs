@@ -1,37 +1,19 @@
-using NaughtyAttributes;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class InputProcessor : MonoBehaviour
 {
     [SerializeField]
-    private AbstractProcessorState _currentState;
-
-    //Should be moved to gameplaymanager
-    public AbstractInstanceFactory ConstructionFactory { get; private set; }
+    private GameplayManager _gameplayManager;
 
     [SerializeField]
-    private NavigationManager _navManager;
+    private UIManager _uiManager;
 
-    //Should be moved to gameplaymanager
-    public Commander ConstructionCommander = new Commander();
+    [SerializeField]
+    private AbstractProcessorState _currentState;
 
-    public UIManager UIManager;
-
-    public GameplayManager GameplayManager;
-
-    public int Credits
-    {
-        get { return GameplayManager.Credits; }
-        set
-        {
-            GameplayManager.Credits = value;
-        }
-    }
+    [SerializeField]
+    public GameplayManager GetGameplayManager { get { return _gameplayManager; } }
+    public UIManager GetUIManager { get { return _uiManager; } }
 
     public void Start()
     {
@@ -51,19 +33,11 @@ public class InputProcessor : MonoBehaviour
 
     public void ChangeFactory(AbstractInstanceFactory pFactory)
     {
-        ConstructionFactory = pFactory;
+        _gameplayManager.ConstructionFactory = pFactory;
     }
 
     public void StartLevel()
     {
-        //Should be offloaded to a level manager
-        if (_navManager.IsLayoutValid())
-        {
-            GameplayManager.StartLevel();
-        }
-        else
-        {
-            Debug.Log("Level Layout not Valid, gotta give the enemies a chance, ya know");
-        }
+        _gameplayManager.StartNextWave();
     }
 }

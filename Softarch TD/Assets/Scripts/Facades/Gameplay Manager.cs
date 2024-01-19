@@ -9,12 +9,20 @@ public class GameplayManager : MonoBehaviour
     private int _credits = 20;
 
     [SerializeField]
-    private EnemySpawnManager _spawnManager;
-
-    [SerializeField]
     private UIManager _uiManager;
 
+    [SerializeField]
+    private NavigationManager _navManager;
+
+    [SerializeField]
+    private EnemySpawnManager _spawnManager;
+
     private TowerObject _selectedTower;
+
+
+    public AbstractInstanceFactory ConstructionFactory;
+
+    public Commander ConstructionCommander { get; private set; } = new Commander();
 
     private Commander UpgradeCommander = new Commander();
 
@@ -40,9 +48,9 @@ public class GameplayManager : MonoBehaviour
 
     public void GetSceneValues()
     {
-        _spawnManager = SceneSettings.Instance.GetSceneSpawnManager();
+        _credits = SceneSettings.Instance.GetSceneCredits();
 
-        _spawnManager.SpawningWave.Subscribe(_uiManager.UpdateWaveDisplay);
+        _spawnManager = SceneSettings.Instance.GetSceneSpawnManager();
 
         _uiManager.UpdateWaveDisplay(0, _spawnManager.TotalWaves);
     }
@@ -65,15 +73,21 @@ public class GameplayManager : MonoBehaviour
         }
     }
 
-    public void SellTower()
+    public void StartNextWave()
     {
+        if (_navManager.IsLayoutValid())
+        {
 
+            _uiManager.UpdateWaveDisplay(_spawnManager.CurrentWaveCount + 1, _spawnManager.TotalWaves);
+
+            _spawnManager.SpawnNextWave();
+        }
+        else
+        {
+            Debug.Log("Level Layout not Valid, gotta give the enemies a chance, ya know");
+        }
     }
 
-    public void StartLevel()
-    {
-        _spawnManager.SpawnNextWave();
-    }
     private void OnSceneLoaded(Scene pScene, LoadSceneMode pMode)
     {
         GetSceneValues();

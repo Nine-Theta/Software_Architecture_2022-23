@@ -10,6 +10,9 @@ public class SceneSettings : MonoBehaviour
     public static SceneSettings Instance { get { return _instance; } }
 
     [SerializeField]
+    private int _credits;
+
+    [SerializeField]
     private BaseManager _sceneBase;
 
     [SerializeField]
@@ -33,6 +36,10 @@ public class SceneSettings : MonoBehaviour
         _instance = this;
     }
 
+    public int GetSceneCredits()
+    {
+        return _credits;
+    }
 
     public BaseManager GetSceneBase()
     {
@@ -44,7 +51,7 @@ public class SceneSettings : MonoBehaviour
         return _sceneSpawnManager;
     }
 
-    public NavMeshSurface GetNavMeshSurface()
+    public NavMeshSurface GetSceneNavMeshSurface()
     {
         return _sceneNavMeshSurface;
     }

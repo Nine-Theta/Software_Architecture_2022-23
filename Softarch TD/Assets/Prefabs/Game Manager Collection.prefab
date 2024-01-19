@@ -44,10 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ec46661275d81744b548c6708c7e30f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gameplayManager: {fileID: 3205945162053369543}
+  _uiManager: {fileID: 2014894046697775813}
   _currentState: {fileID: 11400000, guid: ac29c395c8bc4184a87d9d4a2f5797f3, type: 2}
-  _navManager: {fileID: 9184824779602869915}
-  UIManager: {fileID: 2014894046697775813}
-  GameplayManager: {fileID: 3205945162053369543}
 --- !u!1 &1685698056112847095
 GameObject:
   m_ObjectHideFlags: 0
@@ -416,5 +415,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _credits: 100
-  _spawnManager: {fileID: 0}
   _uiManager: {fileID: 2014894046697775813}
+  _navManager: {fileID: 9184824779602869915}
+  _spawnManager: {fileID: 0}
+  ConstructionFactory: {fileID: 0}

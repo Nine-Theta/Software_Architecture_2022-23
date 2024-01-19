@@ -66,6 +66,7 @@ public class UIManager : MonoBehaviour
     private void Awake()
     {
         _gameplayManager.CreditsUpdated.Subscribe(OnCreditsUpdated);
+        Debug.Log("credits updated");
     }
 
     private void OnCreditsUpdated(int pValue)

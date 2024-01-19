@@ -30,15 +30,15 @@ public class UpgradeState : AbstractProcessorState
 
         if (!Physics.Raycast(ray, out hit, 50, _upgradeLayer))
         {
-            context.UIManager.HideUpgradeUI();
+            context.GetUIManager.HideUpgradeUI();
             return;
         }
 
 
         TowerObject tower = hit.collider.gameObject.GetComponent<TowerObject>();
 
-        context.UIManager.DisplayUpgradeUI(tower);
+        context.GetUIManager.DisplayUpgradeUI(tower);
 
-        context.GameplayManager.SetSelectedTower(tower);
+        context.GetGameplayManager.SetSelectedTower(tower);
     }
 }
