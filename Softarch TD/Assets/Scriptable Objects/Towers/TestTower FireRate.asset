@@ -37,4 +37,5 @@ MonoBehaviour:
     Range: 3
     Cooldown: 12
     Cost: 5
-  Debuffs: []
+  Debuffs:
+  - {fileID: 11400000, guid: 89ce4a6106e61484b81f0227401362a2, type: 2}

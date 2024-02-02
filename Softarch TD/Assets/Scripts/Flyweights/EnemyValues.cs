@@ -39,4 +39,25 @@ public class EnemyValues
     }
 
     public EnemyValues(EnemyValues pOriginal) : this(pOriginal.Health, pOriginal.MovementSpeed, pOriginal.Defense, pOriginal.Resistance, pOriginal.AttackDamage, pOriginal.Reward) { }
+
+    public float GetStat(EnemyStats pStat)
+    {
+        switch (pStat)
+        {
+            case EnemyStats.HEALTH:
+                return Health;
+            case EnemyStats.SPEED:
+                return MovementSpeed;
+            case EnemyStats.DEFENSE:
+                return Defense;
+            case EnemyStats.RESISTANCE:
+                return Resistance;
+            case EnemyStats.ATTACK:
+                return AttackDamage;
+            case EnemyStats.REWARD:
+                return Reward;
+            default: //Shouldn't ever trigger
+                return Health;
+        }
+    }
 }

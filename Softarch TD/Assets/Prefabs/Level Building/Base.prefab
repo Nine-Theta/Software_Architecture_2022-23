@@ -54,7 +54,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _baseHealth: 100
-  _healthSilder: {fileID: 3658530720404025321}
+  _healthbarVisual: {fileID: 1990566005871223936}
 --- !u!65 &1096563074787649564
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -312,6 +312,7 @@ GameObject:
   - component: {fileID: 2936999764373912734}
   - component: {fileID: 6590945608994265855}
   - component: {fileID: 7666755094231726811}
+  - component: {fileID: 1990566005871223936}
   m_Layer: 5
   m_Name: HealthCanvas
   m_TagString: Untagged
@@ -415,6 +416,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetCamera: {fileID: 0}
+--- !u!114 &1990566005871223936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1492591107385570067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cdb271b25ac98b45ba41bffb19939e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _slider: {fileID: 3658530720404025321}
 --- !u!1 &2610773923971311436
 GameObject:
   m_ObjectHideFlags: 0

@@ -41,8 +41,6 @@ public class TowerObject : AbstractContainerObject
 
     public override I_Containable BaseData { get { return _baseData; } }
 
-    public List<string> Debuffs = new List<string>();
-
     public override void Initialize(I_Containable pData, GameObject pTowerModel)
     {
         _baseData = pData as TowerScriptable;
@@ -71,6 +69,17 @@ public class TowerObject : AbstractContainerObject
         pEnemy.DamageEnemy(_runtimeValues.Damage);
         TargetAcquired.Publish(pEnemy.transform);
         Debug.DrawLine(transform.position, pEnemy.transform.position, Color.red, 3f);
+
+        if (_baseData.Debuffs.Count >= 1)
+            ApplyDebuffs(pEnemy);
+    }
+
+    private void ApplyDebuffs(EnemyObject pEnemy)
+    {
+        for (int i = 0; i < _baseData.Debuffs.Count; i++)
+        {
+            pEnemy.ApplyDebuff(_baseData.Debuffs[i].CreateDebuffCommand(pEnemy.RuntimeValues), _baseData.Debuffs[i].Type);
+        }
     }
 
     private void RemoveTargetFromList(EnemyObject pTarget)

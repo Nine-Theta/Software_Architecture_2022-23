@@ -25,9 +25,9 @@ public class GameplayManager : MonoBehaviour
 
     public AbstractInstanceFactory ConstructionFactory;
 
-    public Commander ConstructionCommander { get; private set; } = new Commander();
+    public CommandInvoker ConstructionCommander { get; private set; } = new CommandInvoker(null);
 
-    private Commander UpgradeCommander = new Commander();
+    private CommandInvoker UpgradeCommander = new CommandInvoker(null);
 
     public int Credits
     {
@@ -68,13 +68,14 @@ public class GameplayManager : MonoBehaviour
     public void SetSelectedTower(TowerObject pSelectedTower)
     {
         _selectedTower = pSelectedTower;
+        UpgradeCommander.SetCommand(new UpgradeTowerCommand(_selectedTower, this));
     }
 
     public void UpgradeTower()
     {
         if(_selectedTower.CanUgrade() && _selectedTower.GetNextUpgradeValues().Cost <= _credits)
         {
-            UpgradeCommander.ExecuteCommand(new UpgradeTowerCommand(_selectedTower, this));
+            UpgradeCommander.ExecuteCommand();
         }
     }
 

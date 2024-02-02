@@ -23,7 +23,7 @@ public class TowerScriptable : ScriptableObject, I_Containable
     public int CreationCost { get { return TowerRankValues[0].Cost; } }
 
     //To be aplied to Enemy
-    public List<string> Debuffs = new List<string>();
+    public List<DebuffScriptable> Debuffs = new List<DebuffScriptable>();
 
     public GameObject GetModel
     {

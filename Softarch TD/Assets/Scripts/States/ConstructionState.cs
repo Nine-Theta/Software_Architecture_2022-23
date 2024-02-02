@@ -20,6 +20,8 @@ public class ConstructionState : AbstractProcessorState
 
     public override void ProccessButtonClick(Vector2 pMousePos)
     {
-        context.GetGameplayManager.ConstructionCommander.ExecuteCommand(new ConstructAtMouseRayCommand(context.GetGameplayManager, pMousePos, _constructionLayer));
+        context.GetGameplayManager.ConstructionCommander.SetCommand(new ConstructAtMouseRayCommand(context.GetGameplayManager, pMousePos, _constructionLayer));
+
+        context.GetGameplayManager.ConstructionCommander.ExecuteCommand();
     }
 }

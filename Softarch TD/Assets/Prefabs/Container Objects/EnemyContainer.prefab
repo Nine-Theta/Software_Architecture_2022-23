@@ -57,7 +57,7 @@ MonoBehaviour:
     Resistance: 0
     AttackDamage: 0
     Reward: 0
-  _healthVisual: {fileID: 6325545816134525892}
+  _healthbarVisual: {fileID: 4814269122548260220}
   TargetPos: {x: 0, y: 0, z: 31.5}
   ActiveDebuffs: []
 --- !u!54 &3336613354235355986
@@ -239,7 +239,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8691147817697262823, guid: edd5992b582171948832fe885a1d060f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4814269122548260220}
   m_SourcePrefab: {fileID: 100100000, guid: edd5992b582171948832fe885a1d060f, type: 3}
 --- !u!224 &2178169474179705717 stripped
 RectTransform:
@@ -257,3 +260,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &8195376620848987966 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8691147817697262823, guid: edd5992b582171948832fe885a1d060f, type: 3}
+  m_PrefabInstance: {fileID: 659490896365945817}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4814269122548260220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8195376620848987966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cdb271b25ac98b45ba41bffb19939e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _slider: {fileID: 6325545816134525892}

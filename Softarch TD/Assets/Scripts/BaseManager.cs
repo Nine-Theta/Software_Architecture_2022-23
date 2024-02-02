@@ -11,18 +11,17 @@ public class BaseManager : MonoBehaviour
     [SerializeField]
     private float _baseHealth = 100f;
 
-    private float _healhSliderMult;
-
     [SerializeField]
-    private Slider _healthSilder;
+    private HealthbarVisual _healthbarVisual;
 
     public EventPublisher<float> BaseHealthUpdated = new EventPublisher<float>();
     public EventPublisher BaseDeath = new EventPublisher();
 
     private void Start()
     {
-        _healhSliderMult = 1 / _baseHealth;
-        _healthSilder.value = _baseHealth * _healhSliderMult;
+        _healthbarVisual.Initialize(_baseHealth);
+
+        BaseHealthUpdated.Subscribe(_healthbarVisual.UpdateHealth);
     }
 
 
@@ -37,12 +36,10 @@ public class BaseManager : MonoBehaviour
     {
         _baseHealth -= pDamage;
 
-        _healthSilder.value = _baseHealth * _healhSliderMult;
+        BaseHealthUpdated.Publish(_baseHealth);
 
         if (_baseHealth <= 0)
             BaseDeath.Publish();
-        else
-            BaseHealthUpdated.Publish(_baseHealth);
     }
 
     private void OnTriggerEnter(Collider other)

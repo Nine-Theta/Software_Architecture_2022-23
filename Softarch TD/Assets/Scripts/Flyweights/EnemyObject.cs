@@ -23,15 +23,15 @@ public class EnemyObject : AbstractContainerObject
     [Space(5)]
 
     [SerializeField]
-    private Slider _healthVisual;
-    private float _healthVisualMult;
+    private HealthbarVisual _healthbarVisual;
 
     public Vector3 TargetPos;
     public GameObject GetModel() { return _model; }
 
-    public List<DebuffScriptable> ActiveDebuffs;
+    public DebuffCommander debuffCommander = new DebuffCommander();
 
     public EventPublisher<EnemyObject> EnemyDestroyed = new EventPublisher<EnemyObject>();
+    public EventPublisher<float> EnemyDamaged = new EventPublisher<float>();
 
     public override I_Containable BaseData { get { return _baseData; } }
 
@@ -44,7 +44,8 @@ public class EnemyObject : AbstractContainerObject
 
         _baseData.MovemenStrategy.Initialize(this, _runtimeValues.MovementSpeed);
 
-        _healthVisualMult = 1 / _baseData.Values.Health;
+        _healthbarVisual.Initialize(_baseData.Values.Health);
+        EnemyDamaged.Subscribe(_healthbarVisual.UpdateHealth);
     }
 
     public void Move()
@@ -52,21 +53,9 @@ public class EnemyObject : AbstractContainerObject
         _baseData.MovemenStrategy.MoveTo(this, TargetPos);
     }
 
-    public void ApplyDebuff(DebuffScriptable pDebuff)
+    public void ApplyDebuff(AbstractDebuffCommand pDebuff, DebuffType pType)
     {
-        if (ActiveDebuffs.Contains(pDebuff))
-        {
-            ActiveDebuffs.Find(item => item.name == pDebuff.name).DebuffDuration = pDebuff.DebuffDuration;
-        }
-        else
-        {
-            ActiveDebuffs.Add(Instantiate(pDebuff));
-        }
-    }
-
-    public void RemoveDebuff(DebuffScriptable pDebuff)
-    {
-        ActiveDebuffs.Remove(pDebuff);
+        debuffCommander.AddDebuff(pDebuff, pType);
     }
 
     public void ModifyStat(EnemyStats pStat, float pModifier, bool pFlatModifer = false)
@@ -128,7 +117,7 @@ public class EnemyObject : AbstractContainerObject
     public void DamageEnemy(float pDamage)
     {
         _runtimeValues.Health -= Mathf.Max((pDamage - _runtimeValues.Defense) * (1 - _runtimeValues.Resistance), 0);
-        _healthVisual.value = _runtimeValues.Health * _healthVisualMult;
+        EnemyDamaged.Publish(_runtimeValues.Health);
         CheckForDeath();
     }
     

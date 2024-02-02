@@ -16,7 +16,7 @@ public class LevelLoadManager : MonoBehaviour
     [SerializeField, ReadOnly]
     private string _previousScene = "";
 
-    private Commander _loadLevelCommander = new Commander();
+    //private CommandInvoker _loadLevelCommander = new CommandInvoker();
 
     private bool _isLoading = false;
 
@@ -52,7 +52,7 @@ public class LevelLoadManager : MonoBehaviour
         }
 
         _isLoading = true;
-
+        /*
         if (_loadLevelCommander.HasCommands())
         {
             _loadLevelCommander.UndoCommand();
@@ -62,14 +62,14 @@ public class LevelLoadManager : MonoBehaviour
         {
             _loadLevelCommander.ExecuteCommand(new LoadSceneCommand(pScene, LoadSceneMode.Additive));            
             _previousScene = pScene;
-        }
+        }*/
     }
 
     private void OnSceneUnloaded(Scene pScene)
     {
         if (pScene.name == _previousScene)
         {
-            _loadLevelCommander.ExecuteCommand(new LoadSceneCommand(_nextScene, LoadSceneMode.Additive));
+            //_loadLevelCommander.ExecuteCommand(new LoadSceneCommand(_nextScene, LoadSceneMode.Additive));
         }
     }
 
