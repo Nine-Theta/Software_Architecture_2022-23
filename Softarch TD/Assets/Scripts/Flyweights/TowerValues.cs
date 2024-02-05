@@ -9,7 +9,7 @@ public class TowerValues
     [Tooltip("How much damage the turret does per shot")]
     public float Damage;
 
-    [Tooltip("The Range of the turret in Unity Units")]
+    [Tooltip("The Range of the turret in Unity Units (meters)")]
     public float Range;
 
     [Tooltip("How often the turret shoots per Second")]
@@ -17,6 +17,9 @@ public class TowerValues
 
     [Tooltip("How much credits it costs to either build or upgrade the tower")]
     public int Cost;
+
+    [Tooltip("How The tower looks at this stage")]
+    public GameObject TowerModel;
 
 
     public TowerValues(float pDamage, float pRange, float pCooldown, int pCost)

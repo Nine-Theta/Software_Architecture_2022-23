@@ -1,12 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Callbacks;
-using UnityEditor;
-using UnityEngine;
-using NaughtyAttributes;
 using System;
-using UnityEngine.AI;
-using UnityEngine.UI;
+using UnityEngine;
 
 [SelectionBase]
 public class EnemyObject : AbstractContainerObject
@@ -28,7 +21,7 @@ public class EnemyObject : AbstractContainerObject
     public Vector3 TargetPos;
     public GameObject GetModel() { return _model; }
 
-    public DebuffCommander debuffCommander = new DebuffCommander();
+    public DebuffHandler debuffHandler;
 
     public EventPublisher<EnemyObject> EnemyDestroyed = new EventPublisher<EnemyObject>();
     public EventPublisher<float> EnemyDamaged = new EventPublisher<float>();
@@ -42,7 +35,9 @@ public class EnemyObject : AbstractContainerObject
 
         _model = pEnemyModel;
 
-        _baseData.MovemenStrategy.Initialize(this, _runtimeValues.MovementSpeed);
+        debuffHandler = new DebuffHandler(this);
+
+        _baseData.MovementStrategy.Initialize(this, _runtimeValues.MovementSpeed);
 
         _healthbarVisual.Initialize(_baseData.Values.Health);
         EnemyDamaged.Subscribe(_healthbarVisual.UpdateHealth);
@@ -50,61 +45,44 @@ public class EnemyObject : AbstractContainerObject
 
     public void Move()
     {
-        _baseData.MovemenStrategy.MoveTo(this, TargetPos);
+        _baseData.MovementStrategy.MoveTo(this, TargetPos);
     }
 
-    public void ApplyDebuff(AbstractDebuffCommand pDebuff, DebuffType pType)
+    public void ApplyDebuff(DebuffScriptable pDebuff)
     {
-        debuffCommander.AddDebuff(pDebuff, pType);
+        debuffHandler.AddDebuff(pDebuff);
+        Debug.Log("Debuff applied Enemy: " + pDebuff.ToString());
+
     }
 
-    public void ModifyStat(EnemyStats pStat, float pModifier, bool pFlatModifer = false)
+    public void ModifyStat(EnemyStats pStat, float pModifier)
     {
         switch (pStat)
         {
             case EnemyStats.HEALTH:
-                if (pFlatModifer)
-                {
-                    _runtimeValues.Health += pModifier;
-                    CheckForDeath();
-                }
-                else
-                    _runtimeValues.Health *= pModifier;
+                _runtimeValues.Health += pModifier;
+                CheckForDeath();
                 break;
 
             case EnemyStats.SPEED:
-                if (pFlatModifer)
-                    _runtimeValues.MovementSpeed += pModifier;
-                else
-                    _runtimeValues.MovementSpeed *= pModifier;
+                _runtimeValues.MovementSpeed += pModifier;
+                _baseData.MovementStrategy.ChangeMoveSpeed(this, _runtimeValues.MovementSpeed);
                 break;
 
             case EnemyStats.DEFENSE:
-                if (pFlatModifer)
-                    _runtimeValues.Defense += pModifier;
-                else
-                    _runtimeValues.Defense *= pModifier;
+                _runtimeValues.Defense += pModifier;
                 break;
 
             case EnemyStats.RESISTANCE:
-                if (pFlatModifer)
-                    _runtimeValues.Resistance += pModifier;
-                else
-                    _runtimeValues.Resistance *= pModifier;
+                _runtimeValues.Resistance += pModifier;
                 break;
 
             case EnemyStats.ATTACK:
-                if (pFlatModifer)
-                    _runtimeValues.AttackDamage += pModifier;
-                else
-                    _runtimeValues.AttackDamage *= pModifier;
+                _runtimeValues.AttackDamage += pModifier;
                 break;
 
             case EnemyStats.REWARD:
-                if (pFlatModifer)
-                    _runtimeValues.Reward += pModifier;
-                else
-                    _runtimeValues.Reward *= pModifier;
+                _runtimeValues.Reward += pModifier;
                 break;
 
             default:
@@ -120,7 +98,7 @@ public class EnemyObject : AbstractContainerObject
         EnemyDamaged.Publish(_runtimeValues.Health);
         CheckForDeath();
     }
-    
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Base"))
@@ -131,7 +109,7 @@ public class EnemyObject : AbstractContainerObject
             Destroy(gameObject);
         }
     }
-    
+
     private void CheckForDeath()
     {
         if (_runtimeValues.Health <= 0)

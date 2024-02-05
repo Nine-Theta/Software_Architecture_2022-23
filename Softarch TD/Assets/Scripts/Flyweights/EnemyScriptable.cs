@@ -15,7 +15,7 @@ public class EnemyScriptable : ScriptableObject, I_Containable
     [SerializeField]
     private GameObject _enemyModel;
 
-    public AbstractMovementStrategy MovemenStrategy;
+    public AbstractMovementStrategy MovementStrategy;
 
     public EnemyValues Values;
 

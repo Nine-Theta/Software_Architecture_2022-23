@@ -78,7 +78,8 @@ public class TowerObject : AbstractContainerObject
     {
         for (int i = 0; i < _baseData.Debuffs.Count; i++)
         {
-            pEnemy.ApplyDebuff(_baseData.Debuffs[i].CreateDebuffCommand(pEnemy.RuntimeValues), _baseData.Debuffs[i].Type);
+            pEnemy.ApplyDebuff(_baseData.Debuffs[i]);
+            Debug.Log("Debuff applied tower: " + _baseData.Debuffs[i].ToString());
         }
     }
 
@@ -98,6 +99,11 @@ public class TowerObject : AbstractContainerObject
 
         _rangeCollider.radius = _runtimeValues.Range;
 
+        GameObject newModel = Instantiate(_baseData.GetRankModel(_currentUpgradeRank), _model.transform.position, _model.transform.rotation, transform);
+        Destroy(_model);
+        newModel.GetComponent<TowerModelController>().Initialize(this);
+        _model = newModel;
+
         return true;
     }
 
@@ -111,6 +117,9 @@ public class TowerObject : AbstractContainerObject
         _runtimeValues = _baseData.TowerRankValues[_currentUpgradeRank];
 
         _rangeCollider.radius = _runtimeValues.Range;
+
+        _model = Instantiate(_baseData.GetRankModel(_currentUpgradeRank));
+        _model.GetComponent<TowerModelController>().Initialize(this);
 
         return true;
     }

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Measure
   _enemyModel: {fileID: 8757755199854365339, guid: fca626ff9377daa409cc2a2ea6c2f782, type: 3}
-  MovemenStrategy: {fileID: 11400000, guid: 841882a8c16acc64bab9004de5644e57, type: 2}
+  MovementStrategy: {fileID: 11400000, guid: 841882a8c16acc64bab9004de5644e57, type: 2}
   Values:
     Health: 10
     MovementSpeed: 1

@@ -43,15 +43,13 @@ public class GameplayManager : MonoBehaviour
 
     private void Start()
     {
-        CreditsUpdated.Publish(Credits);
-
         SceneManager.sceneLoaded += OnSceneLoaded;
         GetSceneValues();
     }
 
     public void GetSceneValues()
     {
-        _credits = SceneSettings.Instance.GetSceneCredits();
+        Credits = SceneSettings.Instance.GetSceneCredits();
 
         _spawnManager = SceneSettings.Instance.GetSceneSpawnManager();
 
@@ -73,7 +71,7 @@ public class GameplayManager : MonoBehaviour
 
     public void UpgradeTower()
     {
-        if(_selectedTower.CanUgrade() && _selectedTower.GetNextUpgradeValues().Cost <= _credits)
+        if(_selectedTower.CanUgrade() && _selectedTower.GetNextUpgradeValues().Cost <= Credits)
         {
             UpgradeCommander.ExecuteCommand();
         }

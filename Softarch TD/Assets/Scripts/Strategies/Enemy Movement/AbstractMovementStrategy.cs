@@ -7,4 +7,6 @@ public abstract class AbstractMovementStrategy : ScriptableObject
     public abstract void Initialize(EnemyObject pEnemy, float pMoveSpeed);
 
     public abstract void MoveTo(EnemyObject pEnemy, Vector3 pDestiniation);
+
+    public abstract void ChangeMoveSpeed(EnemyObject pEnemy, float pMoveSpeed);
 }

@@ -34,7 +34,6 @@ public class ConstructAtMouseRayCommand : I_Command
         Ray ray = Camera.main.ScreenPointToRay(_mousePos);
         Debug.DrawRay(ray.origin, ray.direction * 50, Color.green, 3);
         RaycastHit hit;
-
         //checks if the specific construction layer we need for the current factory is hit, or if it was a different one
         if (!Physics.Raycast(ray, out hit, 50, _constructionLayer) || (_factoryBackup.GetBuildLayer().value & (1 << hit.collider.gameObject.layer)) == 0)
             return false;
@@ -50,7 +49,7 @@ public class ConstructAtMouseRayCommand : I_Command
             buildCoords = FO.GetBuildPos;
         }
 
-        _receiver.Credits -= _containerBackup.BaseData.CreationCost;
+        _receiver.Credits -= _factoryBackup.Containable.CreationCost;
 
         _containerBackup = _factoryBackup.CreateInstance(buildCoords);
 

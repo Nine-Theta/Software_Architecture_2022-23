@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.Animations;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class TowerModelController : MonoBehaviour
 {
@@ -15,6 +16,9 @@ public class TowerModelController : MonoBehaviour
     private TowerObject _towerObject;
 
     private Transform _targetTransform;
+
+    [SerializeField]
+    private bool _trackTarget = true;
 
     private bool _hasTarget = false;
     private bool _useAnimation = false;
@@ -29,6 +33,9 @@ public class TowerModelController : MonoBehaviour
 
     public void OnDrawGizmos()
     {
+        if (!_trackTarget)
+            return;
+
         Handles.DrawLine(_towerPivot.position, _towerPivot.position + (_towerPivot.forward * 4), 2f);
     }
 
@@ -36,8 +43,11 @@ public class TowerModelController : MonoBehaviour
     {
         if (_hasTarget)
         {
-            if(_targetTransform != null && Vector3.SqrMagnitude(_towerObject.transform.position - _targetTransform.position) < _towerObject.RuntimeValues.Range * _towerObject.RuntimeValues.Range)
+            if (_targetTransform != null && Vector3.SqrMagnitude(_towerObject.transform.position - _targetTransform.position) < _towerObject.RuntimeValues.Range+.5f * _towerObject.RuntimeValues.Range+.5f)
             {
+                if (!_trackTarget)
+                    return;
+
                 _towerPivot.LookAt(_targetTransform);
             }
             else
@@ -54,10 +64,17 @@ public class TowerModelController : MonoBehaviour
         _targetTransform = pTarget;
         _hasTarget= true;
 
+        Debug.Log("target aqcuired! "+ pTarget.gameObject);
+
         if (_useAnimation)
         {
             _gunAnimator.SetBool("GunIsFiring", true);
             _gunAnimator.speed = _towerObject.GetCurrentValues().Cooldown;
         }
+    }
+
+    private void OnDestroy()
+    {
+        _towerObject.TargetAcquired.Unsubscribe(OnTargetAcquired);
     }
 }

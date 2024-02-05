@@ -27,5 +27,9 @@ public class NavMeshMovementStrategy : AbstractMovementStrategy
     {
         pEnemy.GetComponent<NavMeshAgent>().SetDestination(pDestiniation);
     }
+    public override void ChangeMoveSpeed(EnemyObject pEnemy, float pMoveSpeed)
+    {
+        pEnemy.GetComponent<NavMeshAgent>().speed = pMoveSpeed;
+    }
 
 }

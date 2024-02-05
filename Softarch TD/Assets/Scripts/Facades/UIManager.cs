@@ -72,6 +72,8 @@ public class UIManager : MonoBehaviour
     private void OnCreditsUpdated(int pValue)
     {
         _creditUI.text = pValue.ToString();
+
+        Debug.Log("credit event");
     }
 
     public void UpdateWaveDisplay(int pCurrentWave, int pTotalWaves)

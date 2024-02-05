@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
@@ -10,10 +9,6 @@ public class TowerScriptable : ScriptableObject, I_Containable
     [SerializeField]
     private string _name = "tower";
 
-    [SerializeField]
-    private GameObject _towerModel;
-
-    public string TowerType = "todo"; //type of attack
     public AbstractAttackStrategy AttackStrategy; //which enemy to attack
 
     [Description("[0] is base values, everything else is upgrades")]
@@ -27,6 +22,16 @@ public class TowerScriptable : ScriptableObject, I_Containable
 
     public GameObject GetModel
     {
-        get { return _towerModel; }
+        get { return GetRankModel(0); }
+    }
+
+    public GameObject GetRankModel(int pRank)
+    {
+        if (pRank < 0)
+            pRank = 0;
+        else if (pRank >= TowerRankValues.Count)
+            pRank = TowerRankValues.Count - 1;
+
+        return TowerRankValues[pRank].TowerModel;
     }
 }
