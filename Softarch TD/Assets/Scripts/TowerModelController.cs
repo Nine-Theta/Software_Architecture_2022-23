@@ -43,7 +43,7 @@ public class TowerModelController : MonoBehaviour
     {
         if (_hasTarget)
         {
-            if (_targetTransform != null && Vector3.SqrMagnitude(_towerObject.transform.position - _targetTransform.position) < _towerObject.RuntimeValues.Range+.5f * _towerObject.RuntimeValues.Range+.5f)
+            if (_targetTransform != null && Vector3.SqrMagnitude(_towerObject.transform.position - _targetTransform.position) < (_towerObject.GetCurrentValues().Range+.5f) * (_towerObject.GetCurrentValues().Range+.5f))
             {
                 if (!_trackTarget)
                     return;

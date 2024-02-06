@@ -16,9 +16,6 @@ public class TowerObject : AbstractContainerObject
     [SerializeField]
     private TowerValues _runtimeValues;
 
-    public TowerValues RuntimeValues { get { return _runtimeValues; } }
-
-
     private float _cooldownTimer = 0;
 
     [SerializeField]
@@ -158,5 +155,15 @@ public class TowerObject : AbstractContainerObject
 
         _targetsInRange.Remove(other.GetComponent<EnemyObject>());
         other.GetComponent<EnemyObject>().EnemyDestroyed.Unsubscribe(RemoveTargetFromList);
+    }
+
+    public void OnDestroy()
+    {
+        TargetAcquired.UnsubscribeAll();
+
+        for (int i = 0; i < _targetsInRange.Count; i++)
+        {
+            _targetsInRange[i].EnemyDestroyed.Unsubscribe(RemoveTargetFromList);
+        }
     }
 }

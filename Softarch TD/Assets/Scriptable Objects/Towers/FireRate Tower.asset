@@ -10,32 +10,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9e8fcbbd88d35dd43954c44f28ac2ef3, type: 3}
-  m_Name: TestTower FireRate
+  m_Name: FireRate Tower
   m_EditorClassIdentifier: 
   _name: Fire Rate Tower
-  _towerModel: {fileID: 6494076441597448111, guid: c6ae394c6eb6cdd49966341086f3d3e1, type: 3}
-  TowerType: todo
   AttackStrategy: {fileID: 11400000, guid: 5c07f856db15f0c489ddfcf9fd201512, type: 2}
   TowerRankValues:
   - Damage: 1
     Range: 1
     Cooldown: 1
     Cost: 1
-  - Damage: 1
-    Range: 1
-    Cooldown: 2
-    Cost: 1
+    TowerModel: {fileID: 6494076441597448111, guid: 83ae658f45c02cd429277ec2f5b4b4f8, type: 3}
   - Damage: 1
     Range: 2
     Cooldown: 4
-    Cost: 2
+    Cost: 3
+    TowerModel: {fileID: 6494076441597448111, guid: 9478df3bf70c7ad48a85e0233cd3b6ef, type: 3}
   - Damage: 1
     Range: 2
-    Cooldown: 10
-    Cost: 3
+    Cooldown: 7
+    Cost: 5
+    TowerModel: {fileID: 6494076441597448111, guid: 40d6c7cc5de63924d8648346236b5553, type: 3}
   - Damage: 1
     Range: 3
-    Cooldown: 12
-    Cost: 5
-  Debuffs:
-  - {fileID: 11400000, guid: 89ce4a6106e61484b81f0227401362a2, type: 2}
+    Cooldown: 10
+    Cost: 10
+    TowerModel: {fileID: 6494076441597448111, guid: 92c10d9a18d8dbc4fadbff874f482647, type: 3}
+  Debuffs: []

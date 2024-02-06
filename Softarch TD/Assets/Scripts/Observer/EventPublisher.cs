@@ -23,6 +23,11 @@ public class EventPublisher
             _subscribers.Remove(pSub);
     }
 
+    public void UnsubscribeAll()
+    {
+        _subscribers.Clear();
+    }
+
     public void Publish()
     {
         for (int i = 0; i < _subscribers.Count; i++)
@@ -46,6 +51,10 @@ public class EventPublisher<T>
     public void Unsubscribe(EventSubscriber pSub)
     {
         _subscribers.Remove(pSub);
+    }
+    public void UnsubscribeAll()
+    {
+        _subscribers.Clear();
     }
 
     public void Publish(T pArgument)
@@ -71,6 +80,10 @@ public class EventPublisher<T1,T2>
     public void Unsubscribe(EventSubscriber pSub)
     {
         _subscribers.Remove(pSub);
+    }
+    public void UnsubscribeAll()
+    {
+        _subscribers.Clear();
     }
 
     public void Publish(T1 pArgument1, T2 pArgument2)

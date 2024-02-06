@@ -10,10 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9e8fcbbd88d35dd43954c44f28ac2ef3, type: 3}
-  m_Name: TestTower Damage
+  m_Name: Damage Tower
   m_EditorClassIdentifier: 
   _name: Damage tower
-  _towerModel: {fileID: 6494076441597448111, guid: ea963f50e3c073f40870fdd6059a5e35, type: 3}
   TowerType: todo
   AttackStrategy: {fileID: 11400000, guid: 5c07f856db15f0c489ddfcf9fd201512, type: 2}
   TowerRankValues:
@@ -21,20 +20,25 @@ MonoBehaviour:
     Range: 1
     Cooldown: 0.5
     Cost: 1
+    TowerModel: {fileID: 6494076441597448111, guid: ea963f50e3c073f40870fdd6059a5e35, type: 3}
   - Damage: 3
     Range: 2
     Cooldown: 0.6
     Cost: 1
+    TowerModel: {fileID: 919132149155446097, guid: c7fd231ff7e44c644a898a68e9f30c4e, type: 3}
   - Damage: 5
     Range: 3
     Cooldown: 0.7
     Cost: 2
+    TowerModel: {fileID: 919132149155446097, guid: 8c6ae7bc398c36a488818722e89243cc, type: 3}
   - Damage: 7
     Range: 4
     Cooldown: 0.8
     Cost: 3
+    TowerModel: {fileID: 919132149155446097, guid: 91d7bffef7732214ea2dd5dfe5b61404, type: 3}
   - Damage: 10
     Range: 5
     Cooldown: 1
     Cost: 5
+    TowerModel: {fileID: 919132149155446097, guid: 6d8b3e5371846144596a5287b737db28, type: 3}
   Debuffs: []

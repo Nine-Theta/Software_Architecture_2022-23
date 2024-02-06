@@ -9,6 +9,9 @@ public class GameplayManager : MonoBehaviour
     private int _credits = 20;
 
     [SerializeField]
+    private float _towerSellMod = .5f;
+
+    [SerializeField]
     private UIManager _uiManager;
 
     [SerializeField]
@@ -74,7 +77,14 @@ public class GameplayManager : MonoBehaviour
         if(_selectedTower.CanUgrade() && _selectedTower.GetNextUpgradeValues().Cost <= Credits)
         {
             UpgradeCommander.ExecuteCommand();
+            _uiManager.DisplayUpgradeUI(_selectedTower);
         }
+    }
+
+    public void SellTower()
+    {
+        Credits += (int)(_selectedTower.GetCurrentValues().Cost * _towerSellMod);
+        Destroy(_selectedTower);
     }
 
     public void StartNextWave()
