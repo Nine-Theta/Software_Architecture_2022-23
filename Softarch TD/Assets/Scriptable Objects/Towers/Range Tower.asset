@@ -13,32 +13,26 @@ MonoBehaviour:
   m_Name: Range Tower
   m_EditorClassIdentifier: 
   _name: Range tower
-  TowerType: todo
   AttackStrategy: {fileID: 11400000, guid: 5c07f856db15f0c489ddfcf9fd201512, type: 2}
   TowerRankValues:
   - Damage: 1
     Range: 2
     Cooldown: 0.5
-    Cost: 1
-    TowerModel: {fileID: 6494076441597448111, guid: 53dbc7ffbc34e34448f2995358b7258e, type: 3}
-  - Damage: 3
-    Range: 3
-    Cooldown: 0.5
     Cost: 2
-    TowerModel: {fileID: 6494076441597448111, guid: 53dbc7ffbc34e34448f2995358b7258e, type: 3}
-  - Damage: 5
+    TowerModel: {fileID: 6494076441597448111, guid: f6f5b638d4788ab44b90db8ec2da2d9b, type: 3}
+  - Damage: 4
     Range: 5
-    Cooldown: 0.5
-    Cost: 3
-    TowerModel: {fileID: 6494076441597448111, guid: 53dbc7ffbc34e34448f2995358b7258e, type: 3}
-  - Damage: 7
-    Range: 7
     Cooldown: 0.4
+    Cost: 3
+    TowerModel: {fileID: 6494076441597448111, guid: 08638ec86ea83d64a80a0ff09bf64e57, type: 3}
+  - Damage: 8
+    Range: 7
+    Cooldown: 0.3
     Cost: 5
-    TowerModel: {fileID: 6494076441597448111, guid: 53dbc7ffbc34e34448f2995358b7258e, type: 3}
+    TowerModel: {fileID: 6494076441597448111, guid: 27fa143507a01dd4d9ccf3ad37ff3fe4, type: 3}
   - Damage: 12
     Range: 10
     Cooldown: 0.25
     Cost: 10
-    TowerModel: {fileID: 6494076441597448111, guid: 53dbc7ffbc34e34448f2995358b7258e, type: 3}
+    TowerModel: {fileID: 6494076441597448111, guid: 3c1228a6b5dad6b4d93a06ae8386ba27, type: 3}
   Debuffs: []
