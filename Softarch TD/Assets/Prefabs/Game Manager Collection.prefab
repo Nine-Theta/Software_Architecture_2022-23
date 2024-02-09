@@ -135,6 +135,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
   _buildTowerStats:
   - {fileID: 0}
   - {fileID: 0}
@@ -156,53 +157,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
---- !u!1 &3155358617329527900
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1202578692357248665}
-  - component: {fileID: 537812336417909702}
-  m_Layer: 0
-  m_Name: SceneLoadManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1202578692357248665
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3155358617329527900}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1306681728684643945}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &537812336417909702
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3155358617329527900}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5dd2a40dd3f4ebe41a21bedc8000ea72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TestLevel: {fileID: 102900000, guid: d76fed42d6739d542a655e9ac6472963, type: 3}
-  _nextScene: 
-  _previousScene: 
 --- !u!1 &3173155048524966013
 GameObject:
   m_ObjectHideFlags: 0
@@ -236,7 +190,6 @@ Transform:
   - {fileID: 1805972150417169026}
   - {fileID: 2456673198946909071}
   - {fileID: 6319501135558677524}
-  - {fileID: 1202578692357248665}
   - {fileID: 5171389839725767612}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -415,6 +368,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _credits: 100
+  _towerSellMod: 0.5
   _uiManager: {fileID: 2014894046697775813}
   _navManager: {fileID: 9184824779602869915}
   _spawnManager: {fileID: 0}

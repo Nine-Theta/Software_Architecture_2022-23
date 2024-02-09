@@ -296,6 +296,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1221282599 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7091899748433895422, guid: abf07e9dbf5467749a1d3b45cf37a3e9, type: 3}
+  m_PrefabInstance: {fileID: 1224696745}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1224696745
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -448,6 +453,18 @@ PrefabInstance:
       propertyPath: m_UIInputModule
       value: 
       objectReference: {fileID: 1490872172}
+    - target: {fileID: 3747392761773464864, guid: abf07e9dbf5467749a1d3b45cf37a3e9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 360383128}
+    - target: {fileID: 3747392761773464864, guid: abf07e9dbf5467749a1d3b45cf37a3e9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 2068127486}
+    - target: {fileID: 3747392761773464864, guid: abf07e9dbf5467749a1d3b45cf37a3e9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 360383128}
     - target: {fileID: 4295685108288468398, guid: abf07e9dbf5467749a1d3b45cf37a3e9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -468,10 +485,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
       objectReference: {fileID: 360383128}
-    - target: {fileID: 5179888006042225845, guid: abf07e9dbf5467749a1d3b45cf37a3e9, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5731347755279055728, guid: abf07e9dbf5467749a1d3b45cf37a3e9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -999,6 +1012,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 449833378}
     - target: {fileID: 2014894046697775813, guid: b8eefd27463add6468ae26c819a13737, type: 3}
+      propertyPath: _towers.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2014894046697775813, guid: b8eefd27463add6468ae26c819a13737, type: 3}
       propertyPath: _upgradePanelButton
       value: 
       objectReference: {fileID: 269807636}
@@ -1018,6 +1035,10 @@ PrefabInstance:
       propertyPath: _towers.Array.data[2]
       value: 
       objectReference: {fileID: 2141855525}
+    - target: {fileID: 2014894046697775813, guid: b8eefd27463add6468ae26c819a13737, type: 3}
+      propertyPath: _towers.Array.data[3]
+      value: 
+      objectReference: {fileID: 1221282599}
     - target: {fileID: 2014894046697775813, guid: b8eefd27463add6468ae26c819a13737, type: 3}
       propertyPath: _buildTowerStats.Array.data[0]
       value: 
@@ -1079,7 +1100,8 @@ PrefabInstance:
       value: Game Manager Collection
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 3155358617329527900, guid: b8eefd27463add6468ae26c819a13737, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b8eefd27463add6468ae26c819a13737, type: 3}
