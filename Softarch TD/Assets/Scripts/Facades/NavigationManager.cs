@@ -17,8 +17,6 @@ public class NavigationManager : MonoBehaviour
     [SerializeField]
     private NavMeshAgent _navigationTester;
 
-    private NavMeshPath paff;
-
     private void Start()
     {
         SceneManager.sceneLoaded+= OnSceneLoaded;
