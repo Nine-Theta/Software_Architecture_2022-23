@@ -99,76 +99,10 @@ public class EnemyWaveSpawner : MonoBehaviour
         Debug.Log("Loading next group");
 
         LoadNextGroup();
-
-        //TODO: next group;
     }
 
     public int GetTotalWaveCount()
     {
         return _enemyWaves.Count();
-    }
-
-    ///
-
-    public void LoadWave(WaveScriptable pNewWave, bool pStartWave = true)
-    {
-        _currentWave = pNewWave;
-
-        if (pStartWave)
-        {
-            HandleGroup(_currentWave.EnemyGroups.First());
-            _groupCounter = 1;
-        }
-    }
-
-    public void StartWave()
-    {
-        if (_currentWave == null) throw new System.Exception("Tried starting a wave, but no wave Loaded");
-
-        HandleGroup(_currentWave.EnemyGroups.First());
-        _groupCounter = 1;
-    }
-
-    public void OverideCooldown()
-    {
-        //Todo
-    }
-
-    private void HandleGroup(EnemyGroup pGroup)
-    {
-        _currentGroup = pGroup;
-
-        //EnemySpawner.SpawnEnemyGroup(pGroup, Vector3.zero, Quaternion.identity);
-
-        //_currentGroup.SpawnStrategy.SpawnGroup(pGroup, this);
-        //_currentGroup.SpawnStrategy.OnSpawningComplete += ProgressWave;
-    }
-
-    private void ProgressWave()
-    {
-        Debug.Log("Wave Progress");
-
-        //_currentGroup.SpawnStrategy.OnSpawningComplete -= ProgressWave;
-
-        _groupCounter++;
-
-        if(_groupCounter <= _currentWave.EnemyGroups.Count)
-            StartCoroutine(GroupCooldown(_currentGroup.GroupSpawnDelay));
-        //else
-            //OnWaveComplete.Invoke();
-
-    }
-
-    private IEnumerator GroupCooldown(float pSeconds)
-    {
-        yield return new WaitForSeconds(pSeconds);
-        Debug.Log("In Routine");
-
-        HandleGroup(_currentWave.EnemyGroups[_groupCounter - 1]);
-    }///
-
-    private void Update()
-    {
-        
     }
 }

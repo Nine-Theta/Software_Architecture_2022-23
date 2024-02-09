@@ -7,8 +7,18 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoadManager : MonoBehaviour
 {
+    private static SceneLoadManager _instance;
+    public static SceneLoadManager Instance { get { return _instance; } }
+
+
     [SerializeField]
     private SceneAsset TestLevel;
+
+    [SerializeField]
+    private SceneAsset _titleSceneAsset;
+
+    [SerializeField]
+    private SceneAsset _overlaySceneAsset;
 
     [SerializeField]
     private string _nextScene;
@@ -17,8 +27,26 @@ public class SceneLoadManager : MonoBehaviour
     private string _previousScene;
 
 
+
+    private LoadSceneCommand _loadTitleCommand;
+    private LoadSceneCommand _loadOverlayCommand;
+
+    private LoadSceneCommand _loadLevelCommand = null;
+
+
     private void Awake()
     {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this);
+        }
+
+        _instance = this;
+        DontDestroyOnLoad(gameObject);
+
+        _loadTitleCommand = new LoadSceneCommand(_titleSceneAsset.name, LoadSceneMode.Single);
+        _loadOverlayCommand = new LoadSceneCommand(_overlaySceneAsset.name, LoadSceneMode.Additive);
+
         SceneManager.sceneUnloaded += OnSceneUnloaded;
         SceneManager.sceneLoaded += OnSceneLoaded;
 
@@ -31,19 +59,30 @@ public class SceneLoadManager : MonoBehaviour
         LoadLevel(TestLevel);
     }
 
-    public void LoadLevel(SceneAsset pScene)
+    public void LoadTitleScreen()
     {
-        _nextScene = pScene.name;
+        _loadLevelCommand = null;
+        _loadTitleCommand.Execute();
+    }
 
-        SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
+    public void LoadLevel(Scene pScene) { LoadLevel(pScene.name); }
+    public void LoadLevel(SceneAsset pScene) { LoadLevel(pScene.name); }
+    public void LoadLevel(string pScene)
+    {
+        _nextScene = pScene;
+
+        _loadLevelCommand = new LoadSceneCommand(pScene, LoadSceneMode.Single);
+        _loadLevelCommand.Execute();
     }
 
     private void OnSceneUnloaded(Scene pScene)
     {
-        if (pScene == SceneManager.GetSceneByName(_previousScene))
-        {
-            SceneManager.LoadScene(_nextScene, LoadSceneMode.Additive);
-        }
+
     }
 
     private void OnSceneLoaded(Scene pScene, LoadSceneMode pMode)
@@ -51,8 +90,7 @@ public class SceneLoadManager : MonoBehaviour
         if (pScene == SceneManager.GetSceneByName(_nextScene))
         {
             SceneManager.SetActiveScene(pScene);
-            _previousScene = _nextScene;
-            //_nextScene = "";
+            _loadOverlayCommand.Execute();
         }
     }
 }
