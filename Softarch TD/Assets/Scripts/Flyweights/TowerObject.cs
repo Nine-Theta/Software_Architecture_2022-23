@@ -27,13 +27,6 @@ public class TowerObject : AbstractContainerObject
 
     private List<EnemyObject> _targetsInRange = new List<EnemyObject>();
 
-
-    public GameObject GetModel() { return _model; }
-    public TowerValues GetCurrentValues() { return _runtimeValues; }
-    public TowerValues GetNextUpgradeValues() { return _baseData.TowerRankValues[Mathf.Min(_currentUpgradeRank + 1, _upgradeMax)]; }
-    public int GetCurrentRank() { return _currentUpgradeRank; }
-    public bool CanUgrade() { return _currentUpgradeRank < _upgradeMax; }
-
     public EventPublisher<Transform> TargetAcquired = new EventPublisher<Transform>();
 
     public override I_Containable BaseData { get { return _baseData; } }
@@ -60,6 +53,11 @@ public class TowerObject : AbstractContainerObject
     {
         Handles.DrawWireDisc(gameObject.transform.position, Vector3.up, _runtimeValues.Range, 2f);
     }
+    public GameObject GetModel() { return _model; }
+    public TowerValues GetCurrentValues() { return _runtimeValues; }
+    public TowerValues GetNextUpgradeValues() { return _baseData.TowerRankValues[Mathf.Min(_currentUpgradeRank + 1, _upgradeMax)]; }
+    public int GetCurrentRank() { return _currentUpgradeRank; }
+    public bool CanUgrade() { return _currentUpgradeRank < _upgradeMax; }
 
     public void AttackTarget(EnemyObject pEnemy)
     {
@@ -129,7 +127,7 @@ public class TowerObject : AbstractContainerObject
         Debug.Log("Tower Upgraded!");
     }
 
-    public void Update()
+    private void Update()
     {
         if (activated && _cooldownTimer <= Time.time)
         {
@@ -139,7 +137,7 @@ public class TowerObject : AbstractContainerObject
         }
     }
 
-    public void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Enemy")) return;
 
@@ -149,7 +147,7 @@ public class TowerObject : AbstractContainerObject
         other.GetComponent<EnemyObject>().EnemyDestroyed.Subscribe(RemoveTargetFromList);
     }
 
-    public void OnTriggerExit(Collider other)
+    private void OnTriggerExit(Collider other)
     {
         if (!other.CompareTag("Enemy")) return;
 
@@ -157,7 +155,7 @@ public class TowerObject : AbstractContainerObject
         other.GetComponent<EnemyObject>().EnemyDestroyed.Unsubscribe(RemoveTargetFromList);
     }
 
-    public void OnDestroy()
+    private void OnDestroy()
     {
         TargetAcquired.UnsubscribeAll();
 

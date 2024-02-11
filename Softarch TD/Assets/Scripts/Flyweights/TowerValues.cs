@@ -22,13 +22,14 @@ public class TowerValues
     public GameObject TowerModel;
 
 
-    public TowerValues(float pDamage, float pRange, float pCooldown, int pCost)
+    public TowerValues(float pDamage, float pRange, float pCooldown, int pCost, GameObject pModel)
     {
         Damage = pDamage;
         Range = pRange;
         Cooldown = pCooldown;
         Cost = pCost;
+        TowerModel = pModel;
     }
 
-    public TowerValues(TowerValues pOriginal) : this(pOriginal.Damage, pOriginal.Range, pOriginal.Cooldown, pOriginal.Cost) { }
+    public TowerValues(TowerValues pOriginal) : this(pOriginal.Damage, pOriginal.Range, pOriginal.Cooldown, pOriginal.Cost, pOriginal.TowerModel) { }
 }

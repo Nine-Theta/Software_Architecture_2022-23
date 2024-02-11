@@ -23,10 +23,6 @@ public class SceneLoadManager : MonoBehaviour
     [SerializeField]
     private string _nextScene;
 
-    [SerializeField]
-    private string _previousScene;
-
-
 
     private LoadSceneCommand _loadTitleCommand;
     private LoadSceneCommand _loadOverlayCommand;
@@ -49,8 +45,6 @@ public class SceneLoadManager : MonoBehaviour
 
         SceneManager.sceneUnloaded += OnSceneUnloaded;
         SceneManager.sceneLoaded += OnSceneLoaded;
-
-        _previousScene = SceneManager.GetActiveScene().name;
     }
 
     [Button]

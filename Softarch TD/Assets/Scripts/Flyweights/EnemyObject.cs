@@ -18,10 +18,10 @@ public class EnemyObject : AbstractContainerObject
     [SerializeField]
     private HealthbarVisual _healthbarVisual;
 
-    public Vector3 TargetPos;
-    public GameObject GetModel() { return _model; }
+    private DebuffHandler _debuffHandler;
 
-    public DebuffHandler debuffHandler;
+    public Vector3 TargetPos;
+
 
     public EventPublisher<EnemyObject> EnemyDestroyed = new EventPublisher<EnemyObject>();
     public EventPublisher<float> EnemyDamaged = new EventPublisher<float>();
@@ -35,7 +35,7 @@ public class EnemyObject : AbstractContainerObject
 
         _model = pEnemyModel;
 
-        debuffHandler = new DebuffHandler(this);
+        _debuffHandler = new DebuffHandler(this);
 
         _baseData.MovementStrategy.Initialize(this, _runtimeValues.MovementSpeed);
 
@@ -47,10 +47,11 @@ public class EnemyObject : AbstractContainerObject
     {
         _baseData.MovementStrategy.MoveTo(this, TargetPos);
     }
+    public GameObject GetModel() { return _model; }
 
     public void ApplyDebuff(DebuffScriptable pDebuff)
     {
-        debuffHandler.AddDebuff(pDebuff);
+        _debuffHandler.AddDebuff(pDebuff);
         Debug.Log("Debuff applied Enemy: " + pDebuff.ToString());
 
     }

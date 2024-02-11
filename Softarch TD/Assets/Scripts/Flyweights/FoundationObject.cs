@@ -13,7 +13,6 @@ public class FoundationObject : AbstractContainerObject
     public bool Buildable { get { return _buildable; } }
 
     public Vector3 GetBuildPos { get { return transform.position; } }
-    public GameObject GetModel() { return _model; }
 
     public override I_Containable BaseData { get { return _baseData; } }
 
@@ -23,6 +22,7 @@ public class FoundationObject : AbstractContainerObject
 
         _model = pFoundationModel;
     }
+    public GameObject GetModel() { return _model; }
 
     public bool BuildRequest()
     {
