@@ -115,8 +115,8 @@ public class EnemyObject : AbstractContainerObject
     {
         if (_runtimeValues.Health <= 0)
         {
-            Debug.Log("Death to be implemented");
             EnemyDestroyed.Publish(this);
+            FindObjectOfType<GameplayManager>().Credits += (int)_runtimeValues.Reward; //Last-minute addition, don't have time for a proper implementation anymore
             Destroy(gameObject);
         }
     }
