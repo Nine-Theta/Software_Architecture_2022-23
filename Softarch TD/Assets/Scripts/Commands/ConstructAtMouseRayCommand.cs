@@ -51,7 +51,7 @@ public class ConstructAtMouseRayCommand : I_Command
 
         _receiver.Credits -= _factoryBackup.Containable.CreationCost;
 
-        _containerBackup = _factoryBackup.CreateInstance(buildCoords);
+        _containerBackup = _factoryBackup.CreateInstance(buildCoords, Quaternion.identity);
 
         return true;
     }

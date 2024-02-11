@@ -18,7 +18,7 @@ public class ConstructionCommand : I_Command
 
     public bool Execute()
     {
-        _towerBackup = _receiver.CreateInstance(_position);
+        _towerBackup = _receiver.CreateInstance(_position, Quaternion.identity);
         return true;
     }
 

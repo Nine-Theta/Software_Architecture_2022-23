@@ -13,7 +13,7 @@ public class EnemyWaveSpawner : MonoBehaviour
     private EnemyFactory _spawnFactory;
 
     [SerializeField]
-    private Vector3 _spawnOffset = Vector3.zero;
+    private Transform _spawnPoint;
 
     [SerializeField]
     private GameObject _target;
@@ -82,7 +82,7 @@ public class EnemyWaveSpawner : MonoBehaviour
         {
             _spawnFactory.SetEnemyVariant(_currentSpawnList.Peek().Item1);
 
-            EnemyObject enemy = _spawnFactory.CreateInstance(transform.position + _spawnOffset).GetComponent<EnemyObject>();
+            EnemyObject enemy = _spawnFactory.CreateInstance(_spawnPoint.position, _spawnPoint.rotation).GetComponent<EnemyObject>();
             enemy.TargetPos = _target.transform.position;
             enemy.Move();
 

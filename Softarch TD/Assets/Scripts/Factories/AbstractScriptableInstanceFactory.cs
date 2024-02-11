@@ -6,7 +6,7 @@ public abstract class AbstractInstanceFactory : MonoBehaviour
 {
     public abstract I_Containable Containable { get; set; }
 
-    public abstract AbstractContainerObject CreateInstance(Vector3 pPosition);
+    public abstract AbstractContainerObject CreateInstance(Vector3 pPosition, Quaternion pRotation);
 
     public virtual void DeleteInstance(AbstractContainerObject pInstance)
     {
