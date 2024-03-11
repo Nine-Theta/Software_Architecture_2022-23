@@ -799,7 +799,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spawnFactory: {fileID: 671668540}
-  _spawnOffset: {x: 0, y: 0, z: 0}
+  _spawnPoint: {fileID: 0}
   _target: {fileID: 1419970775}
   _enemyWaves:
   - {fileID: 11400000, guid: 6b48de2b564a739419f03e75717f1595, type: 2}
@@ -1348,6 +1348,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 620880182}
     - target: {fileID: 2014894046697775813, guid: b8eefd27463add6468ae26c819a13737, type: 3}
+      propertyPath: _towers.Array.data[3]
+      value: 
+      objectReference: {fileID: 1887006317}
+    - target: {fileID: 2014894046697775813, guid: b8eefd27463add6468ae26c819a13737, type: 3}
       propertyPath: _buildTowerStats.Array.data[0]
       value: 
       objectReference: {fileID: 181431304}
@@ -1443,6 +1447,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1210718325 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5365722053502347158, guid: 2086bffd84d844448b01f4411b746bad, type: 3}
+  m_PrefabInstance: {fileID: 1827464745}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1231064795 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2014894046697775813, guid: b8eefd27463add6468ae26c819a13737, type: 3}
@@ -1524,6 +1533,33 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5075769914098101709, guid: 2086bffd84d844448b01f4411b746bad, type: 3}
   m_PrefabInstance: {fileID: 1827464745}
   m_PrefabAsset: {fileID: 0}
+--- !u!54 &1314476199
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1210718325}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 14
+  m_CollisionDetection: 0
 --- !u!1 &1419970775 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 36389474519806651, guid: 4e3ca6a9c50374042baa92eff3409470, type: 3}
@@ -1931,13 +1967,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: FoundationContainer
       objectReference: {fileID: 0}
+    - target: {fileID: 6889036836704721650, guid: 2086bffd84d844448b01f4411b746bad, type: 3}
+      propertyPath: m_Size.y
+      value: 0.25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 5075769914098101709, guid: 2086bffd84d844448b01f4411b746bad, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2029580556}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5365722053502347158, guid: 2086bffd84d844448b01f4411b746bad, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1314476199}
   m_SourcePrefab: {fileID: 100100000, guid: 2086bffd84d844448b01f4411b746bad, type: 3}
 --- !u!114 &1839054875 stripped
 MonoBehaviour:
@@ -2034,6 +2077,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 708146134}
+    - target: {fileID: 1040724783837377810, guid: abf07e9dbf5467749a1d3b45cf37a3e9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1231064795}
     - target: {fileID: 1329723357608602148, guid: abf07e9dbf5467749a1d3b45cf37a3e9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -2166,6 +2213,30 @@ PrefabInstance:
       propertyPath: m_UIInputModule
       value: 
       objectReference: {fileID: 583686188}
+    - target: {fileID: 3747392761773464864, guid: abf07e9dbf5467749a1d3b45cf37a3e9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1231064795}
+    - target: {fileID: 3747392761773464864, guid: abf07e9dbf5467749a1d3b45cf37a3e9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1903843889}
+    - target: {fileID: 3747392761773464864, guid: abf07e9dbf5467749a1d3b45cf37a3e9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 1231064795}
+    - target: {fileID: 3747392761773464864, guid: abf07e9dbf5467749a1d3b45cf37a3e9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SelectTowerButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 3747392761773464864, guid: abf07e9dbf5467749a1d3b45cf37a3e9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: set_TowerVariant
+      objectReference: {fileID: 0}
+    - target: {fileID: 3747392761773464864, guid: abf07e9dbf5467749a1d3b45cf37a3e9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: DisplayBuildTowerStats
+      objectReference: {fileID: 0}
     - target: {fileID: 4295685108288468398, guid: abf07e9dbf5467749a1d3b45cf37a3e9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -2259,6 +2330,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: abf07e9dbf5467749a1d3b45cf37a3e9, type: 3}
+--- !u!1 &1887006317 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7091899748433895422, guid: abf07e9dbf5467749a1d3b45cf37a3e9, type: 3}
+  m_PrefabInstance: {fileID: 1887006316}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1903843887
 GameObject:
   m_ObjectHideFlags: 0

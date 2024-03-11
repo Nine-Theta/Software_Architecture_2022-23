@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Dave
   _enemyModel: {fileID: 8757755199854365339, guid: ab2f2a9199c764744a19fecbb1b4f31f, type: 3}
-  MovemenStrategy: {fileID: 11400000, guid: 841882a8c16acc64bab9004de5644e57, type: 2}
+  MovementStrategy: {fileID: 11400000, guid: 841882a8c16acc64bab9004de5644e57, type: 2}
   Values:
     Health: 100
     MovementSpeed: 0.1

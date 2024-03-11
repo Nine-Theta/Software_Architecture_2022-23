@@ -3,7 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
-
+/// <summary>
+/// Concrete Factory that creates instances of <see cref="EnemyObject"/> using a <see cref="EnemyScriptable"/> that contains the instantiation values.
+/// </summary>
 public class EnemyFactory : AbstractInstanceFactory
 {
     [SerializeField]

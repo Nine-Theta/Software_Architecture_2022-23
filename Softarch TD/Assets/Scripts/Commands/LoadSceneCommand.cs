@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// <see cref="I_Command"/> that loads/unloads a specified scene
+/// </summary>
 public class LoadSceneCommand : I_Command
 {
     private string _sceneBackup;

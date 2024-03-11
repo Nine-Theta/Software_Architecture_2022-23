@@ -4,6 +4,10 @@ using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
 
+/// <summary>
+/// A singleton that is unique per Unity Scene. It contains all the scene-specific information that scene-inpedendant script rely on.
+/// </summary>
+/// <remarks>Contains references to the scene's <see cref="BaseManager"/>, <see cref="EnemySpawnManager"/>, <see cref="NavMeshSurface"/>, and <see cref="NavMeshAgent"/> required for testing</remarks>
 public class SceneSettings : MonoBehaviour
 {
     private static SceneSettings _instance;

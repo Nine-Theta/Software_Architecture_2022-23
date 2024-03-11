@@ -1,5 +1,9 @@
 using System.Collections.Generic;
 
+/// <summary>
+/// A list of <see cref="I_Command"/>s. Allows for the addition and removal of commands, but will Execute/Undo all of them at once.
+/// </summary>
+/// <remarks>see also <see cref="CommandInvoker"/> and <see cref="CommandQueueInvoker"/></remarks>
 public class CommandListInvoker
 {
     private List<I_Command> _commands;

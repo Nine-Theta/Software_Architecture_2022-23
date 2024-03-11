@@ -1,6 +1,11 @@
 using System;
 using UnityEngine;
 
+/// <summary>
+/// This script handles all the functionality of an enemy instance.
+/// It moves using a variant of <see cref="AbstractMovementStrategy"/> contained in its <see cref="EnemyScriptable"/>, which also has its instantiation values.
+/// </summary>
+/// <remarks>It is instantiated by an <see cref="EnemyFactory"/></remarks> 
 [SelectionBase]
 public class EnemyObject : AbstractContainerObject
 {

@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
+/// <summary>
+/// This script handles all the functionality of an enemy instance, it contains an <see cref="TowerScriptable"/> that has the instantiation values.
+/// This scriptable also determines its attack priority through its variant of <see cref="AbstractAttackStrategy"/>.
+/// </summary>
+/// <remarks>It is instantiated by an <see cref="TowerFactory"/></remarks> 
 [SelectionBase]
 public class TowerObject : AbstractContainerObject
 {
@@ -22,6 +27,8 @@ public class TowerObject : AbstractContainerObject
     private int _currentUpgradeRank = 0;
     [SerializeField]
     private int _upgradeMax;
+
+    private FoundationObject _builtOnFoundation;
 
     private bool activated = false;
 
@@ -119,6 +126,11 @@ public class TowerObject : AbstractContainerObject
         return true;
     }
 
+    public void SetFoundation(FoundationObject pFoundation)
+    {
+        _builtOnFoundation = pFoundation;
+    }
+
     [Button]
     public void TestUpgradeTower()
     {
@@ -155,9 +167,10 @@ public class TowerObject : AbstractContainerObject
         other.GetComponent<EnemyObject>().EnemyDestroyed.Unsubscribe(RemoveTargetFromList);
     }
 
-    private void OnDestroy()
+    public void OnDestroy()
     {
         TargetAcquired.UnsubscribeAll();
+        _builtOnFoundation.ClearBuildStatus();
 
         for (int i = 0; i < _targetsInRange.Count; i++)
         {

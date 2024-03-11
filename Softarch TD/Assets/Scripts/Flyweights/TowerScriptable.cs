@@ -2,7 +2,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
 
-
+/// <summary>
+/// ScriptableObject which contains the instantiation data for a tower variant.
+/// Has a List of <see cref="TowerValues"/> for the tower's stats and model per upgrade stage.
+/// Also contains a List of <see cref="DebuffScriptable"/>s that are applied to the enemy on attack.
+/// </summary>
+/// <remarks>An <see cref="I_Containable"/> used by <see cref="TowerObject"/>.</remarks>
 [CreateAssetMenu(fileName = "TowerScriptable", menuName = "ScriptableObjects/Tower")]
 public class TowerScriptable : ScriptableObject, I_Containable
 {

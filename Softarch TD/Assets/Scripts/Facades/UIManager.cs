@@ -7,6 +7,9 @@ using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Handles all of the UI functions. Disabling buttons, displaying values, showing panels, that sort of stuff.
+/// </summary>
 public class UIManager : MonoBehaviour
 {
     [SerializeField]
@@ -96,10 +99,10 @@ public class UIManager : MonoBehaviour
     {
         _towerSelectionTab.SetActive(true);
         _buildTowerStatsPanel.SetActive(true);
+        HideUpgradeUI();
 
         _towerButton.interactable = false;
         _foundationButton.interactable = true;
-        _upgradeButton.interactable = true;
     }
 
     public void HideTowerBuildUI()
@@ -115,7 +118,7 @@ public class UIManager : MonoBehaviour
     {
         _foundationButton.interactable = false;
         HideTowerBuildUI();
-        _upgradeButton.interactable = true;
+        HideUpgradeUI();
     }
 
     public void SelectUpgradeButton()
@@ -150,7 +153,7 @@ public class UIManager : MonoBehaviour
         if (_viewingTower != null)
             SetLayersInChildren(_viewingTower, LayerMask.NameToLayer("Default"));
 
-        _towerButton.interactable = true;
+        _upgradeButton.interactable = true;
     }
 
     public void DragRotateTowerCam()
@@ -172,8 +175,6 @@ public class UIManager : MonoBehaviour
         SetLayersInChildren(_viewingTower, LayerMask.NameToLayer("3D View"));
 
         RefreshTowerValues();
-
-
     }
 
     public void RefreshTowerValues()

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+/// <summary>
+/// Script for a Strategy/ScriptableObject that allows instances of EnemyObject to move using Unity's NavMesh system;
+/// </summary>
 [CreateAssetMenu(fileName = "NavMeshMovementStrategy", menuName = "Strategy/Movement/Navmesh"), RequireComponent(typeof(NavMeshAgent))]
 public class NavMeshMovementStrategy : AbstractMovementStrategy
 {

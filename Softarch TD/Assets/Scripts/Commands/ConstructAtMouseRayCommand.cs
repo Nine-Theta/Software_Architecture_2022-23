@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+/// <summary>
+/// An <see cref="I_Command"/> that checks if a given <see cref="AbstractInstanceFactory"/> can build an object at a mouse input location on a specific layer.
+/// If possible, it will make the factory build its set object at that location.
+/// </summary>
 public class ConstructAtMouseRayCommand : I_Command
 {
     private GameplayManager _receiver;
@@ -25,7 +29,10 @@ public class ConstructAtMouseRayCommand : I_Command
 
     public bool Execute()
     {
-        if (_receiver.Credits - _factoryBackup.Containable.CreationCost < 0 || EventSystem.current.IsPointerOverGameObject())
+        if(EventSystem.current.IsPointerOverGameObject())
+            return false;
+
+        if (_receiver.Credits - _factoryBackup.Containable.CreationCost < 0)
         {
             Debug.LogError("No Credits to build with!");
             return false;
@@ -47,13 +54,17 @@ public class ConstructAtMouseRayCommand : I_Command
             if (!FO.BuildRequest())
                 return false;
             buildCoords = FO.GetBuildPos;
+
+            _containerBackup = _factoryBackup.CreateInstance(buildCoords, Quaternion.identity);
+
+            (_containerBackup as TowerObject).SetFoundation(FO);
         }
 
         _receiver.Credits -= _factoryBackup.Containable.CreationCost;
 
         _containerBackup = _factoryBackup.CreateInstance(buildCoords, Quaternion.identity);
 
-        return true;
+            return true;
     }
 
     public void Undo()

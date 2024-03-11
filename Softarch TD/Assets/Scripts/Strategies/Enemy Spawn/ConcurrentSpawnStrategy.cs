@@ -6,6 +6,10 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.Events;
 
+/// <summary>
+/// A spawn strategy used by <see cref="EnemyGroup"/>s.
+/// 
+/// </summary>
 [CreateAssetMenu(fileName = "ConcurrentSpawn", menuName = "Strategy/Spawn/Concurrent")]
 public class ConcurrentSpawnStrategy : SpawnStrategyBase
 {

@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+/// <summary>
+/// Handles most of the general game functions during runtime.
+/// </summary>
+/// <remarks>See <see cref="InputProcessor"/> and <see cref="UIManager"/> for most of the input functions</remarks>
 public class GameplayManager : MonoBehaviour
 {
     [SerializeField]
@@ -84,7 +87,8 @@ public class GameplayManager : MonoBehaviour
     public void SellTower()
     {
         Credits += (int)(_selectedTower.GetCurrentValues().Cost * _towerSellMod);
-        Destroy(_selectedTower);
+        Destroy(_selectedTower.gameObject);
+        _selectedTower = null;
     }
 
     public void StartNextWave()

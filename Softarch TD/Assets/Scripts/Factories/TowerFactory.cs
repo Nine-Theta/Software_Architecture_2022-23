@@ -4,6 +4,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Concrete Factory that creates instances of <see cref="TowerObject"/> using a <see cref="TowerScriptable"/> that contains the instantiation values.
+/// </summary>
 public class TowerFactory : AbstractInstanceFactory
 {
     [SerializeField]

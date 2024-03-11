@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Manages the player's non-UI input depending on its <see cref="AbstractProcessorState"/>.
+/// </summary>
 public class InputProcessor : MonoBehaviour
 {
     [SerializeField]

@@ -1,9 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Events;
 
+/// <summary>
+/// Implementation of the Event Pattern.
+/// </summary>
 public class EventPublisher
 {
     //makes me feel like I'm developing a subscription-based live-service
@@ -37,6 +38,8 @@ public class EventPublisher
     }
 }
 
+/// <inheritdoc cref="EventPublisher"/>
+/// <typeparam name="T">Argument type subscriber methods need to adhere to</typeparam>
 public class EventPublisher<T>
 {
     public delegate void EventSubscriber(T pArgument);
@@ -66,6 +69,10 @@ public class EventPublisher<T>
     }
 }
 
+
+/// <inheritdoc cref="EventPublisher"/>
+/// <typeparam name="T1">First argument type subscriber methods need to adhere to.</typeparam>
+/// <typeparam name="T2">Second argument type subscriber methods need to adhere to.</typeparam>
 public class EventPublisher<T1,T2>
 {
     public delegate void EventSubscriber(T1 pArgument1, T2 pArgument2);

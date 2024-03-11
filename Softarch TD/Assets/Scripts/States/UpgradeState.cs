@@ -5,6 +5,10 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+/// <summary>
+/// Upgrade state for the <see cref="InputProcessor"/>.
+/// In this state the processor will select a <see cref="TowerObject"/> for the <see cref="GameplayManager"/> that has already been build on MouseClick, and show show their upgradeUI through the <see cref="UIManager"/>. 
+/// </summary>
 [CreateAssetMenu(fileName = "UpgradeState", menuName = "States/UpgradeState")]
 public class UpgradeState : AbstractProcessorState
 {

@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Concrete Factory that creates instances of <see cref="FoundationObject"/> using a <see cref="FoundationScriptable"/> for contains the instantiation values.
+/// </summary>
 public class FoundationFactory : AbstractInstanceFactory
 {
     [SerializeField]

@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// deprecated <see cref="I_Command"/> that was used in a previous version of tower construction
+/// </summary>
 public class ConstructionCommand : I_Command
 {
     private AbstractInstanceFactory _receiver;

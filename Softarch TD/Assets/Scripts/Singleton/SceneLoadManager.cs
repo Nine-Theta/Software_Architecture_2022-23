@@ -5,6 +5,9 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// A singleton that loads and unloads scenes through the use of <see cref="LoadSceneCommand"/>s
+/// </summary>
 public class SceneLoadManager : MonoBehaviour
 {
     private static SceneLoadManager _instance;

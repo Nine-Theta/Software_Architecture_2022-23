@@ -6,6 +6,9 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Manages the current scene's NavMesh, ensures that there is a valid path for enemies that use <see cref="NavMeshMovementStrategy"/>.
+/// </summary>
 public class NavigationManager : MonoBehaviour
 {
     [SerializeField]
