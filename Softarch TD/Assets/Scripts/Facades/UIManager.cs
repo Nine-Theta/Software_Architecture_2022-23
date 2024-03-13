@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
-using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,6 +19,9 @@ public class UIManager : MonoBehaviour
 
     [SerializeField]
     private TextMeshProUGUI _waveCountUI;
+
+    [SerializeField]
+    private GameObject _pauseScreen;
 
     /////
 
@@ -209,5 +211,11 @@ public class UIManager : MonoBehaviour
         {
             children[i].gameObject.layer = pLayer;
         }
+    }
+
+    public void TogglePauseScreen()
+    {
+        _pauseScreen.SetActive(!_pauseScreen.activeSelf);
+        _gameplayManager.PauseGame(_pauseScreen.activeSelf);
     }
 }

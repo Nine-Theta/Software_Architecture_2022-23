@@ -29,6 +29,9 @@ public class GameplayManager : MonoBehaviour
     private bool _canSpawnNextWave = true;
 
 
+    private float _gameSpeed = 1f;
+
+
     public AbstractInstanceFactory ConstructionFactory;
 
     public CommandInvoker ConstructionCommander { get; private set; } = new CommandInvoker(null);
@@ -66,6 +69,7 @@ public class GameplayManager : MonoBehaviour
 
     public void SetGameSpeed(float pSpeed)
     {
+        _gameSpeed = pSpeed;
         Time.timeScale = pSpeed;
     }
 
@@ -106,6 +110,24 @@ public class GameplayManager : MonoBehaviour
         {
             Debug.Log("Level Layout not Valid, gotta give the enemies a chance, ya know");
         }
+    }
+
+    public void PauseGame(bool pPause)
+    {
+        if (pPause)
+            Time.timeScale = 0;
+        else
+            SetGameSpeed(_gameSpeed);
+    }
+
+    public void QuitGame()
+    {
+        SceneLoadManager.Instance.QuitGame();
+    }
+
+    public void ReloadScene()
+    {
+        SceneLoadManager.Instance.ReloadLevel();
     }
 
     private void OnSceneLoaded(Scene pScene, LoadSceneMode pMode)

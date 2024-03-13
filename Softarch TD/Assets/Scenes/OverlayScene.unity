@@ -325,6 +325,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 500105044}
+    - target: {fileID: 1482200665927447853, guid: abf07e9dbf5467749a1d3b45cf37a3e9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 360383128}
     - target: {fileID: 1764473576437134399, guid: abf07e9dbf5467749a1d3b45cf37a3e9, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -453,6 +457,10 @@ PrefabInstance:
       propertyPath: m_UIInputModule
       value: 
       objectReference: {fileID: 1490872172}
+    - target: {fileID: 3592699184554353962, guid: abf07e9dbf5467749a1d3b45cf37a3e9, type: 3}
+      propertyPath: m_ActionEvents.Array.data[15].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 360383128}
     - target: {fileID: 3747392761773464864, guid: abf07e9dbf5467749a1d3b45cf37a3e9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -466,6 +474,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 360383128}
     - target: {fileID: 4295685108288468398, guid: abf07e9dbf5467749a1d3b45cf37a3e9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 500105044}
+    - target: {fileID: 4730878508693083919, guid: abf07e9dbf5467749a1d3b45cf37a3e9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 500105044}
@@ -533,6 +545,10 @@ PrefabInstance:
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 360383128}
+    - target: {fileID: 8880755454037423667, guid: abf07e9dbf5467749a1d3b45cf37a3e9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 500105044}
     - target: {fileID: 8961065672060456478, guid: abf07e9dbf5467749a1d3b45cf37a3e9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -803,6 +819,11 @@ Transform:
   - {fileID: 2068127487}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1511774734 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5180683293983743636, guid: abf07e9dbf5467749a1d3b45cf37a3e9, type: 3}
+  m_PrefabInstance: {fileID: 1224696745}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1629824351 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1710717126000950364, guid: abf07e9dbf5467749a1d3b45cf37a3e9, type: 3}
@@ -987,6 +1008,10 @@ PrefabInstance:
       propertyPath: _creditUI
       value: 
       objectReference: {fileID: 335140237}
+    - target: {fileID: 2014894046697775813, guid: b8eefd27463add6468ae26c819a13737, type: 3}
+      propertyPath: _pauseScreen
+      value: 
+      objectReference: {fileID: 1511774734}
     - target: {fileID: 2014894046697775813, guid: b8eefd27463add6468ae26c819a13737, type: 3}
       propertyPath: _towerButton
       value: 

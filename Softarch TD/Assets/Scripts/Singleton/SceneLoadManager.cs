@@ -1,6 +1,4 @@
 using NaughtyAttributes;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -64,7 +62,17 @@ public class SceneLoadManager : MonoBehaviour
 
     public void QuitGame()
     {
+#if UNITY_STANDALONE
         Application.Quit();
+#endif
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
+    }
+
+    public void ReloadLevel()
+    {
+        _loadLevelCommand.Execute();
     }
 
     public void LoadLevel(Scene pScene) { LoadLevel(pScene.name); }
