@@ -8,7 +8,7 @@ using UnityEngine.UIElements;
 
 /// <summary>
 /// The code for SciptableObject instances that determine the stats of enemies.
-/// The stats themselves are contained within a <see cref="EnemyValues"/>.
+/// The stats themselves are contained within an <see cref="EnemyValues"/>.
 /// </summary>
 /// <remarks>
 /// An <see cref="I_Containable"/> used by <see cref="EnemyObject"/>.

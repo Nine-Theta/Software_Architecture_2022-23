@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// A simple script to be attached to any GameObject to make it look at the specified camera.
+/// </summary>
 public class SimpleBillboardScript : MonoBehaviour
 {
     [SerializeField]

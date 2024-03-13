@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+/// <summary>
+/// This strategy will make the <see cref="TowerObject"/> attack every <see cref="EnemyObject"/> in range.
+/// </summary>
 [CreateAssetMenu(fileName = "AreaAttackStrategy", menuName = "Strategy/Attack/AreaOfEffect")]
 public class AreaAttackStrategy : AbstractAttackStrategy
 {

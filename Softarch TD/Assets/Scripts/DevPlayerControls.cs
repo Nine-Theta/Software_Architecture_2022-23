@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Dev code for basic player controls
+/// </summary>
 public class DevPlayerControls : MonoBehaviour
 {
     public Camera cam;

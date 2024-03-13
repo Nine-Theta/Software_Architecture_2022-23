@@ -6,6 +6,11 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+/// <summary>
+/// Functions as a spawnlocation for enemies.
+/// <para>Contains multiple <see cref="WaveScriptable"/>s, which get spawned on command of <see cref="EnemySpawnManager"/>.</para>
+/// Each <see cref="EnemyGroup"/> in a wave gets spawned according to its <see cref="SpawnStrategyBase"/>.
+/// </summary>
 [RequireComponent(typeof(EnemyFactory))]
 public class EnemyWaveSpawner : MonoBehaviour
 {

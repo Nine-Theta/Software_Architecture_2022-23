@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.Animations;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
+/// <summary>
+/// Controls the tracking behaviour of the models used by <see cref="TowerObject"/>s.
+/// </summary>
 public class TowerModelController : MonoBehaviour
 {
     [SerializeField]

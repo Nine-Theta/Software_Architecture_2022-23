@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Used by <see cref="EnemyObject"/>s to handle the <see cref="DebuffScriptable"/>s they receive from <see cref="TowerObject"/>s.
+/// </summary>
 [Serializable]
 public class DebuffHandler
 {

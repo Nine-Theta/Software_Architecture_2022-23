@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Dev code used for early testing of enemies
+/// </summary>
 public class DevEnemySpawner : MonoBehaviour
 {
     public EnemyFactory Factory;

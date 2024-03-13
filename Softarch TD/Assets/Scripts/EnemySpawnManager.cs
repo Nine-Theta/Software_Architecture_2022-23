@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Manages all the <see cref="EnemyWaveSpawner"/>s in a scene.
+/// </summary>
 public class EnemySpawnManager : MonoBehaviour
 {
     private int _currentWaveCount = 0;

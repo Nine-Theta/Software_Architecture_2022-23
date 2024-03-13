@@ -1,10 +1,10 @@
-using JetBrains.Annotations;
 using NaughtyAttributes;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Controls the functionality of the base that <see cref="EnemyObject"/>s target.
+/// </summary>
 [SelectionBase]
 public class BaseManager : MonoBehaviour
 {

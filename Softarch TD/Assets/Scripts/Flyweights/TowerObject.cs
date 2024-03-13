@@ -5,7 +5,7 @@ using UnityEngine;
 
 /// <summary>
 /// This script handles all the functionality of an enemy instance, it contains an <see cref="TowerScriptable"/> that has the instantiation values.
-/// This scriptable also determines its attack priority through its variant of <see cref="AbstractAttackStrategy"/>.
+/// <para>This scriptable also determines its attack priority through its variant of <see cref="AbstractAttackStrategy"/>.</para>
 /// </summary>
 /// <remarks>It is instantiated by an <see cref="TowerFactory"/></remarks> 
 [SelectionBase]

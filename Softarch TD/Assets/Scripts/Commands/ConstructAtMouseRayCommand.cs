@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 /// <summary>
 /// An <see cref="I_Command"/> that checks if a given <see cref="AbstractInstanceFactory"/> can build an object at a mouse input location on a specific layer.
-/// If possible, it will make the factory build its set object at that location.
+/// <para>If possible, it will make the factory build its set object at that location.</para>
 /// </summary>
 public class ConstructAtMouseRayCommand : I_Command
 {

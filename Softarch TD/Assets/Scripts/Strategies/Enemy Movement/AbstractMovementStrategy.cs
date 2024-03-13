@@ -4,6 +4,7 @@ using UnityEngine;
 /// <summary>
 /// Abstract class that serves as the base for concrete implementations of enemy movement using the strategy pattern.
 /// </summary>
+/// <remarks>contained in an <see cref="EnemyScriptable"/></remarks>
 public abstract class AbstractMovementStrategy : ScriptableObject
 {
     public abstract void Initialize(EnemyObject pEnemy, float pMoveSpeed);

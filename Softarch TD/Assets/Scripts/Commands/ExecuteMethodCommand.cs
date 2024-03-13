@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Unused <see cref="I_Command"/> that Executes a specified method, and Undoes a specified method
+/// Unused <see cref="I_Command"/> that executes a specified method, and Undoes a specified method
 /// </summary>
 /// <remarks>Probably should remain unused</remarks>
 public class ExecuteMethodCommand : I_Command

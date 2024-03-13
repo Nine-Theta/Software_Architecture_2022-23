@@ -4,6 +4,9 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// A simple script that was used for the startscene in an earlier stage of the project.
+/// </summary>
 public class StartSceneManager : MonoBehaviour
 {
     [SerializeField]
