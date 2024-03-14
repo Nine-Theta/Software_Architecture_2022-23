@@ -1789,6 +1789,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _towerPivot: {fileID: 1673003703}
   _gunAnimator: {fileID: 1309951719}
+  _trackTarget: 1
 --- !u!4 &628081435
 Transform:
   m_ObjectHideFlags: 0
@@ -1851,7 +1852,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spawnFactory: {fileID: 671668540}
-  _spawnOffset: {x: 0, y: 0, z: 0}
+  _spawnPoint: {fileID: 671668542}
   _target: {fileID: 1419970775}
   _enemyWaves:
   - {fileID: 11400000, guid: 6b48de2b564a739419f03e75717f1595, type: 2}

@@ -62,6 +62,11 @@ public class GameplayManager : MonoBehaviour
 
         _spawnManager = SceneSettings.Instance.GetSceneSpawnManager();
 
+        _spawnManager.CurrentWaveComplete.Subscribe(OnWaveComplete);
+        _spawnManager.AllWavesComplete.Subscribe(OnAllWavesComplete);
+
+        SceneSettings.Instance.GetSceneBase().BaseDeath.Subscribe(OnBaseDestroyed);
+
         _uiManager.UpdateWaveDisplay(0, _spawnManager.TotalWaves);
 
         _canSpawnNextWave = true;
@@ -133,5 +138,22 @@ public class GameplayManager : MonoBehaviour
     private void OnSceneLoaded(Scene pScene, LoadSceneMode pMode)
     {
         GetSceneValues();
+    }
+
+    private void OnWaveComplete(int pWave)
+    {
+        _uiManager.StartWaveCountdownTimer(20);
+    }
+
+    private void OnAllWavesComplete()
+    {
+        SetGameSpeed(0);
+        _uiManager.ShowGameEndPanel(true);
+    }
+
+    private void OnBaseDestroyed()
+    {
+        SetGameSpeed(0);
+        _uiManager.ShowGameEndPanel(false);
     }
 }

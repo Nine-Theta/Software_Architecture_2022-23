@@ -23,6 +23,9 @@ public class EnemyObject : AbstractContainerObject
     [SerializeField]
     private HealthbarVisual _healthbarVisual;
 
+    [SerializeField]
+    private GameObject _creditPopUp;
+
     private DebuffHandler _debuffHandler;
 
     public Vector3 TargetPos;
@@ -97,7 +100,7 @@ public class EnemyObject : AbstractContainerObject
     }
 
 
-    //Maybe implement TakeDamage as a Job?
+    //Maybe implement TakeDamage as a Job? 
     public void DamageEnemy(float pDamage)
     {
         _runtimeValues.Health -= Mathf.Max((pDamage - _runtimeValues.Defense) * (1 - _runtimeValues.Resistance), 0);
@@ -121,6 +124,7 @@ public class EnemyObject : AbstractContainerObject
         if (_runtimeValues.Health <= 0)
         {
             EnemyDestroyed.Publish(this);
+            Instantiate(_creditPopUp, transform.position + Vector3.up,Quaternion.identity).GetComponent<PopUpControlScript>().Initialize(_runtimeValues.Reward,1.5f,Color.yellow);
             FindObjectOfType<GameplayManager>().Credits += (int)_runtimeValues.Reward; //Last-minute addition, don't have time for a proper implementation anymore
             Destroy(gameObject);
         }

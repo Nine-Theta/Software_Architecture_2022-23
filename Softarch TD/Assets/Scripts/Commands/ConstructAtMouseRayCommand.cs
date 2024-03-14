@@ -59,10 +59,12 @@ public class ConstructAtMouseRayCommand : I_Command
 
             (_containerBackup as TowerObject).SetFoundation(FO);
         }
+        else
+        {
+            _containerBackup = _factoryBackup.CreateInstance(buildCoords, Quaternion.identity);
+        }
 
         _receiver.Credits -= _factoryBackup.Containable.CreationCost;
-
-        _containerBackup = _factoryBackup.CreateInstance(buildCoords, Quaternion.identity);
 
             return true;
     }

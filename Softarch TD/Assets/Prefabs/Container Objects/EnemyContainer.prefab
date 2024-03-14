@@ -58,8 +58,8 @@ MonoBehaviour:
     AttackDamage: 0
     Reward: 0
   _healthbarVisual: {fileID: 4814269122548260220}
+  _creditPopUp: {fileID: 179016006103669764, guid: dceebd0fb8012cc43a4c7305bf1960fb, type: 3}
   TargetPos: {x: 0, y: 0, z: 31.5}
-  ActiveDebuffs: []
 --- !u!54 &3336613354235355986
 Rigidbody:
   m_ObjectHideFlags: 0

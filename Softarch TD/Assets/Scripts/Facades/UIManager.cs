@@ -23,6 +23,17 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private GameObject _pauseScreen;
 
+    [SerializeField]
+    private SimpleTimerScript _waveCountDown;
+
+    [SerializeField]
+    private GameObject _EndScreen;
+    [SerializeField]
+    private GameObject _WonPanel;
+    [SerializeField]
+    private GameObject _LostPanel;
+
+
     /////
 
     [Header("BuildUI"), HorizontalLine(color: EColor.Red)]
@@ -217,5 +228,20 @@ public class UIManager : MonoBehaviour
     {
         _pauseScreen.SetActive(!_pauseScreen.activeSelf);
         _gameplayManager.PauseGame(_pauseScreen.activeSelf);
+    }
+
+    public void StartWaveCountdownTimer(int pTime)
+    {
+        _waveCountDown.gameObject.SetActive(true);
+        _waveCountDown.StartTimer(pTime);
+    }
+
+    public void ShowGameEndPanel(bool pWonGame)
+    {
+        if (_EndScreen.activeSelf)
+            return;
+        _EndScreen.SetActive(true);
+        _WonPanel.SetActive(pWonGame);
+        _LostPanel.SetActive(!pWonGame);
     }
 }

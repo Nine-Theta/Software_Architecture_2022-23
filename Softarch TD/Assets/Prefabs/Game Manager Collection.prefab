@@ -126,6 +126,8 @@ MonoBehaviour:
   _gameplayManager: {fileID: 3205945162053369543}
   _creditUI: {fileID: 0}
   _waveCountUI: {fileID: 0}
+  _pauseScreen: {fileID: 0}
+  _waveCountDown: {fileID: 0}
   _towerButton: {fileID: 0}
   _foundationButton: {fileID: 0}
   _upgradeButton: {fileID: 0}

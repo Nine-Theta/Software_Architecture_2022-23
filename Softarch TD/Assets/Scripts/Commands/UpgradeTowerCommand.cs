@@ -20,13 +20,13 @@ public class UpgradeTowerCommand : I_Command
     public bool Execute()
     {
         _receiver.TryUpgradeTower();
-        _creditManager.Credits -= _receiver.GetNextUpgradeValues().Cost;
+        _creditManager.Credits -= _receiver.GetCurrentValues().Cost;
         return true;
     }
 
     public void Undo()
     {
-        _creditManager.Credits += _receiver.GetCurrentValues().Cost;
         _receiver.TryDownGradeTower();
+        _creditManager.Credits += _receiver.GetNextUpgradeValues().Cost;
     }
 }
