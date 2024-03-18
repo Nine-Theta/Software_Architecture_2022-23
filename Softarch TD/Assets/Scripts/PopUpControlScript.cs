@@ -25,7 +25,6 @@ public class PopUpControlScript : MonoBehaviour
         _text.text = pPopupText;
         _text.color = pColor;
         _duration = 1/(pDuration*100f);
-        Debug.Log("D: " + _duration);
         StartCoroutine(FadeText());
     }
 

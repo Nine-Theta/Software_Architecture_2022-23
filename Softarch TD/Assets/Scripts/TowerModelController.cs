@@ -5,7 +5,7 @@ using UnityEditor.Animations;
 using UnityEngine;
 
 /// <summary>
-/// Controls the tracking behaviour of the models used by <see cref="TowerObject"/>s.
+/// Controls the tracking behaviour of the models used by <see cref="TowerObject"/>s, and the the spawning of visual bullets;
 /// </summary>
 public class TowerModelController : MonoBehaviour
 {
@@ -15,9 +15,18 @@ public class TowerModelController : MonoBehaviour
     [SerializeField]
     private Animator _gunAnimator;
 
+    [SerializeField]
+    private Transform _muzzleTransform;
+
+    [SerializeField]
+    private GameObject _bulletObject;
+
     private TowerObject _towerObject;
 
     private Transform _targetTransform;
+
+    [SerializeField]
+    private bool _spawnBullet = true;
 
     [SerializeField]
     private bool _trackTarget = true;
@@ -67,6 +76,12 @@ public class TowerModelController : MonoBehaviour
         _hasTarget= true;
 
         Debug.Log("target aqcuired! "+ pTarget.gameObject);
+
+        if (_spawnBullet)
+        {
+            Instantiate(_bulletObject, _muzzleTransform.position, _muzzleTransform.rotation).GetComponent<Rigidbody>().AddForce((pTarget.position +Vector3.up - _muzzleTransform.position) *5f, ForceMode.VelocityChange);
+
+        }
 
         if (_useAnimation)
         {

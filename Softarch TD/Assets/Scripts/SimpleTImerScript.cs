@@ -6,6 +6,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
+/// <summary>
+/// Simple script to display a countdown timer in a TMP text field;
+/// </summary>
 public class SimpleTimerScript : MonoBehaviour
 {
     [SerializeField]

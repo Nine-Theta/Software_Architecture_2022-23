@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &592874812112666414
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6409628875439543505}
+  m_Layer: 0
+  m_Name: MuzzleTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6409628875439543505
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 592874812112666414}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.165, z: 2.2}
+  m_LocalScale: {x: 1.1999999, y: 1.1999999, z: 1.1999999}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4431452502838490561}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1673251829972214095
 GameObject:
   m_ObjectHideFlags: 0
@@ -114,6 +145,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _towerPivot: {fileID: 4431452502838490561}
   _gunAnimator: {fileID: 6444668553431432962}
+  _muzzleTransform: {fileID: 6409628875439543505}
+  _bulletObject: {fileID: 225996679432711168, guid: ddebf37320c6bfe42b849e7999810d83, type: 3}
+  _spawnBullet: 1
   _trackTarget: 1
 --- !u!1001 &3038964300448587282
 PrefabInstance:
@@ -255,7 +289,10 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 19903b84a6cccda44ba855be6d67cc8e, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 7403595750300638157, guid: 8317ffbade7b95544a01c39e5d00153a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6409628875439543505}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8317ffbade7b95544a01c39e5d00153a, type: 3}
 --- !u!4 &4431452502838490561 stripped

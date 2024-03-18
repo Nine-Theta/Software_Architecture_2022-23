@@ -17,5 +17,5 @@ MonoBehaviour:
     GroupSpawnDelay: 0
     EnemyTypes:
     - EnemyType: {fileID: 11400000, guid: 29f6a9898c5433447b7abfe965a8deea, type: 2}
-      SpawnCount: 5
+      SpawnCount: 500
       SpawnDelay: 5

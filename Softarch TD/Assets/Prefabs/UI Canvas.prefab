@@ -1030,6 +1030,7 @@ GameObject:
   - component: {fileID: 6985275575145058322}
   - component: {fileID: 6047007464443400530}
   - component: {fileID: 5018403980297076786}
+  - component: {fileID: 7878574763431105708}
   m_Layer: 5
   m_Name: Dev Tower Three
   m_TagString: Untagged
@@ -1125,9 +1126,9 @@ MonoBehaviour:
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 21300000, guid: 94c32dc968356bc49bd398d7500d8740, type: 3}
-    m_PressedSprite: {fileID: 21300000, guid: 56d7ce1a1ae269346b8d955d136417ef, type: 3}
-    m_SelectedSprite: {fileID: 21300000, guid: 94c32dc968356bc49bd398d7500d8740, type: 3}
-    m_DisabledSprite: {fileID: 21300000, guid: 0bc35f95f3fee524d8be1dd8394226ba, type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: 0bc35f95f3fee524d8be1dd8394226ba, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: 0bc35f95f3fee524d8be1dd8394226ba, type: 3}
+    m_DisabledSprite: {fileID: 21300000, guid: 56d7ce1a1ae269346b8d955d136417ef, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -1139,18 +1140,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: SelectTowerButton
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 5018403980297076786}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: TowerFactory, Assembly-CSharp
         m_MethodName: set_TowerVariant
@@ -1175,6 +1164,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &7878574763431105708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1072561757160782502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d621823d37b08d45a9b077e79974f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameplayManager: {fileID: 0}
+  _tower: {fileID: 11400000, guid: 3b4f2e8c10797914ca0a22cc53aaf998, type: 2}
 --- !u!1 &1114263462410518823
 GameObject:
   m_ObjectHideFlags: 0
@@ -6378,6 +6381,7 @@ GameObject:
   - component: {fileID: 2197386244667051030}
   - component: {fileID: 7333734696356904701}
   - component: {fileID: 6207061957605399064}
+  - component: {fileID: 7647209403988007750}
   m_Layer: 5
   m_Name: Dev Tower Two
   m_TagString: Untagged
@@ -6473,9 +6477,9 @@ MonoBehaviour:
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 21300000, guid: 94c32dc968356bc49bd398d7500d8740, type: 3}
-    m_PressedSprite: {fileID: 21300000, guid: 56d7ce1a1ae269346b8d955d136417ef, type: 3}
-    m_SelectedSprite: {fileID: 21300000, guid: 94c32dc968356bc49bd398d7500d8740, type: 3}
-    m_DisabledSprite: {fileID: 21300000, guid: 541d4cbdc18245e4187c171a579797db, type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: 541d4cbdc18245e4187c171a579797db, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: 541d4cbdc18245e4187c171a579797db, type: 3}
+    m_DisabledSprite: {fileID: 21300000, guid: 56d7ce1a1ae269346b8d955d136417ef, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -6487,18 +6491,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: SelectTowerButton
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 6207061957605399064}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: TowerFactory, Assembly-CSharp
         m_MethodName: set_TowerVariant
@@ -6523,6 +6515,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &7647209403988007750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4704535641786385962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d621823d37b08d45a9b077e79974f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameplayManager: {fileID: 0}
+  _tower: {fileID: 11400000, guid: 5b31aeccdc0816b4981a2fbc3a2aeee2, type: 2}
 --- !u!1 &4800293334544319653
 GameObject:
   m_ObjectHideFlags: 0
@@ -7067,6 +7073,7 @@ GameObject:
   - component: {fileID: 4887724745140698074}
   - component: {fileID: 3183806716871085}
   - component: {fileID: 2497400320948900472}
+  - component: {fileID: 9221026795665876338}
   m_Layer: 5
   m_Name: Dev Tower One
   m_TagString: Untagged
@@ -7162,9 +7169,9 @@ MonoBehaviour:
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 21300000, guid: 94c32dc968356bc49bd398d7500d8740, type: 3}
-    m_PressedSprite: {fileID: 21300000, guid: 56d7ce1a1ae269346b8d955d136417ef, type: 3}
-    m_SelectedSprite: {fileID: 21300000, guid: 94c32dc968356bc49bd398d7500d8740, type: 3}
-    m_DisabledSprite: {fileID: 21300000, guid: 27b84aca6a5594948a2f61873d7fe04e, type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: 27b84aca6a5594948a2f61873d7fe04e, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: 27b84aca6a5594948a2f61873d7fe04e, type: 3}
+    m_DisabledSprite: {fileID: 21300000, guid: 56d7ce1a1ae269346b8d955d136417ef, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -7176,18 +7183,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: SelectTowerButton
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 2497400320948900472}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: TowerFactory, Assembly-CSharp
         m_MethodName: set_TowerVariant
@@ -7212,6 +7207,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &9221026795665876338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5411525055918650671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d621823d37b08d45a9b077e79974f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameplayManager: {fileID: 0}
+  _tower: {fileID: 11400000, guid: fef68b774e503ec4b8676b376f98fb6e, type: 2}
 --- !u!1 &5418974999472552745
 GameObject:
   m_ObjectHideFlags: 0
@@ -9182,6 +9191,7 @@ GameObject:
   - component: {fileID: 5064215582856525924}
   - component: {fileID: 6168000164298806094}
   - component: {fileID: 3747392761773464864}
+  - component: {fileID: 6206189217454018783}
   m_Layer: 5
   m_Name: Dev Tower Four
   m_TagString: Untagged
@@ -9277,9 +9287,9 @@ MonoBehaviour:
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 21300000, guid: 94c32dc968356bc49bd398d7500d8740, type: 3}
-    m_PressedSprite: {fileID: 21300000, guid: 56d7ce1a1ae269346b8d955d136417ef, type: 3}
-    m_SelectedSprite: {fileID: 21300000, guid: 94c32dc968356bc49bd398d7500d8740, type: 3}
-    m_DisabledSprite: {fileID: 21300000, guid: 518e5dbaec7636545add424de99cf814, type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: 518e5dbaec7636545add424de99cf814, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: 518e5dbaec7636545add424de99cf814, type: 3}
+    m_DisabledSprite: {fileID: 21300000, guid: 56d7ce1a1ae269346b8d955d136417ef, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -9291,18 +9301,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: SelectTowerButton
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 3747392761773464864}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: TowerFactory, Assembly-CSharp
         m_MethodName: set_TowerVariant
@@ -9327,6 +9325,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &6206189217454018783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7091899748433895422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d621823d37b08d45a9b077e79974f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameplayManager: {fileID: 0}
+  _tower: {fileID: 11400000, guid: f812ad2f36cc2184eb19d9849ef7b7ec, type: 2}
 --- !u!1 &7231853876596069271
 GameObject:
   m_ObjectHideFlags: 0

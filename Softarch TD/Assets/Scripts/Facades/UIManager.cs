@@ -97,16 +97,17 @@ public class UIManager : MonoBehaviour
         _waveCountUI.text = (pCurrentWave.ToString() + "/" + pTotalWaves.ToString());
     }
 
+    /*
     public void SelectTowerButton(Button pSelected)
     {
         for (int i = 0; i < _towers.Count; i++)
         {
-            _towers[i].GetComponent<Button>().interactable = true;
+            //_towers[i].GetComponent<Button>().interactable = true;
         }
 
         if (pSelected == null) return;
-        pSelected.interactable = false;
-    }
+        //pSelected.interactable = false;
+    }*/
 
     public void DisplayTowerBuildUI()
     {
@@ -195,6 +196,8 @@ public class UIManager : MonoBehaviour
         if (_viewingTower == null) return;
 
         TowerObject tower = _viewingTower.gameObject.GetComponentInParent<TowerObject>();
+
+        _upgradePanelButton.interactable = (tower.CanUgrade() && tower.GetNextUpgradeValues().Cost < _gameplayManager.Credits);
 
         _selectedTowerStats[0].text = tower.GetCurrentRank().ToString();
         _selectedTowerStats[1].text = tower.GetCurrentValues().Damage.ToString();

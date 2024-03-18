@@ -42,6 +42,6 @@ public class FoundationObject : AbstractContainerObject
 
     public void ClearBuildStatus()
     {
-        _buildable = false;
+        _buildable = true;
     }
 }

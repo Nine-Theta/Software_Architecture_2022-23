@@ -799,7 +799,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spawnFactory: {fileID: 671668540}
-  _spawnPoint: {fileID: 0}
+  _spawnPoint: {fileID: 671668542}
   _target: {fileID: 1419970775}
   _enemyWaves:
   - {fileID: 11400000, guid: 6b48de2b564a739419f03e75717f1595, type: 2}
