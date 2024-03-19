@@ -3,7 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
-
+/// <summary>
+/// Concrete Factory that creates instances of <see cref="EnemyObject"/> using a <see cref="EnemyScriptable"/> that contains the instantiation values.
+/// </summary>
 public class EnemyFactory : AbstractInstanceFactory
 {
     [SerializeField]
@@ -23,11 +25,15 @@ public class EnemyFactory : AbstractInstanceFactory
         get { return _enemy; }
         set { _enemy = value is EnemyScriptable ? value as EnemyScriptable : throw new System.ArgumentException("Incorrect Containable", "EnemyFactory" ); }
     }
-
-    public override AbstractContainerObject CreateInstance(Vector3 pPosition)
+    public AbstractContainerObject CreateInstance(Vector3 pPosition)
     {
-        GameObject newEnemy = Instantiate(_enemyObject.gameObject, pPosition, Quaternion.identity); //pPosition, pRotation);
-        GameObject model = Instantiate(_enemy.GetModel,_enemy.GetModel.transform.position + pPosition, Quaternion.identity, newEnemy.transform);
+        return CreateInstance(pPosition, Quaternion.identity);
+    }
+
+    public override AbstractContainerObject CreateInstance(Vector3 pPosition, Quaternion pRotation)
+    {
+        GameObject newEnemy = Instantiate(_enemyObject.gameObject, pPosition, pRotation);
+        GameObject model = Instantiate(_enemy.GetModel,_enemy.GetModel.transform.position + pPosition, pRotation, newEnemy.transform);
         newEnemy.name = _enemy.GetName;
 
         EnemyObject instance = newEnemy.GetComponent<EnemyObject>();

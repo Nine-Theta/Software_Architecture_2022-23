@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Concrete Factory that creates instances of <see cref="FoundationObject"/> using a <see cref="FoundationScriptable"/> for contains the instantiation values.
+/// </summary>
 public class FoundationFactory : AbstractInstanceFactory
 {
     [SerializeField]
@@ -26,16 +29,20 @@ public class FoundationFactory : AbstractInstanceFactory
         get { return _foundation; }
         set { _foundation = value is FoundationFactory ? value as FoundationScriptable : throw new System.ArgumentException("Incorrect Containable", "Foundation Factory"); }
     }
+    public AbstractContainerObject CreateInstance(Vector3 pPosition)
+    {
+        return CreateInstance(pPosition, Quaternion.identity);
+    }
 
-    public override AbstractContainerObject CreateInstance(Vector3 pPosition)
+    public override AbstractContainerObject CreateInstance(Vector3 pPosition, Quaternion pRotation)
     {
         float x = pPosition.x % SnapSize;
         float z = pPosition.z % SnapSize;
 
         Vector3 pos = new Vector3((pPosition.x - x) + Mathf.Round(x), pPosition.y, (pPosition.z - z) + Mathf.Round(z));
 
-        GameObject founder = Instantiate(_foundationObject.gameObject, pos, Quaternion.identity);
-        GameObject model = Instantiate(_foundation.GetModel, _foundation.GetModel.transform.position + pos, Quaternion.identity, founder.transform);        
+        GameObject founder = Instantiate(_foundationObject.gameObject, pos, pRotation);
+        GameObject model = Instantiate(_foundation.GetModel, _foundation.GetModel.transform.position + pos, pRotation, founder.transform);        
 
         founder.name = _foundation.GetName;
 

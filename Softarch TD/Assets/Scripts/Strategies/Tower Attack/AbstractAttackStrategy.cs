@@ -2,8 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Abstract class that serves as the base for attack strageies used by <see cref="TowerObject"/>s.
+/// </summary>
+/// <remarks>Contained in a <see cref="TowerScriptable"/></remarks>
 public abstract class AbstractAttackStrategy : ScriptableObject
 {
-    public abstract Collider GetTarget(Collider[] pTargets, Vector3 pReference);
-    public abstract bool TryGetTarget(Collider[] pTargets, Vector3 pReference, out Collider pTarget);
+    public abstract bool AttackEnemies(EnemyObject[] pEnemies, TowerObject pAttacker);
 }

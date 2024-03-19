@@ -1,13 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Callbacks;
-using UnityEditor;
-using UnityEngine;
-using NaughtyAttributes;
 using System;
-using UnityEngine.AI;
-using UnityEngine.UI;
+using UnityEngine;
 
+/// <summary>
+/// This script handles all the functionality of an enemy instance.
+/// <para>It moves using a variant of <see cref="AbstractMovementStrategy"/> contained in its <see cref="EnemyScriptable"/>, which also has its instantiation values.</para>
+/// </summary>
+/// <remarks>It is instantiated by an <see cref="EnemyFactory"/></remarks> 
 [SelectionBase]
 public class EnemyObject : AbstractContainerObject
 {
@@ -18,18 +16,22 @@ public class EnemyObject : AbstractContainerObject
 
     [SerializeField]
     private EnemyValues _runtimeValues;
+
+    public EnemyValues RuntimeValues { get { return _runtimeValues; } }
     [Space(5)]
 
     [SerializeField]
-    private Slider _healthVisual;
-    private float _healthVisualMult;
+    private HealthbarVisual _healthbarVisual;
+
+    [SerializeField]
+    private GameObject _creditPopUp;
+
+    private DebuffHandler _debuffHandler;
 
     public Vector3 TargetPos;
-    public GameObject GetModel() { return _model; }
 
-    public List<DebuffScriptable> ActiveDebuffs;
 
-    public EventPublisher EnemyDestroyed = new EventPublisher();
+    public EventPublisher<EnemyObject> EnemyDestroyed = new EventPublisher<EnemyObject>();
     public EventPublisher<float> EnemyDamaged = new EventPublisher<float>();
 
     public override I_Containable BaseData { get { return _baseData; } }
@@ -41,87 +43,55 @@ public class EnemyObject : AbstractContainerObject
 
         _model = pEnemyModel;
 
-        _baseData.MovemenStrategy.Initialize(this, _runtimeValues.MovementSpeed);
+        _debuffHandler = new DebuffHandler(this);
 
-        EnemyDamaged.Subscribe(OnEnemyDamaged);
+        _baseData.MovementStrategy.Initialize(this, _runtimeValues.MovementSpeed);
 
-        _healthVisualMult = 1 / _baseData.Values.Health;
-    }
-
-    private void OnEnemyDamaged(float _health)
-    {
-        _healthVisual.value = _health * _healthVisualMult; 
+        _healthbarVisual.Initialize(_baseData.Values.Health);
+        EnemyDamaged.Subscribe(_healthbarVisual.UpdateHealth);
     }
 
     public void Move()
     {
-        _baseData.MovemenStrategy.MoveTo(this, TargetPos);
+        _baseData.MovementStrategy.MoveTo(this, TargetPos);
     }
+    public GameObject GetModel() { return _model; }
 
     public void ApplyDebuff(DebuffScriptable pDebuff)
     {
-        if (ActiveDebuffs.Contains(pDebuff))
-        {
-            ActiveDebuffs.Find(item => item.name == pDebuff.name).DebuffDuration = pDebuff.DebuffDuration;
-        }
-        else
-        {
-            ActiveDebuffs.Add(Instantiate(pDebuff));
-        }
+        _debuffHandler.AddDebuff(pDebuff);
+        Debug.Log("Debuff applied Enemy: " + pDebuff.ToString());
+
     }
 
-    public void RemoveDebuff(DebuffScriptable pDebuff)
-    {
-        ActiveDebuffs.Remove(pDebuff);
-    }
-
-    public void ModifyStat(EnemyStats pStat, float pModifier, bool pFlatModifer = false)
+    public void ModifyStat(EnemyStats pStat, float pModifier)
     {
         switch (pStat)
         {
             case EnemyStats.HEALTH:
-                if (pFlatModifer)
-                {
-                    _runtimeValues.Health += pModifier;
-                    CheckForDeath();
-                }
-                else
-                    _runtimeValues.Health *= pModifier;
+                _runtimeValues.Health += pModifier;
+                CheckForDeath();
                 break;
 
             case EnemyStats.SPEED:
-                if (pFlatModifer)
-                    _runtimeValues.MovementSpeed += pModifier;
-                else
-                    _runtimeValues.MovementSpeed *= pModifier;
+                _runtimeValues.MovementSpeed += pModifier;
+                _baseData.MovementStrategy.ChangeMoveSpeed(this, _runtimeValues.MovementSpeed);
                 break;
 
             case EnemyStats.DEFENSE:
-                if (pFlatModifer)
-                    _runtimeValues.Defense += pModifier;
-                else
-                    _runtimeValues.Defense *= pModifier;
+                _runtimeValues.Defense += pModifier;
                 break;
 
             case EnemyStats.RESISTANCE:
-                if (pFlatModifer)
-                    _runtimeValues.Resistance += pModifier;
-                else
-                    _runtimeValues.Resistance *= pModifier;
+                _runtimeValues.Resistance += pModifier;
                 break;
 
             case EnemyStats.ATTACK:
-                if (pFlatModifer)
-                    _runtimeValues.AttackDamage += pModifier;
-                else
-                    _runtimeValues.AttackDamage *= pModifier;
+                _runtimeValues.AttackDamage += pModifier;
                 break;
 
             case EnemyStats.REWARD:
-                if (pFlatModifer)
-                    _runtimeValues.Reward += pModifier;
-                else
-                    _runtimeValues.Reward *= pModifier;
+                _runtimeValues.Reward += pModifier;
                 break;
 
             default:
@@ -130,35 +100,33 @@ public class EnemyObject : AbstractContainerObject
     }
 
 
-    //Maybe implement TakeDamage as a Job?
+    //Maybe implement TakeDamage as a Job? 
     public void DamageEnemy(float pDamage)
     {
         _runtimeValues.Health -= Mathf.Max((pDamage - _runtimeValues.Defense) * (1 - _runtimeValues.Resistance), 0);
         EnemyDamaged.Publish(_runtimeValues.Health);
         CheckForDeath();
     }
-    
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Base"))
         {
-            Debug.Log("Base Reached!");
+            //Debug.Log("Base Reached!");
             other.GetComponentInParent<BaseManager>().DamageBase(_runtimeValues.AttackDamage);
-            Destroy(gameObject);
-        }
-    }
-    
-    private void CheckForDeath()
-    {
-        if (_runtimeValues.Health <= 0)
-        {
-            Debug.Log("Death to be implemented");
+            EnemyDestroyed.Publish(this);
             Destroy(gameObject);
         }
     }
 
-    private void OnDestroy()
+    private void CheckForDeath()
     {
-        EnemyDestroyed.Publish();
+        if (_runtimeValues.Health <= 0)
+        {
+            EnemyDestroyed.Publish(this);
+            Instantiate(_creditPopUp, transform.position + Vector3.up,Quaternion.identity).GetComponent<PopUpControlScript>().Initialize(_runtimeValues.Reward,1.5f,Color.yellow);
+            FindObjectOfType<GameplayManager>().Credits += (int)_runtimeValues.Reward; //Last-minute addition, don't have time for a proper implementation anymore
+            Destroy(gameObject);
+        }
     }
 }

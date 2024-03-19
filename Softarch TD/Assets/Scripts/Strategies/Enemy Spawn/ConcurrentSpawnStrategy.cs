@@ -6,6 +6,11 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.Events;
 
+/// <summary>
+/// A spawn strategy used by <see cref="EnemyGroup"/>s.
+/// <para>Keeps track of the individual spawndelay of each enemy variant, and counts them down at the same time.</para>
+/// This causes every variant to be spawned regardless of the delay time of other types.
+/// </summary>
 [CreateAssetMenu(fileName = "ConcurrentSpawn", menuName = "Strategy/Spawn/Concurrent")]
 public class ConcurrentSpawnStrategy : SpawnStrategyBase
 {

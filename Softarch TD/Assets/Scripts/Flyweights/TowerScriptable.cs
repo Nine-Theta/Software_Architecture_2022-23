@@ -1,19 +1,19 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
 
-
+/// <summary>
+/// ScriptableObject which contains the instantiation data for a tower variant.
+/// <para>Has a List of <see cref="TowerValues"/> for the tower's stats and model per upgrade stage.</para>
+/// Also contains a List of <see cref="DebuffScriptable"/>s that are applied to the enemy on attack.
+/// </summary>
+/// <remarks>An <see cref="I_Containable"/> used by <see cref="TowerObject"/>.</remarks>
 [CreateAssetMenu(fileName = "TowerScriptable", menuName = "ScriptableObjects/Tower")]
 public class TowerScriptable : ScriptableObject, I_Containable
 {
     [SerializeField]
     private string _name = "tower";
 
-    [SerializeField]
-    private GameObject _towerModel;
-
-    public string TowerType = "todo"; //type of attack
     public AbstractAttackStrategy AttackStrategy; //which enemy to attack
 
     [Description("[0] is base values, everything else is upgrades")]
@@ -23,10 +23,20 @@ public class TowerScriptable : ScriptableObject, I_Containable
     public int CreationCost { get { return TowerRankValues[0].Cost; } }
 
     //To be aplied to Enemy
-    public List<string> Debuffs = new List<string>();
+    public List<DebuffScriptable> Debuffs = new List<DebuffScriptable>();
 
     public GameObject GetModel
     {
-        get { return _towerModel; }
+        get { return GetRankModel(0); }
+    }
+
+    public GameObject GetRankModel(int pRank)
+    {
+        if (pRank < 0)
+            pRank = 0;
+        else if (pRank >= TowerRankValues.Count)
+            pRank = TowerRankValues.Count - 1;
+
+        return TowerRankValues[pRank].TowerModel;
     }
 }

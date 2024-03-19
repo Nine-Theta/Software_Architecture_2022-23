@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e8fcbbd88d35dd43954c44f28ac2ef3, type: 3}
+  m_Name: Range Tower
+  m_EditorClassIdentifier: 
+  _name: Range tower
+  AttackStrategy: {fileID: 11400000, guid: 5c07f856db15f0c489ddfcf9fd201512, type: 2}
+  TowerRankValues:
+  - Damage: 1
+    Range: 2
+    Cooldown: 0.5
+    Cost: 2
+    TowerModel: {fileID: 6494076441597448111, guid: f6f5b638d4788ab44b90db8ec2da2d9b, type: 3}
+  - Damage: 4
+    Range: 5
+    Cooldown: 0.4
+    Cost: 3
+    TowerModel: {fileID: 6494076441597448111, guid: 08638ec86ea83d64a80a0ff09bf64e57, type: 3}
+  - Damage: 8
+    Range: 7
+    Cooldown: 0.3
+    Cost: 5
+    TowerModel: {fileID: 6494076441597448111, guid: 27fa143507a01dd4d9ccf3ad37ff3fe4, type: 3}
+  - Damage: 12
+    Range: 10
+    Cooldown: 0.25
+    Cost: 10
+    TowerModel: {fileID: 6494076441597448111, guid: 3c1228a6b5dad6b4d93a06ae8386ba27, type: 3}
+  Debuffs: []

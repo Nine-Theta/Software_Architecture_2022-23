@@ -3,24 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+/// <summary>
+/// This strategy will make the <see cref="TowerObject"/> attack the <see cref="EnemyObject"/> that entered its range last
+/// </summary>
 [CreateAssetMenu(fileName = "LastAttackStrategy", menuName = "Strategy/Attack/Last")]
 public class LastAttackStrategy : AbstractAttackStrategy
 {
-    public override Collider GetTarget(Collider[] pTargetsInRange, Vector3 pReference)
+    public override bool AttackEnemies(EnemyObject[] pEnemies, TowerObject pAttacker)
     {
-        if (pTargetsInRange.Length == 0) return null;
+        if (pEnemies.Length == 0) return false;
 
-        return pTargetsInRange[pTargetsInRange.Length-1];
-    }
+        pAttacker.AttackTarget(pEnemies[pEnemies.Length - 1]);
 
-    public override bool TryGetTarget(Collider[] pTargetsInRange, Vector3 pReference, out Collider pTarget)
-    {
-        pTarget = GetTarget(pTargetsInRange, pReference);
-
-        if (pTarget == null)
-            return false;
-        else
-            return true;
+        return true;
     }
 }
 

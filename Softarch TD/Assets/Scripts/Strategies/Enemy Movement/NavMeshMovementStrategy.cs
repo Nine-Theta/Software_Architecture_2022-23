@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+/// <summary>
+/// Script for a Strategy/ScriptableObject that allows instances of <see cref="EnemyObject"/> to move using Unity's NavMesh system;
+/// </summary>
 [CreateAssetMenu(fileName = "NavMeshMovementStrategy", menuName = "Strategy/Movement/Navmesh"), RequireComponent(typeof(NavMeshAgent))]
 public class NavMeshMovementStrategy : AbstractMovementStrategy
 {
@@ -26,6 +29,10 @@ public class NavMeshMovementStrategy : AbstractMovementStrategy
     public override void MoveTo(EnemyObject pEnemy, Vector3 pDestiniation)
     {
         pEnemy.GetComponent<NavMeshAgent>().SetDestination(pDestiniation);
+    }
+    public override void ChangeMoveSpeed(EnemyObject pEnemy, float pMoveSpeed)
+    {
+        pEnemy.GetComponent<NavMeshAgent>().speed = pMoveSpeed;
     }
 
 }

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a731a94f0f33e344836b4c85629939b, type: 3}
+  m_Name: Boss Enemy
+  m_EditorClassIdentifier: 
+  _name: Dave
+  _enemyModel: {fileID: 8757755199854365339, guid: ab2f2a9199c764744a19fecbb1b4f31f, type: 3}
+  MovementStrategy: {fileID: 11400000, guid: 841882a8c16acc64bab9004de5644e57, type: 2}
+  Values:
+    Health: 100
+    MovementSpeed: 0.1
+    Defense: 1
+    Resistance: 0.5
+    AttackDamage: 100
+    Reward: 25

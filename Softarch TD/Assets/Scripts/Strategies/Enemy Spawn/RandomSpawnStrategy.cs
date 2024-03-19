@@ -3,6 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// A spawn strategy used by <see cref="EnemyGroup"/>s.
+/// <para>Out of all the enemy variants, picks a random one, adds it to the spawn queue, and removes it from the spawn total.</para>
+/// </summary>
+/// <remarks>Randomization through Fisher-Yates-shuffle.</remarks>
 [CreateAssetMenu(fileName = "RandomSpawn", menuName = "Strategy/Spawn/Random")]
 public class RandomSpawnStrategy : SpawnStrategyBase
 {

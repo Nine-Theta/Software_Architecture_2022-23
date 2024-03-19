@@ -3,6 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// A spawn strategy used by <see cref="EnemyGroup"/>s.
+/// <para>Adds 1 of every enemy variant to spawn queue in order, until there are none left.</para>
+/// </summary>
 [CreateAssetMenu(fileName = "SequentialSpawn", menuName = "Strategy/Spawn/Sequential")]
 public class SequentialSpawnStrategy : SpawnStrategyBase
 {

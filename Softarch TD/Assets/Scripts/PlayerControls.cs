@@ -2,8 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
+/// <summary>
+/// Playercontrol script using Unity's new input system.
+/// Allows for 3D movement and mouselook.
+/// </summary>
 [RequireComponent(typeof(PlayerInput))]
 public class PlayerControls : MonoBehaviour
 {

@@ -4,7 +4,11 @@ using System.Collections.Generic;
 using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Manages the current scene's NavMesh, ensures that there is a valid path for enemies that use <see cref="NavMeshMovementStrategy"/>.
+/// </summary>
 public class NavigationManager : MonoBehaviour
 {
     [SerializeField]
@@ -16,16 +20,15 @@ public class NavigationManager : MonoBehaviour
     [SerializeField]
     private NavMeshAgent _navigationTester;
 
-    private NavMeshPath paff;
-
     private void Start()
     {
+        SceneManager.sceneLoaded+= OnSceneLoaded;
         GetSceneValues();
     }
 
     public void GetSceneValues()
     {
-        _mesh = SceneSettings.Instance.GetNavMeshSurface();
+        _mesh = SceneSettings.Instance.GetSceneNavMeshSurface();
         _navigationTarget = SceneSettings.Instance.GetSceneBase().transform;
         _navigationTester = SceneSettings.Instance.GetSceneNavigiationTester();
     }
@@ -59,5 +62,10 @@ public class NavigationManager : MonoBehaviour
     public void TestNavigation()
     {
         IsLayoutValid();
+    }
+
+    private void OnSceneLoaded(Scene pScene, LoadSceneMode pMode)
+    {
+        GetSceneValues();
     }
 }

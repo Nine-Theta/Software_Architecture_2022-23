@@ -6,6 +6,13 @@ using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+/// <summary>
+/// The code for SciptableObject instances that determine the stats of enemies.
+/// The stats themselves are contained within an <see cref="EnemyValues"/>.
+/// </summary>
+/// <remarks>
+/// An <see cref="I_Containable"/> used by <see cref="EnemyObject"/>.
+/// </remarks>
 [CreateAssetMenu(fileName = "EnemyScriptable", menuName = "ScriptableObjects/Enemy")]
 public class EnemyScriptable : ScriptableObject, I_Containable
 {
@@ -15,7 +22,7 @@ public class EnemyScriptable : ScriptableObject, I_Containable
     [SerializeField]
     private GameObject _enemyModel;
 
-    public AbstractMovementStrategy MovemenStrategy;
+    public AbstractMovementStrategy MovementStrategy;
 
     public EnemyValues Values;
 

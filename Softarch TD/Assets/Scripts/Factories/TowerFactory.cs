@@ -4,6 +4,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Concrete Factory that creates instances of <see cref="TowerObject"/> using a <see cref="TowerScriptable"/> that contains the instantiation values.
+/// </summary>
 public class TowerFactory : AbstractInstanceFactory
 {
     [SerializeField]
@@ -27,11 +30,21 @@ public class TowerFactory : AbstractInstanceFactory
         set { _tower = value is TowerScriptable ? value as TowerScriptable : throw new System.ArgumentException("Incorrect Containable", "TowerFactory"); }
     }
 
-    public override AbstractContainerObject CreateInstance(Vector3 pPosition)
+    [Button]
+    public void TestBuildTower()
+    {
+        CreateInstance(transform.position);
+    }
+    public AbstractContainerObject CreateInstance(Vector3 pPosition)
+    {
+        return CreateInstance(pPosition, Quaternion.identity);
+    }
+
+    public override AbstractContainerObject CreateInstance(Vector3 pPosition, Quaternion pRotation)
     {      
-        GameObject newTower = Instantiate(_towerObject.gameObject, pPosition, Quaternion.identity);
+        GameObject newTower = Instantiate(_towerObject.gameObject, pPosition, pRotation);
         //pPosition.y += _tower.ModelHeightOffset;
-        GameObject model = Instantiate(_tower.GetModel, _tower.GetModel.transform.position + pPosition, Quaternion.identity, newTower.transform);
+        GameObject model = Instantiate(_tower.GetModel, _tower.GetModel.transform.position + pPosition, pRotation, newTower.transform);
         newTower.name = _tower.GetName;
 
         TowerObject instance = newTower.GetComponent<TowerObject>();

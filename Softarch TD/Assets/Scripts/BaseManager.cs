@@ -1,28 +1,27 @@
-using JetBrains.Annotations;
 using NaughtyAttributes;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Controls the functionality of the base that <see cref="EnemyObject"/>s target.
+/// </summary>
 [SelectionBase]
 public class BaseManager : MonoBehaviour
 {
     [SerializeField]
     private float _baseHealth = 100f;
 
-    private float _healhSliderMult;
-
     [SerializeField]
-    private Slider _healthSilder;
+    private HealthbarVisual _healthbarVisual;
 
     public EventPublisher<float> BaseHealthUpdated = new EventPublisher<float>();
     public EventPublisher BaseDeath = new EventPublisher();
 
     private void Start()
     {
-        _healhSliderMult = 1 / _baseHealth;
-        _healthSilder.value = _baseHealth * _healhSliderMult;
+        _healthbarVisual.Initialize(_baseHealth);
+
+        BaseHealthUpdated.Subscribe(_healthbarVisual.UpdateHealth);
     }
 
 
@@ -37,18 +36,16 @@ public class BaseManager : MonoBehaviour
     {
         _baseHealth -= pDamage;
 
-        _healthSilder.value = _baseHealth * _healhSliderMult;
+        BaseHealthUpdated.Publish(_baseHealth);
 
         if (_baseHealth <= 0)
             BaseDeath.Publish();
-        else
-            BaseHealthUpdated.Publish(_baseHealth);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Enemy")) return;
 
-        Debug.Log(other.name + " Has entered the Forbidden Zone(tm)");
+        //Debug.Log(other.name + " Has entered the Forbidden Zone(tm)");
     }
 }

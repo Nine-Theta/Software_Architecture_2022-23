@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Manages all the <see cref="EnemyWaveSpawner"/>s in a scene.
+/// </summary>
 public class EnemySpawnManager : MonoBehaviour
 {
     private int _currentWaveCount = 0;
@@ -10,14 +13,17 @@ public class EnemySpawnManager : MonoBehaviour
     [SerializeField]
     private EnemyWaveSpawner[] _spawnLocations;
 
-    public EventPublisher CurrentWaveComplete = new EventPublisher();
+    public int CurrentWaveCount { get { return _currentWaveCount; } }
+    public int TotalWaves { get { return _wavesInLevel; } }
+
+    public EventPublisher<int> CurrentWaveComplete = new EventPublisher<int>();
     public EventPublisher AllWavesComplete = new EventPublisher();
 
     private void Start()
     {
         for(int i = 0; i < _spawnLocations.Length; i++)
         {
-            _spawnLocations[i].SpawnWaveComplete.Subscribe(CheckIfSpawningFinished);
+            _spawnLocations[i].SpawnerWaveCompleted.Subscribe(CheckIfSpawningFinished);
             if(_wavesInLevel < _spawnLocations[i].GetTotalWaveCount())
                 _wavesInLevel = _spawnLocations[i].GetTotalWaveCount();
         }
@@ -31,10 +37,10 @@ public class EnemySpawnManager : MonoBehaviour
                 return;
         }
 
-        CurrentWaveComplete.Publish();
+        CurrentWaveComplete.Publish(_currentWaveCount);
     }
 
-    public void SpawnNextWave()
+    public void SpawnNextWave() //TODO: ensure waves are done spawning
     {
         if(_currentWaveCount >= _wavesInLevel)
         {

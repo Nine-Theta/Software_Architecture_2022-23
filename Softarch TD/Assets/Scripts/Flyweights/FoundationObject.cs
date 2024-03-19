@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// This class handles all functionalities of a foundation, it contains an <see cref="FoundationScriptable"/> that has the instantiation values.
+/// </summary>
+/// <remarks>It is instantiated by an <see cref="FoundationFactory"/></remarks>
+[SelectionBase]
 public class FoundationObject : AbstractContainerObject
 {
     [SerializeField]
@@ -13,7 +18,6 @@ public class FoundationObject : AbstractContainerObject
     public bool Buildable { get { return _buildable; } }
 
     public Vector3 GetBuildPos { get { return transform.position; } }
-    public GameObject GetModel() { return _model; }
 
     public override I_Containable BaseData { get { return _baseData; } }
 
@@ -23,6 +27,7 @@ public class FoundationObject : AbstractContainerObject
 
         _model = pFoundationModel;
     }
+    public GameObject GetModel() { return _model; }
 
     public bool BuildRequest()
     {
@@ -33,5 +38,10 @@ public class FoundationObject : AbstractContainerObject
         }
         else
             return false;
+    }
+
+    public void ClearBuildStatus()
+    {
+        _buildable = true;
     }
 }
